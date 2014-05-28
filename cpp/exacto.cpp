@@ -1,8 +1,6 @@
 #include <iostream>
-#include <utility>
 #include <list>
 #include <vector>
-#include <stack>
 using namespace std;
 
 struct ady
