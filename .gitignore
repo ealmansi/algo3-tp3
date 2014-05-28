@@ -15,7 +15,18 @@
 *.a
 *.lib
 
+# temporales gedit
+*~
+
 # Executables
 *.exe
 *.out
 *.app
+
+# Latex
+
+tex/*.aux
+tex/*.log
+tex/*.pdf
+tex/*.synctex.gz
+tex/*.toc
