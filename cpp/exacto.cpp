@@ -3,22 +3,24 @@
 #include <vector>
 using namespace std;
 
+struct ady;
+typedef vector<int> vi;
+typedef list<int> li;
+typedef vector<bool> vb;
+typedef list<ady> lady;
+typedef vector<lady> vlady;
+
 struct ady
 {
   ady(int v, int w1, int w2) : v(v), w1(w1), w2(w2) {}
   int v, w1, w2;
 };
-struct nodo_bt
-{
-  nodo_bt(int v, int W1, int W2) : v(v), W1(W1), W2(W2) {}
-  int v, W1, W2;
-};
 
-typedef vector<int> vi;
-typedef vector<bool> vb;
-typedef list<ady> lady;
-typedef vector<lady> vlady;
-typedef list<nodo_bt> lnodo_bt;
+struct solucion
+{
+  li camino;
+  int W1, W2;
+};
 
 struct Entrada
 {
@@ -28,9 +30,12 @@ struct Entrada
 
 struct Salida
 {
+  Salida(li c, int W1, int W2) : hay_solucion(not c.empty()),
+    camino(c.begin(), c.end()), W1(W1), W2(W2) {}
+  
   bool hay_solucion;
-  int W1, W2;
   vi camino;
+  int W1, W2;
 };
 
 bool leer_instancia(Entrada& e)
@@ -53,29 +58,31 @@ bool leer_instancia(Entrada& e)
   return true;
 }
 
-void backtracking(const Entrada& e, lnodo_bt& sol, lnodo_bt& sol_opt, vb& visitado)
+void backtracking(const Entrada& e, solucion& sol, solucion& sol_opt, vb& visitado)
 {
-  nodo_bt nodo = sol.back();
+  int u = sol.camino.back();
 
-  if (nodo.v == e.v)
+  if (u == e.v)
   {
-    if (sol_opt.empty() or nodo.W2 < sol_opt.back().W2)
+    if (sol_opt.camino.empty() or sol.W2 < sol_opt.W2)
       sol_opt = sol;
   }
   else
   {
     lady::const_iterator i;
-    for (i = e.adyacentes[nodo.v].begin(); i != e.adyacentes[nodo.v].end(); ++i)
+    for (i = e.adyacentes[u].begin(); i != e.adyacentes[u].end(); ++i)
     {
-      if (not visitado[i->v] and nodo.W1 + i->w1 <= e.K)
+      if (not visitado[i->v] and sol.W1 + i->w1 <= e.K)
       {
-        sol.push_back(nodo_bt(i->v, nodo.W1 + i->w1, nodo.W2 + i->w2));
+        sol.camino.push_back(i->v);
+        sol.W1 += i->w1; sol.W2 += i->w2;
         visitado[i->v] = true;
         
         backtracking(e, sol, sol_opt, visitado);
 
         visitado[i->v] = false;
-        sol.pop_back();
+        sol.W1 -= i->w1; sol.W2 -= i->w2;
+        sol.camino.pop_back();
       }
     }
   }
@@ -83,26 +90,16 @@ void backtracking(const Entrada& e, lnodo_bt& sol, lnodo_bt& sol_opt, vb& visita
 
 Salida resolver(const Entrada& e)
 {
-  lnodo_bt sol, sol_opt;
+  solucion sol, sol_opt;
   vb visitado(e.n + 1);
 
-  sol.push_back(nodo_bt(e.u, 0, 0));
+  sol.camino.push_back(e.u);
+  sol.W1 = sol.W2 = 0;
   visitado[e.u] = true;
 
   backtracking(e, sol, sol_opt, visitado);
 
-  Salida s;
-  s.hay_solucion = not sol_opt.empty();
-  if (s.hay_solucion)
-  {
-    s.W1 = sol_opt.back().W1;
-    s.W2 = sol_opt.back().W2;
-    lnodo_bt::const_iterator i;
-    for (i = sol_opt.begin(); i != sol_opt.end(); ++i)
-      s.camino.push_back(i->v);
-  }
-
-  return s;
+  return Salida(sol_opt.camino, sol_opt.W1, sol_opt.W2);
 }
 
 void escribir_salida(const Salida& s)
