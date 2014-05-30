@@ -19,12 +19,12 @@
 *~
 
 # Executables
+cpp/bin/*
 *.exe
 *.out
 *.app
 
 # Latex
-
 tex/*.aux
 tex/*.log
 tex/*.pdf
