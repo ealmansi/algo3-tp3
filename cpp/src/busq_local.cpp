@@ -10,9 +10,31 @@ using namespace std;
 typedef list<int> li;
 typedef vector<bool> vb;
 
-struct vecino{
-	
+struct operacion
+{
+  typedef enum {OP_AGREGAR, OP_BORRAR, OP_CAMBIAR, NINGUNA} tipo_op;
+  operacion(tipo_op tipo = NINGUNA) : tipo(tipo) {}
+  tipo_op tipo;
+};
 
+struct op_agregar : operacion
+{
+  op_agregar(leje::iterator& pos, eje u_x, eje x_v)
+    : operacion(OP_AGREGAR), pos(pos), u_x(u_x), x_v(x_v) {}
+  leje::iterator& pos;
+  eje u_x, x_v;
+};
+
+struct op_borrar : operacion
+{
+  op_borrar(int pos) : operacion(OP_BORRAR), pos(pos) {}
+  int pos;
+};
+
+struct op_cambiar : operacion
+{
+  op_cambiar(int pos, int v) : operacion(OP_CAMBIAR), pos(pos), v(v) {}
+  int pos, v;
 };
 
 /*    *    *    *    *    *    *    *    *    *    *    *    */
@@ -23,46 +45,13 @@ salida resolver(const entrada& e)
   if (not s_golsoso.hay_solucion)
     return s_golsoso;
 
-  // int n, m, u, v, K;
-  // vlady adyacentes;
-	
-  li& camino = s_golsoso.camino;
+  leje& ejes = s_golsoso.ejes;
   int W1 = s_golsoso.W1, W2 = s_golsoso.W2;
 
-	salida mejorHastaAhora;
-	mejorHastaAhora.camino = camino;
-	mejorHastaAhora.W1 = W1;
-	mejorHastaAhora.W2 = W2;
-		
   bool seguir_buscando = true;
   while (seguir_buscando)
   {
-		///SACAR
-    li::iterator vi, vj;
-    vi = vj = camino.begin();
-    ++vj;++vj;
-
-    while (vj != camino.end())
-    {
-      bool son_adyacentes = false;
-      lady::iterator j;
-      for (j = e.adyacentes[*vi].begin(); j != e.adyacentes[*vi].end() and not son_adyacentes; ++j)
-      {
-        if (j->v == *vj)
-        {
-          son_adyacentes = true;
-					///son validos?
-/*					if(W1 + j->w1 + COSAS QUE NO PODEMOS AVERIGUAR!!! < e.K){
-					
-					}*/
-        }
-      }
-
-      ++vi;++vj;
-    }
-
-		
-
+    seguir_buscando = false;
   }
 
   return s_golsoso;

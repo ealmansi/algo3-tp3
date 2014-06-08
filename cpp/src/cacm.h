@@ -7,14 +7,22 @@
 namespace cacm
 {
   struct ady;
+  struct eje;
   typedef std::list<int> li;
   typedef std::list<ady> lady;
+  typedef std::list<eje> leje;
   typedef std::vector<lady> vlady;
 
   struct ady
   {
     ady(int v, int w1, int w2) : v(v), w1(w1), w2(w2) {}
     int v, w1, w2;
+  };
+
+  struct eje
+  {
+    eje(int u, int v, int w1, int w2) : u(u), v(v), w1(w1), w2(w2) {}
+    int u, v, w1, w2;
   };
 
   struct entrada
@@ -26,8 +34,8 @@ namespace cacm
   struct salida
   {
     bool hay_solucion;
-    li camino;
-    int W1, W2;
+    leje ejes;
+    int u, v, W1, W2;
   };
 
   bool leer_instancia(entrada& e);

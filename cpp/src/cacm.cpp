@@ -5,8 +5,6 @@ using namespace cacm;
 #include <list>
 using namespace std;
 
-typedef list<int> li;
-
 /*    *    *    *    *    *    *    *    *    *    *    *    */
 
 bool cacm::leer_instancia(entrada& e)
@@ -33,15 +31,18 @@ void cacm::escribir_salida(const salida& s)
 {
   if (s.hay_solucion)
   {
-    cout << s.W1 << " " << s.W2 << " " << s.camino.size() << " ";
-    li::const_iterator i;
-    for (i = s.camino.begin(); i != s.camino.end(); ++i)
+    cout << s.W1 << " " << s.W2 << " " << (s.ejes.size() + 1) << " ";
+    
+    cout << s.u;
+    if(not s.ejes.empty()) cout << " ";
+    else cout << endl;
+
+    leje::const_iterator i;
+    for (i = s.ejes.begin(); i != s.ejes.end(); ++i)
     {
-      cout << *i;
-      if(i != --s.camino.end())
-        cout << " ";
-      else
-        cout << endl;
+      cout << i->v;
+      if(i != --s.ejes.end()) cout << " ";
+      else cout << endl;
     }
   }
   else

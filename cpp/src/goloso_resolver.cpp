@@ -47,7 +47,7 @@ void dijkstra(const entrada& e, vb& visitado, vd& dist, vi& dist_w1, vi& dist_w2
     lady::const_iterator i;
     for (i = e.adyacentes[u].begin(); i != e.adyacentes[u].end(); ++i)
     {
-      double dist_u_uv = dist[u] + pow(i->w1, 1 - alfa) * pow(i->w2, alfa);
+      double dist_u_uv = dist[u] + (1 - alfa) * i->w1 + alfa * i->w2;
       if (dist_u_uv < dist[i->v])
       {
         dist[i->v] = dist_u_uv;
@@ -76,14 +76,20 @@ salida cacm_goloso::resolver(const entrada& e)
   {
     dijkstra(e, visitado, dist, dist_w1, dist_w2, pred, *alfa);
     
-    if (dist_w1[e.v] < e.K)
+    if (dist_w1[e.v] <= e.K)
     {
       salida s;
       s.hay_solucion = true;
       
-      for (int v = e.v; v != -1; v = pred[v])
-        s.camino.push_front(v);
+      for (int v = e.v; pred[v] != -1; v = pred[v])
+      {
+        int w1 = dist_w1[v] - dist_w1[pred[v]],
+        w2 = dist_w2[v] - dist_w2[pred[v]];
+        s.ejes.push_front(eje(pred[v], v, w1, w2));
+      }
 
+      s.u = e.u;
+      s.v = e.v;
       s.W1 = dist_w1[e.v];
       s.W2 = dist_w2[e.v];
 
