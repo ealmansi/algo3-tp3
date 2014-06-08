@@ -7,7 +7,7 @@ using namespace cacm_busq_local;
 int main(int argc, char const *argv[])
 {
   entrada e;
-  while (leer_instancia(e))
+  while (leer_instancia_listas_ordenadas(e))
   {
     salida s = resolver(e);
     escribir_salida(s);

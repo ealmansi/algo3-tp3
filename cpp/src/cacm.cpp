@@ -27,6 +27,22 @@ bool cacm::leer_instancia(entrada& e)
   return true;
 }
 
+bool cacm::leer_instancia_listas_ordenadas(entrada& e)
+{
+  if (not leer_instancia(e))
+    return false;
+
+  for (int i = 0; i < e.n + 1; ++i)
+    e.adyacentes[i].sort(comparar_ady_por_v);
+
+  return true;
+}
+
+bool cacm::comparar_ady_por_v(const ady& a, const ady& b)
+{
+  return a.v < b.v;
+}
+
 void cacm::escribir_salida(const salida& s)
 {
   if (s.hay_solucion)
