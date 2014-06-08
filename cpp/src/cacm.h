@@ -8,7 +8,6 @@ namespace cacm
 {
   struct ady;
   struct eje;
-  typedef std::list<int> li;
   typedef std::list<ady> lady;
   typedef std::list<eje> leje;
   typedef std::vector<lady> vlady;

@@ -1,6 +1,8 @@
 #include "cacm.h"
 #include "cacm_goloso.h"
+#include "cacm_busq_local.h"
 using namespace cacm;
+using namespace cacm_busq_local;
 
 #include <iostream>
 #include <list>
@@ -12,7 +14,7 @@ typedef vector<bool> vb;
 
 /*    *    *    *    *    *    *    *    *    *    *    *    */
 
-salida resolver(const entrada& e)
+salida cacm_busq_local::resolver(const entrada& e)
 {
   salida s_golsoso = cacm_goloso::resolver(e);
   if (not s_golsoso.hay_solucion)
@@ -28,16 +30,4 @@ salida resolver(const entrada& e)
   }
 
   return s_golsoso;
-}
-
-int main(int argc, char const *argv[])
-{
-  entrada e;
-  while(leer_instancia(e))
-  {
-    salida s = resolver(e);
-    escribir_salida(s);
-  }
-
-  return 0;
 }

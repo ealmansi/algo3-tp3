@@ -2,36 +2,39 @@ SRC_DIR	=	src
 OBJ_DIR	=	obj
 BIN_DIR	=	bin
 
-BIN = $(BIN_DIR)/exacto $(BIN_DIR)/goloso $(BIN_DIR)/busq_local
+BIN = $(BIN_DIR)/cacm_exacto $(BIN_DIR)/cacm_goloso $(BIN_DIR)/cacm_busq_local
 
 all: init $(BIN)
 
 $(OBJ_DIR)/cacm.o: $(SRC_DIR)/cacm.cpp $(SRC_DIR)/cacm.h
-	g++ -c -o $(OBJ_DIR)/cacm.o $(SRC_DIR)/cacm.cpp
+	g++ -c -o $@ $(SRC_DIR)/cacm.cpp
 
-$(OBJ_DIR)/exacto.o: $(SRC_DIR)/exacto.cpp $(SRC_DIR)/cacm.h
-	g++ -c -o $(OBJ_DIR)/exacto.o $(SRC_DIR)/exacto.cpp
+$(OBJ_DIR)/cacm_exacto_main.o: $(SRC_DIR)/cacm_exacto_main.cpp $(SRC_DIR)/cacm.h
+	g++ -c -o $@ $<
 
-$(OBJ_DIR)/goloso.o: $(SRC_DIR)/goloso.cpp $(SRC_DIR)/cacm.h
-	g++ -c -o $(OBJ_DIR)/goloso.o $(SRC_DIR)/goloso.cpp
+$(OBJ_DIR)/cacm_goloso_main.o: $(SRC_DIR)/cacm_goloso_main.cpp $(SRC_DIR)/cacm.h
+	g++ -c -o $@ $<
 
-$(OBJ_DIR)/goloso_resolver.o: $(SRC_DIR)/goloso_resolver.cpp $(SRC_DIR)/cacm_goloso.h
-	g++ -c -o $(OBJ_DIR)/goloso_resolver.o $(SRC_DIR)/goloso_resolver.cpp
+$(OBJ_DIR)/cacm_busq_local_main.o: $(SRC_DIR)/cacm_busq_local_main.cpp $(SRC_DIR)/cacm.h
+	g++ -c -o $@ $<
 
-$(OBJ_DIR)/exacto_resolver.o: $(SRC_DIR)/exacto_resolver.cpp $(SRC_DIR)/cacm_exacto.h
-	g++ -c -o $(OBJ_DIR)/exacto_resolver.o $(SRC_DIR)/exacto_resolver.cpp
+$(OBJ_DIR)/cacm_goloso_resolver.o: $(SRC_DIR)/cacm_goloso_resolver.cpp $(SRC_DIR)/cacm_goloso.h
+	g++ -c -o $@ $<
 
-$(OBJ_DIR)/busq_local.o: $(SRC_DIR)/busq_local.cpp $(SRC_DIR)/cacm.h
-	g++ -c -o $(OBJ_DIR)/busq_local.o $(SRC_DIR)/busq_local.cpp
+$(OBJ_DIR)/cacm_exacto_resolver.o: $(SRC_DIR)/cacm_exacto_resolver.cpp $(SRC_DIR)/cacm_exacto.h
+	g++ -c -o $@ $<
 
-$(BIN_DIR)/exacto: $(OBJ_DIR)/cacm.o $(OBJ_DIR)/exacto.o $(OBJ_DIR)/exacto_resolver.o
-	g++ -o $(BIN_DIR)/exacto $(OBJ_DIR)/cacm.o $(OBJ_DIR)/exacto.o $(OBJ_DIR)/exacto_resolver.o
+$(OBJ_DIR)/cacm_busq_local_resolver.o: $(SRC_DIR)/cacm_busq_local_resolver.cpp $(SRC_DIR)/cacm_busq_local.h
+	g++ -c -o $@ $<
 
-$(BIN_DIR)/goloso: $(OBJ_DIR)/cacm.o $(OBJ_DIR)/goloso.o $(OBJ_DIR)/goloso_resolver.o
-	g++ -o $(BIN_DIR)/goloso $(OBJ_DIR)/cacm.o $(OBJ_DIR)/goloso.o $(OBJ_DIR)/goloso_resolver.o
+$(BIN_DIR)/cacm_exacto: $(OBJ_DIR)/cacm.o $(OBJ_DIR)/cacm_exacto_main.o $(OBJ_DIR)/cacm_exacto_resolver.o
+	g++ -o $@ $^
 
-$(BIN_DIR)/busq_local: $(OBJ_DIR)/cacm.o $(OBJ_DIR)/busq_local.o $(OBJ_DIR)/goloso_resolver.o
-	g++ -o $(BIN_DIR)/busq_local $(OBJ_DIR)/cacm.o $(OBJ_DIR)/busq_local.o $(OBJ_DIR)/goloso_resolver.o
+$(BIN_DIR)/cacm_goloso: $(OBJ_DIR)/cacm.o $(OBJ_DIR)/cacm_goloso_main.o $(OBJ_DIR)/cacm_goloso_resolver.o
+	g++ -o $@ $^
+
+$(BIN_DIR)/cacm_busq_local: $(OBJ_DIR)/cacm.o $(OBJ_DIR)/cacm_busq_local_main.o $(OBJ_DIR)/cacm_goloso_resolver.o $(OBJ_DIR)/cacm_busq_local_resolver.o
+	g++ -o $@ $^
 
 .PHONY: init clean wipe
 
