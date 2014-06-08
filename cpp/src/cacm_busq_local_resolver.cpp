@@ -43,10 +43,11 @@ void buscar_vecinos_tipo_1(solucion& sol, vecino& mejor_vecino, const entrada& e
   for (it_uv = sol.ejes.begin(); it_uv != sol.ejes.end(); ++it_uv)
   {
     eje& uv = *it_uv;
+    int u = uv.u, v = uv.v;
 
     // para cada vertice adyacente a ambos extremos de (u,v)
-    lady::const_iterator it_ady_u = e.adyacentes[uv.u].begin(), it_ady_v = e.adyacentes[uv.v].begin();
-    while (it_ady_u != e.adyacentes[uv.u].end() and it_ady_v != e.adyacentes[uv.v].end())
+    lady::const_iterator it_ady_u = e.adyacentes[u].begin(), it_ady_v = e.adyacentes[v].begin();
+    while (it_ady_u != e.adyacentes[u].end() and it_ady_v != e.adyacentes[v].end())
     {
       const ady& ady_u = *it_ady_u, ady_v = *it_ady_v;
 
@@ -54,6 +55,8 @@ void buscar_vecinos_tipo_1(solucion& sol, vecino& mejor_vecino, const entrada& e
       else if (ady_v.v < ady_u.v) ++it_ady_v;
       else
       {
+        int x = ady_u.v;
+
         // actualizo mejor_vecino si esta solucion vecina es valida y es mejor
         int W1_prima = sol.W1 - uv.w1 + ady_u.w1 + ady_v.w1,
         W2_prima = sol.W2 - uv.w2 + ady_u.w2 + ady_v.w2;
@@ -62,8 +65,8 @@ void buscar_vecinos_tipo_1(solucion& sol, vecino& mejor_vecino, const entrada& e
           mejor_vecino.tipo = vecino::V_TIPO_1;
           mejor_vecino.pos = it_uv;
           mejor_vecino.ejes_nuevos.clear();
-          mejor_vecino.ejes_nuevos.push_back(eje(uv.u, ady_u.v, ady_u.w1, ady_u.w2));
-          mejor_vecino.ejes_nuevos.push_back(eje(ady_v.v, uv.v, ady_v.w1, ady_v.w2));
+          mejor_vecino.ejes_nuevos.push_back(eje(u, x, ady_u.w1, ady_u.w2));
+          mejor_vecino.ejes_nuevos.push_back(eje(x, v, ady_v.w1, ady_v.w2));
           mejor_vecino.W1 = W1_prima;
           mejor_vecino.W2 = W2_prima;
         }
@@ -81,16 +84,16 @@ void buscar_vecinos_tipo_2(solucion& sol, vecino& mejor_vecino, const entrada& e
   leje::iterator it_uv = sol.ejes.begin(), it_vz = sol.ejes.begin(); ++it_vz;
   for (; it_vz != sol.ejes.end(); ++it_uv, ++it_vz)
   {
-    eje& uv = *it_uv,
-    vz = *it_vz;
+    eje& uv = *it_uv, vz = *it_vz;
+    int u = uv.u, v = uv.v, z = vz.v;
 
     // busco a z entre los adyacentes de u
     lady::const_iterator it_ady_u;
-    for (it_ady_u = e.adyacentes[uv.u].begin(); it_ady_u != e.adyacentes[uv.u].end(); ++it_ady_u)
+    for (it_ady_u = e.adyacentes[u].begin(); it_ady_u != e.adyacentes[u].end(); ++it_ady_u)
     {
       const ady& ady_u = *it_ady_u;
 
-      if (ady_u.v != vz.v) continue;
+      if (ady_u.v != z) continue;
 
       // actualizo mejor_vecino si esta solucion vecina es valida y es mejor
       int W1_prima = sol.W1 - uv.w1 - vz.w1 + ady_u.w1,
@@ -100,7 +103,7 @@ void buscar_vecinos_tipo_2(solucion& sol, vecino& mejor_vecino, const entrada& e
         mejor_vecino.tipo = vecino::V_TIPO_2;
         mejor_vecino.pos = it_uv;
         mejor_vecino.ejes_nuevos.clear();
-        mejor_vecino.ejes_nuevos.push_back(eje(uv.u, ady_u.v, ady_u.w1, ady_u.w2));
+        mejor_vecino.ejes_nuevos.push_back(eje(u, z, ady_u.w1, ady_u.w2));
         mejor_vecino.W1 = W1_prima;
         mejor_vecino.W2 = W2_prima;
       }
@@ -117,12 +120,12 @@ void buscar_vecinos_tipo_3(solucion& sol, vecino& mejor_vecino, const entrada& e
   leje::iterator it_uv = sol.ejes.begin(), it_vz = sol.ejes.begin(); ++it_vz;
   for (; it_vz != sol.ejes.end(); ++it_uv, ++it_vz)
   {
-    eje& uv = *it_uv,
-    vz = *it_vz;
+    eje& uv = *it_uv, vz = *it_vz;
+    int u = uv.u, v = uv.v, z = vz.v;
 
     // para cada vertice adyacente a `u` y a `z`
-    lady::const_iterator it_ady_u = e.adyacentes[uv.u].begin(), it_ady_z = e.adyacentes[vz.v].begin();
-    while (it_ady_u != e.adyacentes[uv.u].end() and it_ady_z != e.adyacentes[vz.v].end())
+    lady::const_iterator it_ady_u = e.adyacentes[u].begin(), it_ady_z = e.adyacentes[z].begin();
+    while (it_ady_u != e.adyacentes[u].end() and it_ady_z != e.adyacentes[z].end())
     {
       const ady& ady_u = *it_ady_u, ady_z = *it_ady_z;
 
@@ -130,6 +133,8 @@ void buscar_vecinos_tipo_3(solucion& sol, vecino& mejor_vecino, const entrada& e
       else if (ady_z.v < ady_u.v) ++it_ady_z;
       else
       {
+        int x = ady_u.v;
+
         // actualizo mejor_vecino si esta solucion vecina es valida y es mejor
         int W1_prima = sol.W1 - uv.w1 - vz.w1 + ady_u.w1 + ady_z.w1,
         W2_prima = sol.W2 - uv.w2 - vz.w2 + ady_u.w2 + ady_z.w2;
@@ -138,8 +143,8 @@ void buscar_vecinos_tipo_3(solucion& sol, vecino& mejor_vecino, const entrada& e
           mejor_vecino.tipo = vecino::V_TIPO_3;
           mejor_vecino.pos = it_uv;
           mejor_vecino.ejes_nuevos.clear();
-          mejor_vecino.ejes_nuevos.push_back(eje(uv.u, ady_u.v, ady_u.w1, ady_u.w2));
-          mejor_vecino.ejes_nuevos.push_back(eje(ady_z.v, vz.v, ady_z.w1, ady_z.w2));
+          mejor_vecino.ejes_nuevos.push_back(eje(u, x, ady_u.w1, ady_u.w2));
+          mejor_vecino.ejes_nuevos.push_back(eje(x, z, ady_z.w1, ady_z.w2));
           mejor_vecino.W1 = W1_prima;
           mejor_vecino.W2 = W2_prima;
         }

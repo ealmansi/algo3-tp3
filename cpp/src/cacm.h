@@ -39,7 +39,6 @@ namespace cacm
 
   bool leer_instancia(entrada& e);
   bool leer_instancia_listas_ordenadas(entrada& e);
-  bool comparar_ady_por_v(const ady& a, const ady& b);
   void escribir_salida(const salida& s);
 };
  

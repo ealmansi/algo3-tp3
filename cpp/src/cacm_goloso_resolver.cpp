@@ -14,7 +14,7 @@ typedef vector<bool> vb;
 typedef vector<int> vi;
 typedef vector<double> vd;
 
-#define CANT_ALFAS 1
+#define CANT_ALFAS 100
 #define range(c) (c).begin(), (c).end()
 
 /*    *    *    *    *    *    *    *    *    *    *    *    */
