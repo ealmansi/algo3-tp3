@@ -161,7 +161,12 @@ salida cacm_busq_local::resolver(const entrada& e)
   if (not s_golsoso.hay_solucion)
     return s_golsoso;
 
-  solucion sol = {.ejes = s_golsoso.ejes, .W1 = s_golsoso.W1, .W2 = s_golsoso.W2};
+//  solucion sol = {.ejes = s_golsoso.ejes, .W1 = s_golsoso.W1, .W2 = s_golsoso.W2};
+
+	solucion sol;
+	sol.ejes = s_golsoso.ejes;
+	sol.W1 = s_golsoso.W1;
+	sol.W2 = s_golsoso.W2;
 
   bool seguir_buscando = true;
   while (seguir_buscando)
@@ -196,6 +201,10 @@ salida cacm_busq_local::resolver(const entrada& e)
     sol.W1 = mejor_vecino.W1;
     sol.W2 = mejor_vecino.W2;
   }
+
+	s_golsoso.ejes = sol.ejes;
+	s_golsoso.W1 = sol.W1;
+	s_golsoso.W2 = sol.W2;
 
   return s_golsoso;
 }
