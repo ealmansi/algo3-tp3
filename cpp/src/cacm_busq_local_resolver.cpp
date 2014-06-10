@@ -157,16 +157,14 @@ void buscar_vecinos_tipo_3(solucion& sol, vecino& mejor_vecino, const entrada& e
 
 salida cacm_busq_local::resolver(const entrada& e)
 {
-  salida s_golsoso = cacm_goloso::resolver(e);
-  if (not s_golsoso.hay_solucion)
-    return s_golsoso;
-
-//  solucion sol = {.ejes = s_golsoso.ejes, .W1 = s_golsoso.W1, .W2 = s_golsoso.W2};
+  salida s = cacm_goloso::resolver(e);
+  if (not s.hay_solucion)
+    return s;
 
 	solucion sol;
-	sol.ejes = s_golsoso.ejes;
-	sol.W1 = s_golsoso.W1;
-	sol.W2 = s_golsoso.W2;
+	sol.ejes = s.ejes;
+	sol.W1 = s.W1;
+	sol.W2 = s.W2;
 
   bool seguir_buscando = true;
   while (seguir_buscando)
@@ -177,7 +175,9 @@ salida cacm_busq_local::resolver(const entrada& e)
     buscar_vecinos_tipo_3(sol, mejor_vecino, e);
 
     if (mejor_vecino.tipo == vecino::V_INVALIDO or not mejor_vecino.W2 < sol.W2)
+    {
       seguir_buscando = false;
+    }
     else
     {
       switch (mejor_vecino.tipo)
@@ -197,14 +197,17 @@ salida cacm_busq_local::resolver(const entrada& e)
         sol.ejes.insert(mejor_vecino.pos, range(mejor_vecino.ejes_nuevos));
         break;
       }
+      sol.W1 = mejor_vecino.W1;
+      sol.W2 = mejor_vecino.W2;
     }
-    sol.W1 = mejor_vecino.W1;
-    sol.W2 = mejor_vecino.W2;
   }
 
-	s_golsoso.ejes = sol.ejes;
-	s_golsoso.W1 = sol.W1;
-	s_golsoso.W2 = sol.W2;
+  s.hay_solucion = true;
+  s.ejes = sol.ejes;
+  s.u = e.u;
+  s.v = e.v;
+  s.W1 = sol.W1;
+  s.W2 = sol.W2;
 
-  return s_golsoso;
+  return s;
 }
