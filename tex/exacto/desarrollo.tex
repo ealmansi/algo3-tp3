@@ -1,0 +1,31 @@
+Diseñamos e implementamos un algoritmo exacto que utiliza la técnica de \emph{backtracking} para resolver el problema de CACM. A continuación daremos una descripción detallada del mismo.
+
+Lo que hace este algoritmo es recorrer todos los posibles caminos del grafo partiendo del nodo inicial $u$ y se queda con el mejor camino posible que tenga a $v$ como nodo final. El invariante de este algoritmo es que el camino empieza en el nodo $u$ y es un camino válido. Nos referimos a un camino como válido cuando éste, evaluado en su función de peso $\omega_1$, se encuentra acotada superiormente por la constante $K$ dada.
+
+Lo que el algoritmo realiza en cada llamada se puede representar con el siguiente pseudocódigo:
+
+\begin{center}
+ \begin{figure}[H]
+  \begin{pseudo}
+   \Procedure{backtracking}{nodo ultimo, grafo G, camino sol, camino sol\_opt, vector$\rangle bool \langle$ visitados}
+    \State $visitado[ultimo] \leftarrow true$
+    \If{$ultimo = G.nodoFinal$}
+	\If{$sol$ es mejor que $sol\_opt$}
+	  \State $sol\_opt \leftarrow sol$
+	\EndIf
+      \Else 
+	\For{todo $v$ adyacente a $ultimo$}
+	 \If{(not $visitado[v]$) and $\omega_1$($sol$ + $v$) $\leq$ $K$}
+	  \State $sol$ $\leftarrow$ $sol$ + $v$
+	  \State backtracking($v$, $G$, $sol$, $sol\_opt$, $visitados$)
+	  \State $sol$ $\leftarrow$ $sol$ - $v$
+	\EndIf 
+	
+	\EndFor
+      \EndIf
+      \State $visitado[ultimo] \leftarrow false$
+      \State // El algoritmo termina aca, y no hay return porque sol\_opt es pasada por referencia
+   \EndProcedure
+  \end{pseudo}
+ \end{figure}
+\end{center}

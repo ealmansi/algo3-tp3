@@ -1,7 +1,16 @@
 \subsection{Descripción del problema: Camino acotado de costo mínimo (CACM)}
 \label{sub:introduccion-descripcion}
 
+El objetivo de este trabajo práctico es resolver el problema de \emph{Camino acotado de costo mínimo} (CACM, a partir de ahora). Dado un grafo simple $G = (V,E)$, $\omega_1$ y $\omega_2$ funciones de peso, y $K$ $\in$ $\mathbb{R}_+$ constante, este problema consiste en hallar un camino $P$ de $u$ a $v$ ($u$, $v$ $\in$ $V$) con costo $\omega_1$(P) $\leq$ $K$ de manera tal que el costo $\omega_2$(P) sea mínimo.
 
 \subsection{Ejemplos de problemas reales}
 \label{sub:introduccion-ejemplos}
+
+A continuación vamos a enumerar diversos ejemplos de la vida real que pueden modelarse utilizando CACM.
+
+Un trabajador desea viajar a su oficina para trabajar utilizando el excelentísimo transporte público, y quiere llegar lo más rápido posible utilzando a lo sumo 10 patacones. En este caso, el problema se podría modelar con un grafo $G$ = ($V$,$E$) donde los nodos son las estaciones del transporte, y dos nodos $u$, $v$ $\in$ $V$ son adyacentes si dicho transporte viaja entre dichas estaciones. La función de peso $\omega_1$ devuelve la plata que cuesta ir de una parada a otra, $\omega_2$ devuelve el tiempo de viaje entre las estaciones y $K$ es igual a 10 patacones.
+
+Un viajante desea ir de una ciudad A a una ciudad B, en un país donde hay una cabina de peaje en cada ruta que conecta dos ciudades. Este viajente desea ir de A a B, pagando lo menos posible tardando a lo sumo 2 horas. En este caso, el problema se podría modelar con un grafo $G$ = ($V$,$E$) donde los nodos son las ciudades, y dos nodos $u$, $v$ $\in$ $V$ son adyacentes si existe una ruta entre dichas ciudades. La función de peso $\omega_1$ devuelve el tiempo de viaje que se tarda en tomar esa ruta, $\omega_2$ devuelve la plata que cuesta el peaje de dicha ruta y $K$ es igual a 2 horas.
+
+Otro viajante (al que le no le gusta ver el paisaje) desea viajar de la ciudad Ave a la ciudad Batracio minimizando el tiempo de viaje, sin viajar más de 200 km. En este último caso, el problema se podría modelar con un grafo $G$ = ($V$,$E$) donde los nodos son las ciudades, y dos nodos $u$, $v$ $\in$ $V$ son adyacentes si existe una ruta entre $u$ y $v$. La función de peso $\omega_1$ devuelve los kilómetros de la ruta, $\omega_2$ devuelve tiempo de viaje que se tarda en tomar esa ruta y $K$ es igual a 200 km.
 
