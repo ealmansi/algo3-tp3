@@ -6,6 +6,7 @@
 namespace cacm_busq_local
 {
   cacm::salida resolver(const cacm::entrada& e);
+  void busqueda_local(const cacm::entrada& e, cacm::salida& s);
 };
  
 #endif /* CACM_H_BUSQ_LOCAL */

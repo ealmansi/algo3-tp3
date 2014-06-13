@@ -157,10 +157,16 @@ void buscar_vecinos_tipo_3(solucion& sol, vecino& mejor_vecino, const entrada& e
 
 salida cacm_busq_local::resolver(const entrada& e)
 {
-  salida s = cacm_goloso::resolver(e);
-  if (not s.hay_solucion)
-    return s;
+  salida s = cacm_goloso::resolver(e,20,NULL);
+  busqueda_local(e,s);
+  return s;
+}
 
+void cacm_busq_local::busqueda_local(const entrada& e, salida& s)
+{
+  if (not s.hay_solucion)
+    return ;
+	
 	solucion sol;
 	sol.ejes = s.ejes;
 	sol.W1 = s.W1;
@@ -208,6 +214,4 @@ salida cacm_busq_local::resolver(const entrada& e)
   s.v = e.v;
   s.W1 = sol.W1;
   s.W2 = sol.W2;
-
-  return s;
 }

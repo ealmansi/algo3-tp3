@@ -47,6 +47,7 @@ void cacm::escribir_salida(const salida& s)
 {
   if (s.hay_solucion)
   {
+  	cout << " La Solucion: " ;
     cout << s.W1 << " " << s.W2 << " " << (s.ejes.size() + 1) << " ";
     
     cout << s.u;

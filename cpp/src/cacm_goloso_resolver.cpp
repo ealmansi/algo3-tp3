@@ -14,12 +14,11 @@ typedef vector<bool> vb;
 typedef vector<int> vi;
 typedef vector<double> vd;
 
-#define CANT_ALFAS 100
 #define range(c) (c).begin(), (c).end()
 
 /*    *    *    *    *    *    *    *    *    *    *    *    */
 
-void dijkstra(const entrada& e, vb& visitado, vd& dist, vi& dist_w1, vi& dist_w2, vi& pred, double alfa)
+void cacm_goloso::dijkstra(const entrada& e, vb& visitado, vd& dist, vi& dist_w1, vi& dist_w2, vi& pred, double alfa)
 {
   fill(range(visitado), false);
   fill(range(dist), INFINITY);
@@ -59,47 +58,64 @@ void dijkstra(const entrada& e, vb& visitado, vd& dist, vi& dist_w1, vi& dist_w2
   }
 }
 
-salida cacm_goloso::resolver(const entrada& e)
+salida cacm_goloso::resolver(const entrada& e, int cant_it, double* p)
 {
-  vd alfas(CANT_ALFAS);
-  for (int i = 0; i < CANT_ALFAS; ++i)
-    alfas[CANT_ALFAS - (i + 1)] = ((double) i) / CANT_ALFAS;
-
+	double inicio = 0;
+	double fin = 1;
+		
   vb visitado(e.n + 1);
   vd dist(e.n + 1);
   vi dist_w1(e.n + 1);
   vi dist_w2(e.n + 1);
   vi pred(e.n + 1);
 
-  vd::const_iterator alfa;
-  for (alfa = alfas.begin(); alfa != alfas.end(); ++alfa)
+  for (int i = 0;i < cant_it; ++i)
   {
-    dijkstra(e, visitado, dist, dist_w1, dist_w2, pred, *alfa);
+    dijkstra(e, visitado, dist, dist_w1, dist_w2, pred, (inicio+fin)/2);
     
     if (dist_w1[e.v] <= e.K)
     {
-      salida s;
-      s.hay_solucion = true;
-      
-      for (int v = e.v; pred[v] != -1; v = pred[v])
-      {
-        int w1 = dist_w1[v] - dist_w1[pred[v]],
-        w2 = dist_w2[v] - dist_w2[pred[v]];
-        s.ejes.push_front(eje(pred[v], v, w1, w2));
-      }
-
-      s.u = e.u;
-      s.v = e.v;
-      s.W1 = dist_w1[e.v];
-      s.W2 = dist_w2[e.v];
-
-      return s;
+    	inicio = (inicio+fin)/2;
+    }
+    else
+    {
+    	fin = (inicio+fin)/2;
     }
   }
-
+  
   salida s;
-  s.hay_solucion = false;
+  
+	if (dist_w1[e.v] > e.K)
+	{
+		dijkstra(e, visitado, dist, dist_w1, dist_w2, pred, inicio);
+		if(p != NULL)
+			*p = inicio;
+	}
+	else if (p != NULL){
+		*p = (inicio+fin)/2;
+	}
+	
+	if (dist_w1[e.v] > e.K)
+	{
+	  s.hay_solucion = false;
+	}
+	else
+	{
+		s.hay_solucion = true;
+      
+    for (int v = e.v; pred[v] != -1; v = pred[v])
+    {
+      int w1 = dist_w1[v] - dist_w1[pred[v]],
+      		w2 = dist_w2[v] - dist_w2[pred[v]];
+      s.ejes.push_front(eje(pred[v], v, w1, w2));
+    }
 
-  return s;
+    s.u = e.u;
+    s.v = e.v;
+    s.W1 = dist_w1[e.v];
+    s.W2 = dist_w2[e.v];
+	}
+	return s;
 }
+
 

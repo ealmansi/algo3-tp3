@@ -1,15 +1,15 @@
 #include "cacm.h"
-#include "cacm_goloso.h"
+#include "cacm_grasp.h"
 using namespace cacm;
-using namespace cacm_goloso;
+using namespace cacm_grasp;
 
 
 int main(int argc, char const *argv[])
 {
   entrada e;
-  while (leer_instancia(e))
+  while (leer_instancia_listas_ordenadas(e))
   {
-    salida s = resolver(e,100,NULL);
+    salida s = resolver(e);
     escribir_salida(s);
   }
 
