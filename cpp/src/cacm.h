@@ -40,6 +40,7 @@ namespace cacm
   bool leer_instancia(entrada& e);
   bool leer_instancia_listas_ordenadas(entrada& e);
   void escribir_salida(const salida& s);
+  entrada grafo_rompe(int diferencia);
 };
  
 #endif /* CACM_H */
