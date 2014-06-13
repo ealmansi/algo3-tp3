@@ -1,0 +1,11 @@
+Lo que hace este algoritmo es recorrer todos los posibles caminos simples del grafo del problema empezando por el nodo inicial $u$. Por lo tanto, el caso en el que nuestro algoritmo realice más llamadas recursivas (por lo tanto el que vamos a analizar) es el caso en el que hay más caminos simples en el grafo. El caso en el que más caminos simples hay en un grafo de $n$ nodos se da cuando el grafo tiene la mayor cantidad de aristas posible, esto se da cuando el grafo es completo. 
+
+Una vez que estamos situados en un nodo $w$, el algoritmo realiza una llamada recursiva para todos los nodos adyacentes a $w$ que no estén en el camino (el camino debe ser simple). Por lo dicho en el párrafo anterior, el caso que vamos a analizar es el caso en el que el grafo es completo. Como el grafo es completo la cantidad de vecinos que tiene $w$ es $n-1$. La ecuación de recurrencia del algoritmo es la siguiente:
+
+\begin{center}
+ $T(1) = 1$ 
+ 
+ $T(n) = (n-1)*T(n-1)$
+\end{center}
+
+Como podemos observar $T(n)$ tiene la misma definición que $(n-1)!$ por lo tanto podemos afirmar que la cantidad de llamadas que realiza este algoritmo es $O((n-1)!)$.
