@@ -42,7 +42,7 @@ $(BIN_DIR)/cacm_goloso: $(OBJ_DIR)/cacm.o $(OBJ_DIR)/cacm_goloso_main.o $(OBJ_DI
 $(BIN_DIR)/cacm_busq_local: $(OBJ_DIR)/cacm.o $(OBJ_DIR)/cacm_busq_local_main.o $(OBJ_DIR)/cacm_goloso_resolver.o $(OBJ_DIR)/cacm_busq_local_resolver.o
 	g++ -o $@ $^
 	
-$(BIN_DIR)/cacm_grasp: $(OBJ_DIR)/cacm.o $(OBJ_DIR)/cacm_grasp_main.o $(OBJ_DIR)/cacm_busq_local_resolver.o $(OBJ_DIR)/cacm_grasp_resolver.o
+$(BIN_DIR)/cacm_grasp: $(OBJ_DIR)/cacm.o $(OBJ_DIR)/cacm_grasp_main.o $(OBJ_DIR)/cacm_busq_local_resolver.o $(OBJ_DIR)/cacm_grasp_resolver.o $(OBJ_DIR)/cacm_goloso_resolver.o 
 	g++ -o $@ $^
 
 .PHONY: init clean wipe

@@ -23,7 +23,8 @@ struct vecino
     V_TIPO_1, // vecinos formados al cambiar (u,v) por (u,x)(x,v)
     V_TIPO_2, // vecinos formados al cambiar (u,v)(v,z) por (u,z)
     V_TIPO_3, // vecinos formados al cambiar (u,v)(v,z) por (u,x)(x,z)
-  V_INVALIDO} v_tipo;
+  	V_INVALIDO
+  } v_tipo;
 
   vecino() : tipo(V_INVALIDO) {}
 
