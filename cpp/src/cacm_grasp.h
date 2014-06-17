@@ -6,7 +6,6 @@
 namespace cacm_grasp
 {
   cacm::salida resolver(const cacm::entrada& e);
-  void solucion_aleatoria(const cacm::entrada& e, cacm::salida& s, double p);
 };
  
 #endif /* CACM_H_GRASP */

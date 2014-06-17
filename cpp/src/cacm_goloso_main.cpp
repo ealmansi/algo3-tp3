@@ -9,7 +9,7 @@ int main(int argc, char const *argv[])
   entrada e;
   while (leer_instancia(e))
   {
-    salida s = resolver(e,100,NULL);
+    salida s = resolver(e);
     escribir_salida(s);
   }
 
