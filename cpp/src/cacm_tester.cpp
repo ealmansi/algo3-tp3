@@ -21,22 +21,22 @@ entrada grafo_rompe(int i)
   e.adyacentes[2].push_back(ady(1,i+1,1));
   e.adyacentes[1].push_back(ady(3,i,i));
   e.adyacentes[3].push_back(ady(1,i,i));
-  e.adyacentes[1].push_back(ady(4,1,i+1));
-  e.adyacentes[4].push_back(ady(1,1,i+1));
+  e.adyacentes[1].push_back(ady(4,1,i*2));
+  e.adyacentes[4].push_back(ady(1,1,i*2));
   
   e.adyacentes[5].push_back(ady(2,i+1,1));
   e.adyacentes[2].push_back(ady(5,i+1,1));
   e.adyacentes[5].push_back(ady(3,i,i));
   e.adyacentes[3].push_back(ady(5,i,i));
-  e.adyacentes[5].push_back(ady(4,1,i+1));
-  e.adyacentes[4].push_back(ady(5,1,i+1));
+  e.adyacentes[5].push_back(ady(4,1,i));
+  e.adyacentes[4].push_back(ady(5,1,i));
   
   return e;
 }
 
 int main(int argc, char const *argv[])
 {
-  entrada e = grafo_rompe(100);
+  entrada e = grafo_rompe(400);
 
   salida s_e = cacm_exacto::resolver(e);
   cout << "Salida exacta: " ;
