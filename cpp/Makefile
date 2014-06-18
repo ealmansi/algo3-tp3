@@ -18,7 +18,7 @@ $(OBJ_DIR)/cacm_dijkstra_resolver.o: $(SRC_DIR)/cacm_dijkstra_resolver.cpp $(SRC
 $(OBJ_DIR)/cacm_goloso_resolver.o: $(SRC_DIR)/cacm_goloso_resolver.cpp $(SRC_DIR)/cacm.h $(SRC_DIR)/cacm_dijkstra.h $(SRC_DIR)/cacm_goloso.h
 	g++ -c -o $@ $<
 
-$(OBJ_DIR)/cacm_busq_local_resolver.o: $(SRC_DIR)/cacm_busq_local_resolver.cpp $(SRC_DIR)/cacm.h $(SRC_DIR)/cacm_dijkstra.h $(SRC_DIR)/cacm_busq_local.h
+$(OBJ_DIR)/cacm_busq_local_resolver.o: $(SRC_DIR)/cacm_busq_local_resolver.cpp $(SRC_DIR)/cacm.h $(SRC_DIR)/cacm_dijkstra.h $(SRC_DIR)/cacm_goloso.h $(SRC_DIR)/cacm_busq_local.h
 	g++ -c -o $@ $<
 	
 $(OBJ_DIR)/cacm_grasp_resolver.o: $(SRC_DIR)/cacm_grasp_resolver.cpp $(SRC_DIR)/cacm.h $(SRC_DIR)/cacm_goloso.h $(SRC_DIR)/cacm_busq_local.h $(SRC_DIR)/cacm_grasp.h
@@ -30,7 +30,7 @@ $(BIN_DIR)/cacm_exacto: $(SRC_DIR)/cacm_exacto_main.cpp $(OBJ_DIR)/cacm.o $(OBJ_
 $(BIN_DIR)/cacm_goloso: $(SRC_DIR)/cacm_goloso_main.cpp $(OBJ_DIR)/cacm.o $(OBJ_DIR)/cacm_dijkstra_resolver.o $(OBJ_DIR)/cacm_goloso_resolver.o
 	g++ -o $@ $^
 
-$(BIN_DIR)/cacm_busq_local: $(SRC_DIR)/cacm_busq_local_main.cpp $(OBJ_DIR)/cacm.o $(OBJ_DIR)/cacm_dijkstra_resolver.o $(OBJ_DIR)/cacm_busq_local_resolver.o
+$(BIN_DIR)/cacm_busq_local: $(SRC_DIR)/cacm_busq_local_main.cpp $(OBJ_DIR)/cacm.o $(OBJ_DIR)/cacm_dijkstra_resolver.o $(OBJ_DIR)/cacm_goloso_resolver.o $(OBJ_DIR)/cacm_busq_local_resolver.o
 	g++ -o $@ $^
 	
 $(BIN_DIR)/cacm_grasp: $(SRC_DIR)/cacm_grasp_main.cpp $(OBJ_DIR)/cacm.o $(OBJ_DIR)/cacm_dijkstra_resolver.o $(OBJ_DIR)/cacm_goloso_resolver.o $(OBJ_DIR)/cacm_busq_local_resolver.o $(OBJ_DIR)/cacm_grasp_resolver.o

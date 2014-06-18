@@ -1,5 +1,5 @@
 #include "cacm.h"
-#include "cacm_dijkstra.h"
+#include "cacm_goloso.h"
 #include "cacm_busq_local.h"
 using namespace cacm;
 using namespace cacm_busq_local;
@@ -23,7 +23,7 @@ struct vecino
     V_TIPO_1, // vecinos formados al cambiar (u,v) por (u,x)(x,v)
     V_TIPO_2, // vecinos formados al cambiar (u,v)(v,z) por (u,z)
     V_TIPO_3, // vecinos formados al cambiar (u,v)(v,z) por (u,x)(x,z)
-  	V_INVALIDO
+    V_INVALIDO
   } v_tipo;
 
   vecino() : tipo(V_INVALIDO) {}
@@ -158,7 +158,7 @@ void buscar_vecinos_tipo_3(solucion& sol, vecino& mejor_vecino, const entrada& e
 
 salida cacm_busq_local::resolver(const entrada& e)
 {
-  salida s = cacm_dijkstra::resolver(e);
+  salida s = cacm_goloso::resolver(e);
   buscar_maximo_local(e, s);
   return s;
 }
@@ -167,11 +167,11 @@ void cacm_busq_local::buscar_maximo_local(const entrada& e, salida& s)
 {
   if (not s.hay_solucion)
     return;
-	
-	solucion sol;
-	sol.ejes = s.ejes;
-	sol.W1 = s.W1;
-	sol.W2 = s.W2;
+  
+  solucion sol;
+  sol.ejes = s.ejes;
+  sol.W1 = s.W1;
+  sol.W2 = s.W2;
 
   bool seguir_buscando = true;
   while (seguir_buscando)
