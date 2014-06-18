@@ -29,7 +29,7 @@ salida cacm_dijkstra::resolver(const entrada& e, double alfa, double coef_rand)
 
   while (true)
   {
-    int u, dist_u = INFINITY;
+    int u; double dist_u = INFINITY;
     for (int i = 1; i <= e.n; ++i)
       if (not visitado[i] && dist[i] < dist_u)
         u = i, dist_u = dist[i];
@@ -74,5 +74,6 @@ salida cacm_dijkstra::resolver(const entrada& e, double alfa, double coef_rand)
   {
     s.hay_solucion = false;
   }
+  
   return s;
 }

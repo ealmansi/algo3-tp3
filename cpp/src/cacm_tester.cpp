@@ -77,7 +77,7 @@ int main(int argc, char const *argv[])
   for (int i = 0; i < 5; ++i)
   {
     // entrada e = grafo_rompe(4000);
-    entrada e = generar_instancia_aleatoria(30, 300, 100, 100, 150);
+    entrada e = generar_instancia_aleatoria(15, 30, 100, 100, 50);
 
     salida s;
 
