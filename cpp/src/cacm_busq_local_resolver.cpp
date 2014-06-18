@@ -181,7 +181,7 @@ void cacm_busq_local::buscar_maximo_local(const entrada& e, salida& s)
     buscar_vecinos_tipo_2(sol, mejor_vecino, e);
     buscar_vecinos_tipo_3(sol, mejor_vecino, e);
 
-    if (mejor_vecino.tipo == vecino::V_INVALIDO or not mejor_vecino.W2 < sol.W2)
+    if (mejor_vecino.tipo == vecino::V_INVALIDO or not (mejor_vecino.W2 < sol.W2))
     {
       seguir_buscando = false;
     }

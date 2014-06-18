@@ -74,30 +74,35 @@ entrada generar_instancia_aleatoria(int n, int m, int max_w1, int max_w2, int K)
 
 int main(int argc, char const *argv[])
 {
-  // entrada e = grafo_rompe(400);
-  entrada e = generar_instancia_aleatoria(50, 1000, 100, 100, 50);
+  for (int i = 0; i < 5; ++i)
+  {
+    // entrada e = grafo_rompe(4000);
+    entrada e = generar_instancia_aleatoria(30, 300, 100, 100, 150);
 
-  salida s;
+    salida s;
 
-  cout << "exacto" << endl;
-  s = cacm_exacto::resolver(e);
-  escribir_salida(s);
-  cout << endl;
+    cout << "exacto" << endl;
+    s = cacm_exacto::resolver(e);
+    escribir_salida(s);
+    cout << endl;
 
-  cout << "goloso" << endl;
-  s = cacm_goloso::resolver(e);
-  escribir_salida(s);
-  cout << endl;
+    cout << "goloso" << endl;
+    s = cacm_goloso::resolver(e);
+    escribir_salida(s);
+    cout << endl;
 
-  cout << "busq_local" << endl;
-  s = cacm_busq_local::resolver(e);
-  escribir_salida(s);
-  cout << endl;
+    cout << "busq_local" << endl;
+    s = cacm_busq_local::resolver(e);
+    escribir_salida(s);
+    cout << endl;
 
-  cout << "grasp" << endl;
-  s = cacm_grasp::resolver(e);
-  escribir_salida(s);
-  cout << endl;
+    cout << "grasp" << endl;
+    s = cacm_grasp::resolver(e);
+    escribir_salida(s);
+    cout << endl;
+
+    cout << "---------------" << endl;
+  }
 
   return 0;
 }
