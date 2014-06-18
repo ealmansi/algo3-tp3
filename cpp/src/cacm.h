@@ -17,6 +17,7 @@ namespace cacm
     ady(int v, int w1, int w2) : v(v), w1(w1), w2(w2) {}
     int v, w1, w2;
   };
+  bool comparar_ady_por_v(const ady& a, const ady& b);
 
   struct eje
   {

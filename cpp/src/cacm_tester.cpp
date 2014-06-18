@@ -6,6 +6,8 @@
 using namespace cacm;
 
 #include <iostream>
+#include <cstdlib>
+#include <set>
 using namespace std;
 
 entrada grafo_rompe(int i)
@@ -34,17 +36,68 @@ entrada grafo_rompe(int i)
   return e;
 }
 
+entrada generar_instancia_aleatoria(int n, int m, int max_w1, int max_w2, int K)
+{
+  entrada e;
+  e.n = n;
+  e.m = m;
+  e.u = (rand() %  e.n) + 1;
+  do { e.v = (rand() %  e.n) + 1; } while (e.u == e.v);
+  e.K = K;
+  e.adyacentes.resize(e.n + 1);
+
+  int u, v;
+  set<int> ejes; set<int>::iterator it;
+  
+  while (ejes.size() < e.m)
+  {
+    u = (rand() %  e.n) + 1;
+    do { v = (rand() %  e.n) + 1; } while (u == v);
+    ejes.insert(u * (e.n + 1) + v);
+  }
+
+  for (it = ejes.begin(); it != ejes.end(); ++it)
+  {
+    u = (*it) / (e.n + 1);
+    v = (*it) % (e.n + 1);
+    int w1 = (rand() % max_w1) + 1;
+    int w2 = (rand() % max_w2) + 1;
+    e.adyacentes[u].push_back(ady(v, w1, w2));
+    e.adyacentes[v].push_back(ady(u, w1, w2));
+  }
+
+  for (int i = 1; i < e.n + 1; ++i)
+    e.adyacentes[i].sort(comparar_ady_por_v);
+
+  return e;
+}
+
 int main(int argc, char const *argv[])
 {
-  entrada e = grafo_rompe(100);
+  // entrada e = grafo_rompe(100);
+  entrada e = generar_instancia_aleatoria(50, 1000, 100, 100, 50);
 
-  salida s_e = cacm_exacto::resolver(e);
-  cout << "Salida exacta: " ;
-  escribir_salida(s_e);
+  salida s;
 
-  salida s_g = cacm_goloso::resolver(e);
-  cout << "Salida golosa: " ;
-  escribir_salida(s_g);
-  
+  cout << "exacto" << endl;
+  s = cacm_exacto::resolver(e);
+  escribir_salida(s);
+  cout << endl;
+
+  cout << "goloso" << endl;
+  s = cacm_goloso::resolver(e);
+  escribir_salida(s);
+  cout << endl;
+
+  cout << "busq_local" << endl;
+  s = cacm_busq_local::resolver(e);
+  escribir_salida(s);
+  cout << endl;
+
+  cout << "grasp" << endl;
+  s = cacm_grasp::resolver(e);
+  escribir_salida(s);
+  cout << endl;
+
   return 0;
 }
