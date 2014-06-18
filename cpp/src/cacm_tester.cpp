@@ -10,28 +10,66 @@ using namespace cacm;
 #include <set>
 using namespace std;
 
-entrada grafo_rompe(int i)
+entrada grafo_rompe_goloso(int n, int i) //n mayor que 5
 {
   entrada e;
-  e.n = 5;
-  e.m = 6;
-  e.u = 1;
-  e.v = 5;
-  e.K = 2*i;
-  e.adyacentes.resize(e.n+1);
-  e.adyacentes[1].push_back(ady(2,i+1,1));
-  e.adyacentes[2].push_back(ady(1,i+1,1));
-  e.adyacentes[1].push_back(ady(3,i,i));
-  e.adyacentes[3].push_back(ady(1,i,i));
-  e.adyacentes[1].push_back(ady(4,1,i*2));
-  e.adyacentes[4].push_back(ady(1,1,i*2));
+  e.n = n;
+  e.m = n+1;
+  e.u = 1 + ((n-2) % 3);
+  e.v = n;
+  int k = ((n-2)/ 3);
+  e.K = k*(k+1) ;
+  i = i / k;
+  if(i%k != 0){i++;}
+  int q = k==1 ? ((k+i-1)/ k) +1 : ((k+i-1)/ (k-1)) +1;
   
-  e.adyacentes[5].push_back(ady(2,i+1,1));
-  e.adyacentes[2].push_back(ady(5,i+1,1));
-  e.adyacentes[5].push_back(ady(3,i,i));
-  e.adyacentes[3].push_back(ady(5,i,i));
-  e.adyacentes[5].push_back(ady(4,1,i));
-  e.adyacentes[4].push_back(ady(5,1,i));
+  //cout << " K: " << k << " q: " << q << endl;
+  e.adyacentes.resize(e.n+1);
+  int j = e.u+1;
+  // Primer Camino, mas que la cota
+  
+  e.adyacentes[e.u].push_back(ady(2,k,1));
+  e.adyacentes[2].push_back(ady(e.u,k,1));
+  
+  for(int p = 0; p < k-1; p++)
+  {
+  	e.adyacentes[j].push_back(ady(j+1,k,1));
+  	e.adyacentes[j+1].push_back(ady(j,k,1));
+  	j++;
+  }
+  
+  e.adyacentes[j].push_back(ady(n,k+1,1));
+  e.adyacentes[n].push_back(ady(j,k+1,1));
+  
+  j++;
+  
+  
+  e.adyacentes[e.u].push_back(ady(j,k,q));
+  e.adyacentes[j].push_back(ady(e.u,k,q));
+  
+  for(int p = 0; p < k-1; p++)
+  {
+  	e.adyacentes[j].push_back(ady(j+1,k,q));
+  	e.adyacentes[j+1].push_back(ady(j,k,q));
+  	j++;
+  }
+  
+  e.adyacentes[j].push_back(ady(n,k,q));
+  e.adyacentes[n].push_back(ady(j,k,q));
+  
+  j++;
+  
+  e.adyacentes[e.u].push_back(ady(j,1,q+i));
+  e.adyacentes[j].push_back(ady(e.u,1,q+i));
+  for(int p = 0; p < k-1 ; p++)
+  {
+  	e.adyacentes[j].push_back(ady(j+1,1,q+i));
+  	e.adyacentes[j+1].push_back(ady(j,1,q+i));
+  	j++;
+  }
+  
+  e.adyacentes[j].push_back(ady(n,1,q+i));
+  e.adyacentes[n].push_back(ady(j,1,q+i));
   
   return e;
 }
@@ -72,12 +110,56 @@ entrada generar_instancia_aleatoria(int n, int m, int max_w1, int max_w2, int K)
   return e;
 }
 
+void Test_rompe_goloso(int n, int intervalo){
+	salida s;
+	entrada e;
+	double proporcion;
+	for(int i = 5; i < n; i += intervalo ){
+		
+		cout << "n: " << i << endl;
+		entrada e = grafo_rompe_goloso(i,10000);
+
+    //cout << "exacto" << endl;
+    s = cacm_exacto::resolver(e);
+    //escribir_salida(s);
+    //cout << endl;
+		proporcion = s.W1;
+    //cout << "goloso" << endl;
+    s = cacm_goloso::resolver(e);
+    //escribir_salida(s);
+    //cout << endl;	
+		proporcion /= s.W1;
+		
+		cout << "Proporcion: " << proporcion << endl;
+		
+	}
+
+
+}
+
+
 int main(int argc, char const *argv[])
 {
-  for (int i = 0; i < 5; ++i)
+  
+  Test_rompe_goloso(93,3);
+  /*entrada e = grafo_rompe_goloso(9,100);
+  salida s;
+   cout << "exacto" << endl;
+    s = cacm_exacto::resolver(e);
+    escribir_salida(s);
+    cout << endl;
+
+    cout << "goloso" << endl;
+    s = cacm_goloso::resolver(e);
+    escribir_salida(s);
+    cout << endl;
+  */
+  /*
+  for (int i = 0; i < 1; ++i)
   {
-    // entrada e = grafo_rompe(4000);
-    entrada e = generar_instancia_aleatoria(15, 30, 100, 100, 50);
+    
+    entrada e = grafo_rompe_goloso(200,7000);
+    //entrada e = generar_instancia_aleatoria(15, 30, 100, 100, 50);
 
     salida s;
 
@@ -103,6 +185,6 @@ int main(int argc, char const *argv[])
 
     cout << "---------------" << endl;
   }
-
+*/	
   return 0;
 }
