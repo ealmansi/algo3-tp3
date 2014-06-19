@@ -32,9 +32,7 @@ salida cacm_grasp::resolver(const entrada& e)
       break;
 
     s = cacm_goloso::resolver(e, COEF_RAND);
-    cout << s.W2 << " ";
     cacm_busq_local::buscar_maximo_local(e, s);
-    cout << s.W2 << endl;
 
     if (not s.hay_solucion)
       { ++cant_it_sin_mejora; continue;}
