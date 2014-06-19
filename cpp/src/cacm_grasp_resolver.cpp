@@ -8,15 +8,17 @@ using namespace cacm_grasp;
 #include <cmath>
 using namespace std;
 
-#define COEF_RAND 0.1
+#define COEF_RAND 50
 #define MAX_CANT_IT 1000
 #define MAX_CANT_IT_SIN_MEJORA 20
 #define EPSILON 0.01
 
+#include <iostream>
+using namespace std;
 
-double error_relativo(salida& mejor_s, salida& s)
+double diferencia_relativa(salida& mejor_s, salida& s)
 {
-	return abs(mejor_s.W2 - s.W2) / mejor_s.W2;
+	return (mejor_s.W2 - s.W2) / mejor_s.W2;
 }
 
 salida cacm_grasp::resolver(const entrada& e)
@@ -26,16 +28,22 @@ salida cacm_grasp::resolver(const entrada& e)
   int cant_it_sin_mejora = 0;
   for (int cant_it = 0; cant_it < MAX_CANT_IT; ++cant_it)
   {
-    s = cacm_goloso::resolver(e, COEF_RAND);
-  	cacm_busq_local::buscar_maximo_local(e, s);
-
-    if (not s.hay_solucion or error_relativo(mejor_s, s) < EPSILON)
-      ++cant_it_sin_mejora;
-    else if (s.W2 < mejor_s.W2)
-      mejor_s = s;
-
     if (MAX_CANT_IT_SIN_MEJORA < cant_it_sin_mejora)
       break;
+
+    s = cacm_goloso::resolver(e, COEF_RAND);
+    cout << s.W2 << " ";
+    cacm_busq_local::buscar_maximo_local(e, s);
+    cout << s.W2 << endl;
+
+    if (not s.hay_solucion)
+      { ++cant_it_sin_mejora; continue;}
+    if (diferencia_relativa(mejor_s, s) < EPSILON)
+      ++cant_it_sin_mejora;
+    else
+      cant_it_sin_mejora = 0;
+    if (s.W2 < mejor_s.W2)
+      mejor_s = s;
   }
   
   return mejor_s;

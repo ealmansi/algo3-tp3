@@ -4,13 +4,16 @@ using namespace cacm;
 using namespace cacm_dijkstra;
 
 #include <iostream>
+#include <cstdlib>
 #include <cmath>
 #include <vector>
+#include <list>
 using namespace std;
 
 typedef vector<bool> vb;
 typedef vector<int> vi;
 typedef vector<double> vd;
+typedef list<int> li;
 
 /*    *    *    *    *    *    *    *    *    *    *    *    */
 
@@ -22,6 +25,8 @@ salida cacm_dijkstra::resolver(const entrada& e, double alfa, double coef_rand)
   vi dist_w2(e.n + 1, INFINITY);
   vi pred(e.n + 1, -1);
 
+  li candidatos;
+
   dist[e.u] = 0;
   dist_w1[e.u] = 0;
   dist_w2[e.u] = 0;
@@ -29,12 +34,24 @@ salida cacm_dijkstra::resolver(const entrada& e, double alfa, double coef_rand)
 
   while (true)
   {
-    int u; double dist_u = INFINITY;
+    double min_dist_u = INFINITY;
     for (int i = 1; i <= e.n; ++i)
-      if (not visitado[i] && dist[i] < dist_u)
-        u = i, dist_u = dist[i];
+      if (not visitado[i] && dist[i] < min_dist_u)
+        min_dist_u = dist[i];
+    
+    if (min_dist_u == INFINITY)
+      break;      
 
-    if (dist_u == INFINITY || u == e.v)
+    candidatos.clear();
+    for (int i = 1; i <= e.n; ++i)
+      if (not visitado[i] && dist[i] <= min_dist_u * (1 + coef_rand))
+        candidatos.push_back(i);
+
+    li::iterator it = candidatos.begin();
+    advance(it, rand() % candidatos.size());
+    int u = *it;
+
+    if (u == e.v)
       break;
 
     visitado[u] = true;
