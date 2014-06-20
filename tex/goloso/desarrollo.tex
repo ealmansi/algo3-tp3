@@ -1,0 +1,14 @@
+El algoritmo constructivo goloso que diseñamos está basado en el algoritmo de \emph{Dijkstra} para encontrar caminos mínimos en un grafo. 
+
+Supongamos que queremos resolver CACM para un grafo $G$ $=$ ($V$,$E$) donde $E$ = $(e_1, e_2, ..., e_m)$. Lo que nuestro algoritmo hace es, para un conjunto de valores $\{p$ / $0 \leq p \leq 1\}$, correr el algoritmo de \emph{Dijkstra} para el grafo $G'$ $=$ ($V$, $F(E)$) donde $F(E)$ = $(f(e_1,p), f(e_2,p), ...,f(e_m,p))$ para la siguiente función $f: (\mathbb{N} x \mathbb{N}) \Rightarrow \mathbb{N}$
+
+$f(e_i,p) = p*w_1(e_i) + (1-p)*w_2(e_i)$
+
+Esta función pondera los pesos del grafo $G$ asignándole más importancia al peso $w_1$ para los valores más altos de $p$ o a $w_2$ para los valores más bajos. En este trabajo demostraremos que si corremos el algoritmo de \emph{Dijkstra} para los pesos determinados por está función, entre mayor sea el valor de $p$ dicho algoritmo encontrará caminos con peso $w_1$ menor, pero el peso $w_2$ se incrementará. De la misma forma, a medida que $p$ decrece, el algoritmo encontrará caminos con peso $w_2$ menor y $w_1$ mayor.
+
+%TODO Aca deberíamos decir que esto se va a demostrar mas adelante o algo asi pero no se bien que poner
+Supongamos que $p$ = $1$, lo que el algoritmo de \emph{Dijkstra} hará es hallar los caminos con peso $w_1$ mínimo en $G$. De la misma forma si $p$ = $0$ el algoritmo hallará los caminos con peso $w_2$ mínimo.
+
+Lo que nuestro algoritmo hace es, para un conjunto de $p$ encontrar el $p$ más chico tal que al correr el algoritmo de \emph{Dijkstra} en $G'$ desde el nodo $u$, el peso $w_1$ siga estando acotado por la constante $k$ en el camino de $u$ a $v$. Hacemos esto mediante una búsqueda binaria en los valores de $p$.
+
+Vale aclarar que la componente golosa de este algoritmo se hace presente cuando corremos el algoritmo de \emph{Dijkstra}, ya que dicho algoritmo es un algoritmo goloso.
