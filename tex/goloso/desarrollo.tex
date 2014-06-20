@@ -12,3 +12,28 @@ Supongamos que $p$ = $0$, lo que el algoritmo de \emph{Dijkstra} hará es hallar
 Lo que nuestro algoritmo hace es, para un conjunto de $p$ encontrar el $p$ más grande tal que al correr el algoritmo de \emph{Dijkstra} en $G'$ desde el nodo $u$, el peso $w_1$ siga estando acotado por la constante $k$ en el camino de $u$ a $v$. Hacemos esto mediante una búsqueda binaria en los valores de $p$.
 
 Vale aclarar que la componente golosa de este algoritmo se hace presente cuando corremos el algoritmo de \emph{Dijkstra}, ya que dicho algoritmo es un algoritmo goloso.
+
+A continuación incluimos un pseudocódigo de nuestro algoritmo:
+
+\begin{center}
+ \begin{figure}[H]
+  \begin{pseudo}
+   \Procedure{cacm\_goloso}{grafo $G$, nodo $u$, nodo $v$}
+    \State $pInicial \leftarrow 0$, $pFinal \leftarrow 1$, $pMedio$
+    \For{$i < Cant\_Iteraciones$}
+      \State $pMedio \leftarrow (pInicial + pFinal)/2$
+      \State $solucion$ $\leftarrow$ $Dijkstra(G, medio)$
+      \If{$W_1(solucion) \leq k$}
+	 \State $pInicial \leftarrow pMedio$
+      \Else
+	 \State $pFinal \leftarrow pMedio$
+      \EndIf
+    \EndFor
+    \If{$W_1(solucion) \leq k$}
+      \State $solucion \leftarrow Dijkstra(G, 1)$
+    \EndIf
+    \State Devolver solucion
+   \EndProcedure
+  \end{pseudo}
+ \end{figure}
+\end{center}
