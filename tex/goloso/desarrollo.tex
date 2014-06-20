@@ -22,7 +22,7 @@ A continuación incluimos un pseudocódigo de nuestro algoritmo:
     \State $pInicial \leftarrow 0$, $pFinal \leftarrow 1$, $pMedio$
     \For{$i < Cant\_Iteraciones$}
       \State $pMedio \leftarrow (pInicial + pFinal)/2$
-      \State $solucion$ $\leftarrow$ $Dijkstra(G, medio)$
+      \State $solucion$ $\leftarrow$ $Dijkstra(G$, $medio$, $u$, $v)$
       \If{$W_1(solucion) \leq k$}
 	 \State $pInicial \leftarrow pMedio$
       \Else
@@ -34,6 +34,44 @@ A continuación incluimos un pseudocódigo de nuestro algoritmo:
     \EndIf
     \State Devolver solucion
    \EndProcedure
+  \end{pseudo}
+ \end{figure}
+\end{center}
+
+\begin{center}
+ \begin{figure}[H]
+  \begin{pseudo}
+   \Procedure{Dijkstra}{grafo $G = (V,E)$, $p$, $u$, $v$}
+    \State $S \leftarrow \emptyset$
+    \State $(\forall v \in V) dist(v) \leftarrow \infty$
+    \State $(\forall v \in V) pred(v) \leftarrow NULL$
+    \While{$true$}
+    \State $minDistU \leftarrow \infty$
+    \For{$k =  1 ... |V|$}
+      \If{$i \in V-S \wedge dist(i) < minDistU$}
+	\State $minDistU \leftarrow dist(i)$
+	\State $nuevo \leftarrow i$
+      \EndIf
+    \EndFor
+    \If{$minDistU = \infty$}
+      \State break
+    \EndIf
+    \State $S \leftarrow S \cup \{nuevo\}$
+    \For{$j$ adyacente a $nuevo$}
+      \State $distancia \leftarrow (1-p)*w_1(j) + p*w_2(j)$
+      \If{$distancia < dist(j)$}
+	\State $dist(i) \leftarrow distancia$
+      \EndIf
+    \EndFor
+    \EndWhile
+    \State $Solucion$
+    \State $i \leftarrow v$
+    \While{$i \neq 1$}
+      \State $Solucion \leftarrow Solucion \cup \{i\}$
+      \State $i \leftarrow pred(i)$
+    \EndWhile
+    \State Devolver Solucion
+    \EndProcedure
   \end{pseudo}
  \end{figure}
 \end{center}
