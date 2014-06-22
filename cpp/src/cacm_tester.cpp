@@ -91,8 +91,8 @@ entrada generar_instancia_aleatoria(int n, int m, int max_w1, int max_w2, int K)
   
   while (ejes.size() < e.m)
   {
-    u = (rand() %  e.n) + 1;
-    do { v = (rand() %  e.n) + 1; } while (u == v);
+    u = (rand() %  (e.n - 1)) + 1;
+    do { v = (rand() %  (e.n - u)) + u + 1; } while (u == v);
     ejes.insert(u * (e.n + 1) + v);
   }
 
