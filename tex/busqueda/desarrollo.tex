@@ -1,4 +1,8 @@
-En esta sección describiremos detalladamente el diseño de nuestro algoritmo de búsqueda local. El algoritmo se basa principalmente en la vecindad que elegimos para las posibles soluciones, a continuación las detallaremos.
+En esta sección describiremos detalladamente el diseño de nuestro algoritmo de búsqueda local. 
+
+\subsection{Vecindad}
+
+El algoritmo se basa principalmente en la vecindad que elegimos para las posibles soluciones, a continuación las detallaremos.
 
 Supongamos que tenemos un camino $C$ = ($c_0$, $c_1$, ..., $c_k$) de $k+1$ nodos que es una solución factible del problema de CACM par un grafo $G$ = ($V$,$E$). Los vecinos de la solución $C$ son caminos que también sean soluciones factibles y que surgan de aplicarle una de las siguientes operaciones:
 
@@ -32,4 +36,37 @@ Supongamos que nuestro grafo es $C_n$ y que nuestro nodo inicial es $c_1$ y nues
 
 Supongamos ahora que tenemos como solución inicial $S'$. En este caso tampoco podemos aplicar ninguna operación a $S'$ y no podremos llegar a la otra solución. Podemos decir que en este caso tanto $S$ como $S'$ son soluciones sin vecinos.
 
-Luego de pensar como solucionar este problema, llegamos a la conclusión de que al para resolverlo deberíamos tener una vecindad muy grande y perderíamos la localidad de la búsqueda. Por ejemplo, en el caso anterior, para llegar de la solución $S'$ a la solución $S$ una operación debería ser agregar a $S'$ un camino de $n$ nodos, lo cual es fácil para el grafo $C_n$ pero muy complejo para otros grafos.
+Luego de pensar como solucionar este problema, llegamos a la conclusión de que para resolverlo deberíamos tener una vecindad muy grande y perderíamos la localidad de la búsqueda. Por ejemplo, en el caso anterior, para llegar de la solución $S'$ a la solución $S$ una operación debería ser agregar a $S'$ un camino de $n$ nodos, lo cual es fácil para el grafo $C_n$ pero muy complejo para otros grafos.
+
+\subsection{Algoritmo}
+
+Habiendo explicado las características de nuestra vecindad, a continuación describiremos el algoritmo de busqueda local.
+
+Nuestro algoritmo recibe como entrada el grafo $G$ y una solución inicial $C$. Luego de esto el algoritmo entra en un ciclo en el que se buscan los vecinos de la mejor solución $S$ que se tenga. Si existe un vecino $S'$ mejor que $S$, entonces la mejor solución pasa a ser $S'$ y pasamos a la siguiente iteración. En la iteración en la que no exista un vecino mejor que $S$ entonces se termina la búsqueda.
+%TODO: En realidad búsqueda local siempre es así, deberíamos sacar este párrafo?
+
+A continuación incluiremos un pseudocódigo del algoritmo.
+\begin{center}
+ \begin{figure}[H]
+  \begin{pseudo}
+   \Procedure{busqueda local}{grafo G, camino sol}
+   \State $mejorSol \leftarrow sol$
+   \While{$seguirBuscando$}
+      \State $buscarVecinoQuitar(mejorSol, mejorVecino, G)$
+      \State $buscarVecinoAgregar(mejorSol, mejorVecino, G)$
+      \State $buscarVecinoCambiar(mejorSol, mejorVecino, G)$
+      \If{$mejorVecino.W_1 > k \vee mejorVecino.W_1 \geq mejorSol.W_1$}
+	\State $seguirBuscando \leftarrow false$
+      \Else
+	\State $actualizar(mejorSol, mejorVecino)$
+      \EndIf
+      \State Devolver $mejorSol$
+   \EndWhile
+   \EndProcedure
+  \end{pseudo}
+ \end{figure}
+\end{center}
+
+En este algoritmo usamos la estructura Camino, que es una lista de ejes y además tiene el peso total $W_1$ y $W_2$. Y además usamos la estructura vecino, que tiene un tipo que puede ser $TIPO1$ significa que es un vecino que surge de eliminar un nodo de la solución actual, $TIPO2$ que surge de agregar un nodo, o $TIPO3$, que surge de cambiar un nodo por otro. Además la estructura tiene una posición donde hay que hacer los cambios para pasar del camino actual al vecino (estos cambios se deducen según el tipo del vecino que sea). Por último la estructura cuenta con una lista de nodos a agregar al camino actual, si se cambia o agrega un nodo la lista tendrá un elemento y si se elimina un nodo la lista será vacía.
+
+Utilizamos esta estructura para poder pasar de un camino a su vecino en una complejidad constante ya que ésta cuenta con la información necesaria para saber cuáles son los cambios a realizar y dónde hay que realizarlos. Si no contáramos con esta estructura y tuviésemos simplemente otro camino deberíamos copiar el camino para actualizar la solución, lo que tendría una complejidad temporal lineal.
