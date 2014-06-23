@@ -77,42 +77,6 @@ entrada grafo_rompe_goloso(int n, int i	) //n mayor que 5
   return e;
 }
 
-entrada generar_instancia_aleatoria(int n, int m, int max_w1, int max_w2, int K)
-{
-  entrada e;
-  e.n = n;
-  e.m = m;
-  e.u = (rand() %  e.n) + 1;
-  do { e.v = (rand() %  e.n) + 1; } while (e.u == e.v);
-  e.K = K;
-  e.adyacentes.resize(e.n + 1);
-
-  int u, v;
-  set<int> ejes; set<int>::iterator it;
-  
-  while (ejes.size() < e.m)
-  {
-    u = (rand() %  (e.n - 1)) + 1;
-    do { v = (rand() %  (e.n - u)) + u + 1; } while (u == v);
-    ejes.insert(u * (e.n + 1) + v);
-  }
-
-  for (it = ejes.begin(); it != ejes.end(); ++it)
-  {
-    u = (*it) / (e.n + 1);
-    v = (*it) % (e.n + 1);
-    int w1 = (rand() % max_w1) + 1;
-    int w2 = (rand() % max_w2) + 1;
-    e.adyacentes[u].push_back(ady(v, w1, w2));
-    e.adyacentes[v].push_back(ady(u, w1, w2));
-  }
-
-  for (int i = 1; i < e.n + 1; ++i)
-    e.adyacentes[i].sort(comparar_ady_por_v);
-
-  return e;
-}
-
 void Test_rompe_goloso(int n, int intervalo){
 	salida s;
 	entrada e;
