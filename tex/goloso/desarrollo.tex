@@ -1,14 +1,77 @@
 El algoritmo constructivo goloso que diseñamos está basado en el algoritmo de \emph{Dijkstra} para encontrar caminos mínimos en un grafo. 
 
-Supongamos que queremos resolver CACM para un grafo $G$ $=$ ($V$,$E$) donde $E$ = $(e_1, e_2, ..., e_m)$. Lo que nuestro algoritmo hace es, para un conjunto de valores $\{p$ / $0 \leq p \leq 1\}$, correr el algoritmo de \emph{Dijkstra} para el grafo $G'$ $=$ ($V$, $F(E)$) donde $F(E)$ = $(f(e_1,p), f(e_2,p), ...,f(e_m,p))$ para la siguiente función $f: (\mathbb{N} x \mathbb{N}) \Rightarrow \mathbb{N}$
+Supongamos que queremos resolver CACM para un grafo $G$ $=$ ($V$,$E$) donde $E$ = $(e_1, e_2, ..., e_m)$. Lo que nuestro algoritmo hace es, para un conjunto de valores $\{p$ / $0 \leq p \leq 1\}$, correr el algoritmo de \emph{Dijkstra} para el grafo $G'$ $=$ ($V$, $E'$) donde $E'$ tiene las mismas aristas que $E$ excepto que tiene un único peso, el cual está determinado por la siguiente función $f: (\mathbb{N} x \mathbb{N}) \Rightarrow \mathbb{N}$
 
-$f(e_i,p) = p*w_1(e_i) + (1-p)*w_2(e_i)$
+$f(e_i,p) = (1-p)*w_1(e_i) + p*w_2(e_i)$
 
-Esta función pondera los pesos del grafo $G$ asignándole más importancia al peso $w_1$ para los valores más altos de $p$ o a $w_2$ para los valores más bajos. En este trabajo demostraremos que si corremos el algoritmo de \emph{Dijkstra} para los pesos determinados por está función, entre mayor sea el valor de $p$ dicho algoritmo encontrará caminos con peso $w_1$ menor, pero el peso $w_2$ se incrementará. De la misma forma, a medida que $p$ decrece, el algoritmo encontrará caminos con peso $w_2$ menor y $w_1$ mayor.
-
+Esta función pondera los pesos del grafo $G$ asignándole más importancia al peso $w_1$ para los valores más bajos de $p$ o a $w_2$ para los valores más altos. En este trabajo demostraremos que si corremos el algoritmo de \emph{Dijkstra} para los pesos determinados por está función, entre menor sea el valor de $p$ dicho algoritmo encontrará caminos con peso $w_1$ menor, pero el peso $w_2$ se incrementará. De la misma forma, a medida que $p$ crece, el algoritmo encontrará caminos con peso $w_2$ menor y $w_1$ mayor.
 %TODO Aca deberíamos decir que esto se va a demostrar mas adelante o algo asi pero no se bien que poner
-Supongamos que $p$ = $1$, lo que el algoritmo de \emph{Dijkstra} hará es hallar los caminos con peso $w_1$ mínimo en $G$. De la misma forma si $p$ = $0$ el algoritmo hallará los caminos con peso $w_2$ mínimo.
 
-Lo que nuestro algoritmo hace es, para un conjunto de $p$ encontrar el $p$ más chico tal que al correr el algoritmo de \emph{Dijkstra} en $G'$ desde el nodo $u$, el peso $w_1$ siga estando acotado por la constante $k$ en el camino de $u$ a $v$. Hacemos esto mediante una búsqueda binaria en los valores de $p$.
+Supongamos que $p$ = $0$, lo que el algoritmo de \emph{Dijkstra} hará es hallar los caminos con peso $w_1$ mínimo en $G$. De la misma forma si $p$ = $1$ el algoritmo hallará los caminos con peso $w_2$ mínimo.
+
+Lo que nuestro algoritmo hace es, para un conjunto de $p$ encontrar el $p$ más grande tal que al correr el algoritmo de \emph{Dijkstra} en $G'$ desde el nodo $u$, el peso $w_1$ siga estando acotado por la constante $k$ en el camino de $u$ a $v$. Hacemos esto mediante una búsqueda binaria en los valores de $p$.
 
 Vale aclarar que la componente golosa de este algoritmo se hace presente cuando corremos el algoritmo de \emph{Dijkstra}, ya que dicho algoritmo es un algoritmo goloso.
+
+A continuación incluimos un pseudocódigo de nuestro algoritmo:
+
+\begin{center}
+ \begin{figure}[H]
+  \begin{pseudo}
+   \Procedure{cacm\_goloso}{grafo $G$, nodo $u$, nodo $v$}
+    \State $pInicial \leftarrow 0$, $pFinal \leftarrow 1$, $pMedio$
+    \For{$i < Cant\_Iteraciones$}
+      \State $pMedio \leftarrow (pInicial + pFinal)/2$
+      \State $solucion$ $\leftarrow$ $Dijkstra(G$, $medio$, $u$, $v)$
+      \If{$W_1(solucion) \leq k$}
+	 \State $pInicial \leftarrow pMedio$
+      \Else
+	 \State $pFinal \leftarrow pMedio$
+      \EndIf
+    \EndFor
+    \If{$W_1(solucion) \leq k$}
+      \State $solucion \leftarrow Dijkstra(G, 1)$
+    \EndIf
+    \State Devolver solucion
+   \EndProcedure
+  \end{pseudo}
+ \end{figure}
+\end{center}
+
+\begin{center}
+ \begin{figure}[H]
+  \begin{pseudo}
+   \Procedure{Dijkstra}{grafo $G = (V,E)$, $p$, $u$, $v$}
+    \State $S \leftarrow \emptyset$
+    \State $(\forall v \in V) dist(v) \leftarrow \infty$
+    \State $(\forall v \in V) pred(v) \leftarrow NULL$
+    \While{$true$}
+    \State $minDistU \leftarrow \infty$
+    \For{$k =  1 ... |V|$}
+      \If{$i \in V-S \wedge dist(i) < minDistU$}
+	\State $minDistU \leftarrow dist(i)$
+	\State $nuevo \leftarrow i$
+      \EndIf
+    \EndFor
+    \If{$minDistU = \infty$}
+      \State break
+    \EndIf
+    \State $S \leftarrow S \cup \{nuevo\}$
+    \For{$j$ adyacente a $nuevo$}
+      \State $distancia \leftarrow (1-p)*w_1(j) + p*w_2(j)$
+      \If{$distancia < dist(j)$}
+	\State $dist(i) \leftarrow distancia$
+      \EndIf
+    \EndFor
+    \EndWhile
+    \State $Solucion$
+    \State $i \leftarrow v$
+    \While{$i \neq 1$}
+      \State $Solucion \leftarrow Solucion \cup \{i\}$
+      \State $i \leftarrow pred(i)$
+    \EndWhile
+    \State Devolver Solucion
+    \EndProcedure
+  \end{pseudo}
+ \end{figure}
+\end{center}

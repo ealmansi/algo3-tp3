@@ -1,0 +1,72 @@
+En esta sección describiremos detalladamente el diseño de nuestro algoritmo de búsqueda local. 
+
+\subsubsection{Vecindad}
+
+La escencia de este algoritmo se encuentra principalmente en la vecindad que elegimos para las posibles soluciones, a continuación la detallaremos.
+
+Supongamos que tenemos un camino $C$ = ($c_0$, $c_1$, ..., $c_k$) de $k+1$ nodos que es una solución factible del problema de CACM par un grafo $G$ = ($V$,$E$). Los vecinos de la solución $C$ son caminos que también sean soluciones factibles y que surgan de aplicarle una de las siguientes operaciones:
+
+$\bullet$ Quitar Nodo:
+
+Supongamos que existe un $i$ tal que $0 < i < k$ y que ($c_{i+1}$, $c_{i+1}$) $\in$ $E$. Bajo estas condiciones podemos afirmar que existe un camino en $G$ llamado $C'$ tal que $C'$ = ($c_0$, ..., $c_{i-1}$, $c_{i+1}$, ..., $c_k$). Esto significa que dado $C$ podemos eliminar el nodo $c_i$ del camino y unir $c_{i-1}$ y $c_{i+1}$ ya que estos son adyacentes entre sí, obteniendo un camino $C'$ de $k$ nodos.
+
+$\bullet$ Agregar Nodo:
+
+La operación agregar nodo es la operación inversa a la operación Quitar Nodo descripta anteriormente. Supongamos que existe un $i$ tal que $0 \leq i < k$ y existe un nodo $w \in V$ tal que ($c_i$,$w$) $\in E$ y ($w$, $c_{i+1}$) $\in E$. En este caso podemos afirmar que podemos construir un camino $C'$ = ($c_0$, ..., $c_{i}$,$w$,$c_{i+1}$) de $k+2$ nodos.
+
+Vale aclarar que para realizar esta operación, el nodo $w$ no debe pertenecer a $C$, ya que queremos que el camino sea simple.
+
+$\bullet$ Cambiar Nodo:
+
+Esta operación es una mezcla de las dos operaciones anteriores. Supongamos que existe un $i$ tal que $0 \leq i < k-1$ y que existe un nodo $w \in V$ (nuevamente, $w$ no debe estar en el camino $C$) tal que ($c_i$,$w$) $\in E$ y ($w$, $c_{i+2}$) $\in E$. En este caso podemos cambiar el nodo $c_{i+1}$ del camino $C$ por el nodo $w$ obteniendo un nuevo camino $C'$ de la misma cantidad de nodos.
+
+Uno podría creer que la operación Cambiar Nodo es una combinación de las dos operaciones descriptas anteriormente Agregar Nodo y Quitar Nodo, ya que se podría quitar primero el nodo $c_{i+1}$ y luego agregar el nodo $w$. Sin embargo, esto no es así ya que podría pasar que el eje ($c_i$,$c_{i+2}$) $\notin E$ y, si esto ocurre no nos sería posible quitar el nodo $c_{i+1}$ para luego agregar el nodo $w$.
+
+Dadas estas tres operaciones, un vecino de una solución factible $C$ es un camino que se pueda construir aplicándole a $C$ una de estas tres operaciones. Nótese que si existiese un $C'$ que se pudiera construir a partir de aplicarle a $C$ más de una operación, $C'$ no sería vecino de $C$. Tomamos esta decisión debido a que pensamos que si consideráramos vecino a un camino que se pudiera construir a partir de aplicarle numerosas operaciones a $C$ se estaría perdiendo, por así decirlo, la localidad de la búsqueda y estaríamos incurriendo en una búsqueda más global. Es importante recalcar que sólo tomamos como un vecino de $C$ un camino $C'$ factible.
+
+Algo que pensamos mientras elegíamos nuestra vecindad es que una buena propiedad que ésta pudiese cumplir sería que, dada una solución factible $C$, aplicándole una cantidad de operaciones, pudiésemos llegar a cualquier otra solución factible.
+
+Para explicar esto pensemos en los números reales. Supongamos tenemos una función $F: \mathbb{R} \Rightarrow \mathbb{R}$ y queremos hallar su máximo mediante una búsqueda local. Para esto podemos elegir, dado un $c \in \mathbb{R}$, una función de vecindad que devuelva por ejemplo el conjunto $[c-\varepsilon, c+\varepsilon]$  para algún $\varepsilon$. Dada esta función de vecindad podemos observar que aplicándola muchas veces nos podemos mover a lo largo de todo el dominio de la función $F$.
+
+Que una función de vecindad cumpla con esta propiedad nos parece bueno porque al poder moverse de cualquier solución factible a cualquier otra, nos garantizamos de que no habrá soluciones factibles buenas que nos estemos perdiendo. Más aún, si esta propiedad vale podemos afirmar que si aplicamos muchas veces la función de vecindad (empezando de una solución $C$ luego en un vecino de $C$ y así) eventualmente podemos llegar a la solución óptima del problema (aunque probablemente sea necesario aplicar esta función un número inmenso de veces para llegar y no se estaría haciendo búsqueda local).
+
+Luego de pensarlo llegamos a la conclusión de que nuestra vecindad no cumple con esa propiedad, ya que existen casos en los que a partir de una solución nos es imposible llegar a otra.
+
+Supongamos que nuestro grafo es $C_n$ y que nuestro nodo inicial es $c_1$ y nuestro nodo destino es $c_n$. Supongamos además que tenemos una solución que es $S$ = ($c_1$, $c_2$, ... , $c_n$). Podemos observar que hay otra posible solución, que es $S'$ = ($c_1$,$c_n$) ya que como nuestro grafo es $C_n$ entonces $c_1$ y $c_n$ están unidos. Sin embargo, con nuestra función de vecindad nos es imposible llegar de la solución $S$ a la solución $S'$. ya que no hay ninguna operación que se pueda realizar a $S$. 
+
+Supongamos ahora que tenemos como solución inicial $S'$. En este caso tampoco podemos aplicar ninguna operación a $S'$ y no podremos llegar a la otra solución. Podemos decir que en este caso, en nuestra vecindad tanto $S$ como $S'$ son soluciones sin vecinos.
+
+Luego de pensar como solucionar este problema, llegamos a la conclusión de que para resolverlo deberíamos tener una vecindad muy grande y perderíamos la localidad de la búsqueda. Por ejemplo, en el caso anterior, para llegar de la solución $S'$ a la solución $S$ una operación debería ser agregar a $S'$ un camino de $n$ nodos, lo cual es fácil para el grafo $C_n$ pero muy complejo para otros grafos.
+
+\subsubsection{Algoritmo}
+
+Habiendo explicado las características de nuestra vecindad, a continuación describiremos el algoritmo de busqueda local.
+
+Nuestro algoritmo recibe como entrada el grafo $G$ y una solución inicial $C$. Luego de esto el algoritmo entra en un ciclo en el que se buscan los vecinos de la mejor solución $S$ que se tenga. Si existe un vecino $S'$ mejor que $S$, entonces la mejor solución pasa a ser $S'$ y pasamos a la siguiente iteración. En la iteración en la que no exista un vecino mejor que $S$ entonces se termina la búsqueda.
+%TODO: En realidad búsqueda local siempre es así, deberíamos sacar este párrafo?
+
+A continuación incluiremos un pseudocódigo del algoritmo.
+\begin{center}
+ \begin{figure}[H]
+  \begin{pseudo}
+   \Procedure{busqueda local}{grafo G, camino sol}
+   \State $mejorSol \leftarrow sol$
+   \While{$seguirBuscando$}
+      \State $buscarVecinoQuitar(mejorSol, mejorVecino, G)$
+      \State $buscarVecinoAgregar(mejorSol, mejorVecino, G)$
+      \State $buscarVecinoCambiar(mejorSol, mejorVecino, G)$
+      \If{$mejorVecino.W_1 > k \vee mejorVecino.W_1 \geq mejorSol.W_1$}
+	\State $seguirBuscando \leftarrow false$
+      \Else
+	\State $actualizar(mejorSol, mejorVecino)$
+      \EndIf
+      \State Devolver $mejorSol$
+   \EndWhile
+   \EndProcedure
+  \end{pseudo}
+ \end{figure}
+\end{center}
+
+En este algoritmo usamos la estructura Camino, que es una lista de ejes y además tiene el peso total $W_1$ y $W_2$. Y además usamos la estructura vecino, que tiene tres tipos: $TIPO1$ significa que es un vecino que surge de eliminar un nodo de la solución actual, $TIPO2$ que surge de agregar un nodo, o $TIPO3$, que surge de cambiar un nodo por otro. Además la estructura tiene una posición donde hay que hacer los cambios para pasar del camino actual al vecino (estos cambios se deducen según el tipo del vecino que sea). Por último la estructura cuenta con una lista de nodos a agregar al camino actual, si se cambia o agrega un nodo la lista tendrá un elemento y si se elimina un nodo la lista será vacía.
+
+Utilizamos esta estructura para poder pasar de un camino a su vecino en una complejidad constante ya que ésta cuenta con la información necesaria para saber cuáles son los cambios a realizar y dónde hay que realizarlos. Si no contáramos con esta estructura y tuviésemos simplemente otro camino deberíamos copiar el camino para actualizar la solución, lo que tendría una complejidad temporal lineal.
