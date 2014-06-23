@@ -10,21 +10,80 @@ A continuación incluiremos un pseudocódigo del algoritmo.
    \Procedure{busqueda local}{grafo G, camino sol}
    \State $mejorSol \leftarrow sol$
    \While{$seguirBuscando$}
-      \State $buscarVecinoQuitar(mejorSol, mejorVecino, G)$
       \State $buscarVecinoAgregar(mejorSol, mejorVecino, G)$
+      \State $buscarVecinoQuitar(mejorSol, mejorVecino, G)$
       \State $buscarVecinoCambiar(mejorSol, mejorVecino, G)$
-      \If{$mejorVecino.W_1 > k \vee mejorVecino.W_1 \geq mejorSol.W_1$}
+      \If{$mejorVecino.W_1 > k \vee mejorVecino.W_2 \geq mejorSol.W_2$}
 	\State $seguirBuscando \leftarrow false$
       \Else
-	\State $actualizar(mejorSol, mejorVecino)$
+	\State $mejorSol \leftarrow mejorVecino$
       \EndIf
-      \State Devolver $mejorSol$
    \EndWhile
+   \State Devolver $mejorSol$
    \EndProcedure
   \end{pseudo}
  \end{figure}
 \end{center}
 
+\begin{flushleft}
+ \begin{figure}[H]
+  \begin{pseudo}
+   \Procedure{buscarVecinoAgregar}{mejorSol, mejorVecino, G}
+   \State $i \leftarrow 0$
+   \While{$0 \leq i < cantEjes(mejorSol)-1$}
+      \For{$j \in adyacentes(mejorSol_i,G) \cap adyacentes(mejorSol_{i+1},G)$}
+	  \State $W_1' \leftarrow mejorSol.W_1 - mejorSol(i,i+1).W_1 + (mejorSol_i,j).W_1 +(j,mejorSol_{i+1}).W_1$
+	  \State $W_2' \leftarrow mejorSol.W_2 - mejorSol(i,i+1).W_2 + (mejorSol_i,j).W_2 +(j,mejorSol_{i+1}).W_2$
+	  \If{$W_1' < k \wedge (mejorVecino.W_1 \geq k \vee W_2' < mejorVecino.W_2)$}
+	    \State $mejorVecino = (mejorSol_1, ... ,mejorSol_i, j, mejorSol_{i+1}, ..., mejorSol_{cantEjes})$
+	  \EndIf
+      \EndFor
+      \State $i \leftarrow i+1$
+   \EndWhile
+   \EndProcedure
+  \end{pseudo}
+ \end{figure}
+\end{flushleft}
+
+\begin{flushleft}
+ \begin{figure}[H]
+  \begin{pseudo}
+   \Procedure{buscarVecinoQuitar}{mejorSol, mejorVecino, G}
+   \State $i \leftarrow 0$
+   \While{$0 \leq j < cantEjes(mejorSol)-2$}
+      \If{$mejorSol_{i+2} \in adyacentes(mejorSol_i,G)$}
+	  \State $W_1' \leftarrow mejorSol.W_1 - mejorSol(i,i+1).W_1 - mejorSol(i+1,i+2).W_1 + mejorSol(i,i+2).W_1$
+	  \State $W_2' \leftarrow mejorSol.W_2 - mejorSol(i,i+1).W_2 - mrjorSol(i+1,i+2).W_2 + mejorSol(i,i+2).W_2$
+	  \If{$W_1' < k \wedge (mejorVecino.W_1 \geq k \vee W_2' < mejorVecino.W_2)$}
+	    \State $mejorVecino = (mejorVecino_1, ... ,mejorVecino_i, mejorVecino_{i+1}, ..., mejorVecino_{cantEjes})$
+	  \EndIf
+      \EndIf
+      \State $i = i+1$
+   \EndWhile
+   \EndProcedure
+  \end{pseudo}
+ \end{figure}
+\end{flushleft}
+
+\begin{flushleft}
+ \begin{figure}[H]
+  \begin{pseudo}
+   \Procedure{buscarVecinoQuitar}{mejorSol, mejorVecino, G}
+   \State $i \leftarrow 0$
+   \While{$0 \leq j < cantEjes(mejorSol)-2$}
+      \For{$j \in adyacentes(mejorSol_i,G) \cap adyacentes(mejorSol_{i+2},G)$}
+	  \State $W_1' \leftarrow mejorSol.W_1 - mejorSol(i,i+1).W_1 - mejorSol(i+1,i+2).W_1 + (mejorSol_i, j).W_1 + (j, mejorSol_{i+2}).W_1$
+	  \State $W_2' \leftarrow mejorSol.W_2 - mejorSol(i,i+1).W_2 - mejorSol(i+1,i+2).W_2 + (mejorSol_i, j).W_2 + (j, mejorSol_{i+2}).W_2$
+	  \If{$W_1' < k \wedge (mejorVecino.W_1 \geq k \vee W_2' < mejorVecino.W_2)$}
+	    \State $mejorVecino = (mejorVecino_1, ... ,mejorVecino_i, j ,mejorVecino_{i+2}, ..., mejorVecino_{cantEjes})$
+	  \EndIf
+      \EndFor
+      \State $i = i+1$
+   \EndWhile
+   \EndProcedure
+  \end{pseudo}
+ \end{figure}
+\end{flushleft}
 %En este algoritmo usamos la estructura Camino, que es una lista de ejes y además tiene el peso total $W_1$ y $W_2$. Y además usamos la estructura vecino, que tiene tres tipos: $TIPO1$ significa que es un vecino que surge de eliminar un nodo de la solución actual, $TIPO2$ que surge de agregar un nodo, o $TIPO3$, que surge de cambiar un nodo por otro. Además la estructura tiene una posición donde hay que hacer los cambios para pasar del camino actual al vecino (estos cambios se deducen según el tipo del vecino que sea). Por último la estructura cuenta con una lista de nodos a agregar al camino actual, si se cambia o agrega un nodo la lista tendrá un elemento y si se elimina un nodo la lista será vacía.
 
 %Utilizamos esta estructura para poder pasar de un camino a su vecino en una complejidad constante ya que ésta cuenta con la información necesaria para saber cuáles son los cambios a realizar y dónde hay que realizarlos. Si no contáramos con esta estructura y tuviésemos simplemente otro camino deberíamos copiar el camino para actualizar la solución, lo que tendría una complejidad temporal lineal.
