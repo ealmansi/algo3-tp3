@@ -8,6 +8,7 @@ using namespace cacm;
 #include <iostream>
 #include <cstdlib>
 #include <set>
+#include <math.h>
 using namespace std;
 
 entrada grafo_rompe_goloso(int n, int i) //n mayor que 5
@@ -116,10 +117,9 @@ void Test_rompe_goloso(int n, int intervalo){
 	salida s;
 	entrada e;
 	double proporcion;
-	for(int i = 5; i < n; i += intervalo ){
-		int j = 10^i;
-		cout << "n: " << i << endl;
-		entrada e = grafo_rompe_goloso(i,1000000);
+	for(int i = 1; i < n; i += intervalo ){
+		cout << "n: " << (int) exp2f((float) i) << endl;
+		entrada e = grafo_rompe_goloso(600,(int) exp2f((float) i));
 
     //cout << "exacto" << endl;
     s = cacm_exacto::resolver(e);
@@ -143,7 +143,7 @@ void Test_rompe_goloso(int n, int intervalo){
 int main(int argc, char const *argv[])
 {
   
-  Test_rompe_goloso(600,3);
+  Test_rompe_goloso(20,1);
   /*entrada e = grafo_rompe_goloso(9,100);
   salida s;
    cout << "exacto" << endl;
