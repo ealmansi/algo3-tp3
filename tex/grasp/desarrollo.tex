@@ -1,0 +1,107 @@
+Nuestro algoritmo GRASP (\emph{Greedy Randomized Adaptative Search Procedure}) es una combinación entre nuestra heurística golosa y nuestro algoritmo de búsqueda local. Los pasos genéricos de GRASP son los siguientes:
+
+\begin{center}
+ \begin{figure}[H]
+  \begin{pseudo}
+  \Procedure{GRASP}{}
+    \While{no se alcance el criterio de terminación} 
+    \State Obtener $s$ $\in$ $S$ mediante una heurística golosa aleatorizada
+    \State Mejorar $s$ mediante búsqueda local
+    \State Recordar la mejor solución obtenida hasta el momento
+    \EndWhile
+    \EndProcedure
+  \end{pseudo}
+ \end{figure}
+\end{center}
+
+Cabe aclarar que nuestro algoritmo goloso original no tiene una heurística golosa ``aleatorizada''. En GRASP, esto significa fabricar en cada paso una Lista Restricta de Candidatos (RCL) y elegir aleatoriamente un candidato de esta lista. Por esta razón, modificamos nuestro algoritmo de Dijkstra para que lo podamos utilizar. La nueva implementación de Dijkstra que utilizamos es la siguiente:
+
+\begin{center}
+ \begin{figure}[H]
+  \begin{pseudo}
+   \Procedure{Dijkstra}{grafo $G = (V,E)$, $p$, $u$, $v$}
+    \State $S \leftarrow \emptyset$
+    \State $(\forall v \in V) dist(v) \leftarrow \infty$
+    \State $(\forall v \in V) pred(v) \leftarrow NULL$
+    \While{$true$}
+    \State $minDistU \leftarrow \infty$
+    \For{$k =  1 ... |V|$}
+      \If{$i \in V-S \wedge dist(i) < minDistU$}
+	\State $minDistU \leftarrow dist(i)$
+	\State $nuevo \leftarrow i$
+      \EndIf
+    \EndFor
+    \If{$minDistU = \infty$}
+      \State break
+    \EndIf
+    \State $S \leftarrow S \cup \{nuevo\}$
+    \For{$j$ adyacente a $nuevo$}
+      \State $distancia \leftarrow (1-p)*w_1(j) + p*w_2(j)$
+      \If{$distancia < dist(j)$}
+	\State $dist(i) \leftarrow distancia$
+      \EndIf
+    \EndFor
+    \EndWhile
+    \State $Solucion$
+    \State $i \leftarrow v$
+    \While{$i \neq 1$}
+      \State $Solucion \leftarrow Solucion \cup \{i\}$
+      \State $i \leftarrow pred(i)$
+    \EndWhile
+    \State Devolver Solucion
+    \EndProcedure
+  \end{pseudo}
+ \end{figure}
+\end{center}
+
+Nuestro algoritmo GRASP tiene un criterio de terminación híbrido entre una cantidad máxima de iteraciones y una cantidad máxima de iteraciones seguidas sin cambios. Utilizar ambos componentes nos permite asegurarnos que no va a ejecutarse muchas veces sin conseguir cambios, y por otro lado nos permite saber que va a terminar en alguna cierta cantidad de iteraciones acotada. De esta manera, nos aseguramos que termina siempre.
+
+Como ahora utilizamos una heurística golosa aleatorizada, un punto importante es la creación de una Lista Restricta de Candidatos (RCL) para poder elegir uno de ellos al azar. Para armar con nuestra RCL, la creamos con los candidatos que cumplan con:
+
+\begin{verbatim}
+dist[i] <= min_dist_u * (1 + coef_rand)
+\end{verbatim}
+
+donde dist[i] contiene la distancia del nodo incial al nodo $i$ medida con la función $f$ y el $p$ pasado por parámetro (ver \ref{subsub:algoritmos-heuristicos-goloso-desarrollo.tex} para entender mejor dist), min\_dist\_u es igual al mínimo dist $\forall$ $i$, y coef\_rand es pasado por parámetro en nuestra función de GRASP.
+
+A continuación vamos a presentar el pseudocódigo de nuestro algoritmo GRASP. Cabe aclarar que COEF\_RAND, MAX\_CANT\_IT\_SIN\_MEJORA y MAX\_CANT\_IT son defines declarados antes de la función.
+
+\begin{center}
+ \begin{figure}[H]
+  \begin{pseudo}
+  \Procedure{Resolver}{Entrada e}
+    \State Salida s, mejor\_s = golosoResolver(e, COEF\_RAND)
+    \State cant\_it\_sin\_mejora = 0   
+    \While{cant\_it $<$ MAX\_CANT\_IT}
+      \If{MAX\_CANT\_IT\_SIN\_MEJORA $<$ cant\_it\_sin\_mejora}
+	\State \textbf{break}
+      \EndIf
+      \State s = golosoResolver(e, COEF\_RAND)
+      \State maximoLocalBusqLocal(e,s)
+      \If{\textbf{not} s.hay\_solucion}
+	\State++cant\_it\_sin\_mejora
+	\State \textbf{continue}
+      \EndIf
+      \If{diferencia\_relativa(mejor\_s, s) $<$ EPSILON} //diferencia\_relativa definida despues
+	\State ++cant\_it\_sin\_mejora
+      \Else
+	\State cant\_it\_sin\_mejora = 0
+      \EndIf
+      \If{s.W2 $<$ mejor\_s.W2}
+	\State mejor\_s = s
+      \EndIf
+    \EndWhile
+    \EndProcedure
+  \end{pseudo}
+ \end{figure}
+\end{center}
+
+\begin{center}
+ \begin{figure}[H]
+  \begin{pseudo}
+  \Procedure{diferencia\_relativa}{salida mejor\_s, salida s}
+  \State \textbf{return} (mejor\_s.W2 - s.W2) / mejor\_s.W2;
+  \EndProcedure
+  \end{pseudo}
+ \end{figure}
+\end{center}
