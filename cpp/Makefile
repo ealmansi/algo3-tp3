@@ -40,7 +40,7 @@ $(BIN_DIR)/cacm_tester: $(SRC_DIR)/cacm_tester.cpp $(OBJ_DIR)/cacm.o $(OBJ_DIR)/
 	g++ -o $@ $^
 
 $(BIN_DIR)/cacm_medir: $(SRC_DIR)/cacm_medir.cpp $(OBJ_DIR)/cacm.o $(OBJ_DIR)/cacm_exacto_resolver.o $(OBJ_DIR)/cacm_dijkstra_resolver.o $(OBJ_DIR)/cacm_goloso_resolver.o $(OBJ_DIR)/cacm_busq_local_resolver.o $(OBJ_DIR)/cacm_grasp_resolver.o
-	g++ -o $@ $^
+	g++ -o $@ $^ -lrt
 
 .PHONY: init clean wipe
 
