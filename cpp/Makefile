@@ -2,7 +2,7 @@ SRC_DIR	=	src
 OBJ_DIR	=	obj
 BIN_DIR	=	bin
 
-BIN = $(BIN_DIR)/cacm_exacto $(BIN_DIR)/cacm_goloso $(BIN_DIR)/cacm_busq_local $(BIN_DIR)/cacm_grasp $(BIN_DIR)/cacm_tester
+BIN = $(BIN_DIR)/cacm_exacto $(BIN_DIR)/cacm_goloso $(BIN_DIR)/cacm_busq_local $(BIN_DIR)/cacm_grasp $(BIN_DIR)/cacm_tester $(BIN_DIR)/cacm_medir
 
 all: init $(BIN)
 
@@ -37,6 +37,9 @@ $(BIN_DIR)/cacm_grasp: $(SRC_DIR)/cacm_grasp_main.cpp $(OBJ_DIR)/cacm.o $(OBJ_DI
 	g++ -o $@ $^
 	
 $(BIN_DIR)/cacm_tester: $(SRC_DIR)/cacm_tester.cpp $(OBJ_DIR)/cacm.o $(OBJ_DIR)/cacm_exacto_resolver.o $(OBJ_DIR)/cacm_dijkstra_resolver.o $(OBJ_DIR)/cacm_goloso_resolver.o $(OBJ_DIR)/cacm_busq_local_resolver.o $(OBJ_DIR)/cacm_grasp_resolver.o
+	g++ -o $@ $^
+
+$(BIN_DIR)/cacm_medir: $(SRC_DIR)/cacm_medir.cpp $(OBJ_DIR)/cacm.o $(OBJ_DIR)/cacm_exacto_resolver.o $(OBJ_DIR)/cacm_dijkstra_resolver.o $(OBJ_DIR)/cacm_goloso_resolver.o $(OBJ_DIR)/cacm_busq_local_resolver.o $(OBJ_DIR)/cacm_grasp_resolver.o
 	g++ -o $@ $^
 
 .PHONY: init clean wipe
