@@ -1,6 +1,6 @@
 El algoritmo constructivo goloso que diseñamos está basado en el algoritmo de \emph{Dijkstra} para encontrar caminos mínimos en un grafo. 
 
-Supongamos que queremos resolver CACM para un grafo $G$ $=$ ($V$,$E$) donde $E$ = $(e_1, e_2, ..., e_m)$. Lo que nuestro algoritmo hace es, para un conjunto de valores $\{p$ / $0 \leq p \leq 1\}$, correr el algoritmo de \emph{Dijkstra} para el grafo $G'$ $=$ ($V$, $F(E)$) donde $F(E)$ = $(f(e_1,p), f(e_2,p), ...,f(e_m,p))$ para la siguiente función $f: (\mathbb{N} x \mathbb{N}) \Rightarrow \mathbb{N}$
+Supongamos que queremos resolver CACM para un grafo $G$ $=$ ($V$,$E$) donde $E$ = $(e_1, e_2, ..., e_m)$. Lo que nuestro algoritmo hace es, para un conjunto de valores $\{p$ / $0 \leq p \leq 1\}$, correr el algoritmo de \emph{Dijkstra} para el grafo $G'$ $=$ ($V$, $E'$) donde $E'$ tiene las mismas aristas que $E$ excepto que tiene un único peso, el cual está determinado por la siguiente función $f: (\mathbb{N} x \mathbb{N}) \Rightarrow \mathbb{N}$
 
 $f(e_i,p) = (1-p)*w_1(e_i) + p*w_2(e_i)$
 
