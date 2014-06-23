@@ -48,7 +48,8 @@ salida cacm_dijkstra::resolver(const entrada& e, double alfa, double coef_rand)
         candidatos.push_back(i);
 
     li::iterator it = candidatos.begin();
-    advance(it, rand() % candidatos.size());
+    if (coef_rand > 0)
+    	advance(it, rand() % candidatos.size());
     int u = *it;
 
     if (u == e.v)

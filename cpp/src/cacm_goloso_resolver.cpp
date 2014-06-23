@@ -1,15 +1,18 @@
 #include "cacm.h"
 #include "cacm_dijkstra.h"
 #include "cacm_goloso.h"
+#include <iostream>
+
+using namespace std;
 using namespace cacm;
 using namespace cacm_goloso;
 
-#define CANT_IT 100
+#define CANT_IT 10
 
 salida cacm_goloso::resolver(const entrada& e, double coef_rand)
 {
   salida s;
-  
+  //cout << "coef_rand :" << coef_rand   << endl;
 	double inicio = 0.0, fin = 1.0, medio;
   for (int i = 0; i < CANT_IT; ++i)
   {
