@@ -4,12 +4,89 @@ Supongamos que queremos resolver CACM para un grafo $G$ $=$ ($V$,$E$) donde $E$ 
 
 $f(e_i,p) = (1-p)*w_1(e_i) + p*w_2(e_i)$
 
-Esta función pondera los pesos del grafo $G$ asignándole más importancia al peso $w_1$ para los valores más bajos de $p$ o a $w_2$ para los valores más altos. En este trabajo demostraremos que si corremos el algoritmo de \emph{Dijkstra} para los pesos determinados por está función, entre menor sea el valor de $p$ dicho algoritmo encontrará caminos con peso $w_1$ menor, pero el peso $w_2$ se incrementará. De la misma forma, a medida que $p$ crece, el algoritmo encontrará caminos con peso $w_2$ menor y $w_1$ mayor.
-%TODO Aca deberíamos decir que esto se va a demostrar mas adelante o algo asi pero no se bien que poner
+Esta función pondera los pesos del grafo $G$ asignándole más importancia al peso $w_1$ para los valores más bajos de $p$ o a $w_2$ para los valores más altos. La nocion intuitiva es que al dar m\'as importancia a uno de los pesos el algoritmo encontrara un camino menor en ese peso.
 
-Supongamos que $p$ = $0$, lo que el algoritmo de \emph{Dijkstra} hará es hallar los caminos con peso $w_1$ mínimo en $G$. De la misma forma si $p$ = $1$ el algoritmo hallará los caminos con peso $w_2$ mínimo.
+Lo que nuestro algoritmo hace es, para $p$ entre 0 y 1 encontrar el $p$ más grande tal que al correr el algoritmo de \emph{Dijkstra} en $G'$ desde el nodo $u$, el peso $w_1$ siga estando acotado por la constante $k$ en el camino de $u$ a $v$. Hacemos esto mediante una búsqueda binaria en los valores de $p$.
 
-Lo que nuestro algoritmo hace es, para un conjunto de $p$ encontrar el $p$ más grande tal que al correr el algoritmo de \emph{Dijkstra} en $G'$ desde el nodo $u$, el peso $w_1$ siga estando acotado por la constante $k$ en el camino de $u$ a $v$. Hacemos esto mediante una búsqueda binaria en los valores de $p$.
+Esto tiene sentido ya que nuestro algoritmo tiene dos propiedades que demostraremos luego:
+
+$\bold{1}$ El algoritmo siempre encuentra una solucion factible si existe.
+
+$\bold{2}$ El peso $W_1$ del camino encontrado en funcion de $p$ es creciente, y el peso $W_2$ decreciente.
+
+Primero con $\bold{1}$ nos garantizamos de siempre devolver una solucion factible.
+Gracis a $\bold{2}$ podemos ver que $p'$, el $p$ más grande tal que el peso $w_1$ siga estando acotado por la constante $k$, su camino asociado tengra el menor (o igual) peso en $W_2$ entre todos los caminos factible que encuentra el algoritmo para algun $p$.
+
+Para demostrar esto vemos dos cosas:
+
+1 - Los $p'' > p'$ no son factible ya que $p'$ era el m\'aximo $p$  tal que el peso $W_1$ siga estando acotado por la constante $k$. Si $p''$ es factible, o sea el peso $w_1$ esta acotado por la constante $k$, $p'$ no ser\'ia el m\'aximo, absurdo.
+
+2- Los $p'' < p'$ tendran peso $W_1$ mayor o igual al de $p'$ ya que por $\bold{2}$ $W_2$ es decreciente en $p$.
+
+
+Demostraci\'on $\bold{1}:$
+
+Solo analizaremos el caso en que existe un camino factible, ya que si no existiese nuestro algoritmo nunca podr\'ia dar uno.
+Nuestro algoritmo busca el m\'aximo $p \in [0,1]$ tal que el camino asociado a \'el sea factible. Con mostrar que siempre habra un $p$ tal que su camino asociado es factible, existe el m\'aximo.
+
+Tomando $p=0$, $f(e_i,0) = (1-0)*w_1(e_i) + 0*w_2(e_i) = w_1(e_i)$
+
+O sea ser\'ia buscar el camino m\'inimo en $W_1$. Si este camino no es factible (peso $W_1 < k$), no exitira ningun camino factible (ya que todos tendran peso mayor o igual al m\'inimo) absurdo porque estamos en el caso que existe un camino factible.
+
+Demostraci\'on $\bold{1}:$
+
+Primero veamos que el peso $W_2$ del camino encontrado en funcion de $p$ es decreciente.
+
+Tomemos $p_1 < p_2$ cuyos caminos asociados son $C_1$ y $C_2$ correspondientemente.
+
+q.v.q $W_2(C_1) > W_2(C_2)$
+
+Priemro veamos que $\frac{p_1}{1-p_1} < \frac{p_2}{1-p_2}$
+
+$ p_1* (1-p_2) < p_2 * (1-p_2) < p_2 * (1-p_1)$
+
+$ p_1 - (1-p_2) < p_2 * (1-p_1)$
+
+$ \frac{p_1}{1-p_1} < \frac{p_2}{1-p_2} $ Suponiendo que ninguno es o 0 o 1.
+
+
+Sabemos que $C_1$ es el camino optimo con $p=p_1$, particularmente es menor o igual que $C_2$:
+
+$(1-p_1)*w_1(C_1) + p_1*w_2(C_1) \leq (1-p_1)*w_1(C_2) + p_1*w_2(C_2) $
+
+$(1-p_1)*w_1(C_1) - (1-p_1)*w_1(C_2) \leq  p_1*w_2(C_2) - p_1*w_2(C_1) $
+
+$(1-p_1)*(w_1(C_1) - w_1(C_2)) \leq  p_1*(w_2(C_2) - w_2(C_1)) $
+
+$\frac{(1-p_1)}{p_1}*(w_1(C_1) - w_1(C_2)) \leq  w_2(C_2) - w_2(C_1) $
+
+De la misma forma que en el caso anterior, sabemos que $C_2$ es el camino optimo con $p=p_2$, particularmente es menor o igual que $C_1$:
+
+$(1-p_2)*w_1(C_1) + p_2*w_2(C_1) \geq (1-p_2)*w_1(C_2) + p_2*w_2(C_2) $
+
+$(1-p_2)*w_1(C_1) - (1-p_2)*w_1(C_2) \geq  p_2*w_2(C_2) - p_2*w_2(C_1) $
+
+$(1-p_2)*(w_1(C_1) - w_1(C_2)) \geq  p_2*(w_2(C_2) - w_2(C_1)) $
+
+$\frac{(1-p_2)}{p_2}*(w_1(C_1) - w_1(C_2)) \geq  w_2(C_2) - w_2(C_1) $
+
+Por los que nos queda:
+
+$\frac{(1-p_1)}{p_1}*(w_1(C_1) - w_1(C_2)) \leq  w_2(C_2) - w_2(C_1) \leq \frac{(1-p_2)}{p_2}*(w_1(C_1) - w_1(C_2))$
+
+$\frac{(1-p_1)}{p_1}*(w_1(C_1) - w_1(C_2)) \leq \frac{(1-p_2)}{p_2}*(w_1(C_1) - w_1(C_2))$
+
+$ 0 \leq (\frac{(1-p_2)}{p_2} - \frac{(1-p_1)}{p_1})*(w_1(C_1) - w_1(C_2))$
+
+Como vimos al princpio $\frac{p_1}{1-p_1} < \frac{p_2}{1-p_2}$, por lo que $0 < \frac{(1-p_2)}{p_2} - \frac{(1-p_1)}{p_1} $
+
+Entonces $ 0 \leq (w_1(C_1) - w_1(C_2))$
+
+$w_2(C_1) > w_2(C_2)$
+
+Demostrar que $W_1$ es creciente es igual a lo demostrado anteriormente, una forma de verlo es tomar $t= 1-p$. Usando exactamente el mismo razonamiento que la ultima demostracion llegamos a que $W_1$ es decreciente en $t$, por lo que es creciente en $p$.
+
+%TODO no se si queda claro, hay q explicar xq es simetrico y es al pedo demostrar el segundo.
 
 Vale aclarar que la componente golosa de este algoritmo se hace presente cuando corremos el algoritmo de \emph{Dijkstra}, ya que dicho algoritmo es un algoritmo goloso.
 
@@ -22,7 +99,7 @@ A continuación incluimos un pseudocódigo de nuestro algoritmo:
     \State $pInicial \leftarrow 0$, $pFinal \leftarrow 1$, $pMedio$
     \For{$i < Cant\_Iteraciones$}
       \State $pMedio \leftarrow (pInicial + pFinal)/2$
-      \State $solucion$ $\leftarrow$ $Dijkstra(G$, $medio$, $u$, $v)$
+      \State $solucion$ $\leftarrow$ $Dijkstra(G$, $pMedio$, $u$, $v)$
       \If{$W_1(solucion) \leq k$}
 	 \State $pInicial \leftarrow pMedio$
       \Else
