@@ -209,6 +209,20 @@ datos_m_dij = [5 8532
   set(hleg, 'Position', [0.2 0.55 0.3 0.3]);
   set(get(hleg,'Title'),'String','Solucion inicial');
   saveas(gca, ['../graficos/busq_local_tiempo.eps'],'epsc');
+  
+  figure;
+  plot(datos_m_gol(:,1), datos_m_gol(:,2) / 10, 'r');
+  hold on;
+  plot(datos_m_dij(:,1), datos_m_dij(:,2), 'b');
+  title('Tiempo de ejecucion algoritmo de busqueda local.');
+  xlabel('Cantidad de vertices (n)');
+  ylabel('Tiempo (ns)');
+  hleg = legend({'Goloso / cant iteraciones', 'Dijkstra'});
+  set(hleg, 'Position', [0.2 0.55 0.3 0.3]);
+  set(get(hleg,'Title'),'String','Solucion inicial');
+  saveas(gca, ['../graficos/busq_local_tiempo_divido10.eps'],'epsc');  
+  
+  
 %   
 %   figure;
 %   semilogy(datos_m_0_5(:,1), datos_m_0_5(:,2), 'Color', cc(1,:));
