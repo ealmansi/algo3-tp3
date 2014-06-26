@@ -45,19 +45,25 @@ function graficar_exacto_tiempo()
   hold on;
   plot(datos_m_0_8(:,1), datos_m_0_8(:,2), 'Color', cc(2,:));
   plot(datos_m_1(:,1), datos_m_1(:,2), 'Color', cc(3,:));
-  title('Algoritmo exacto. Tiempo de ejecucion vs n.');
+  title('Tiempo de ejecucion algoritmo exacto.');
+  xlabel('Cantidad de vertices (n)');
+  ylabel('Tiempo (ns)');
   hleg = legend({'50%', '80%', '100%'});
   set(hleg, 'Position', [0.2 0.55 0.3 0.3]);
   set(get(hleg,'Title'),'String','# aristas / # aristas Kn');
+  saveas(gca, ['../graficos/exacto_tiempo.eps'],'epsc');
   
   figure;
   semilogy(datos_m_0_5(:,1), datos_m_0_5(:,2), 'Color', cc(1,:));
   hold on;
   semilogy(datos_m_0_8(:,1), datos_m_0_8(:,2), 'Color', cc(2,:));
   semilogy(datos_m_1(:,1), datos_m_1(:,2), 'Color', cc(3,:));
-  title('Algoritmo exacto. Tiempo de ejecucion vs n. Escala logaritmica');
+  title('Tiempo de ejecucion algoritmo exacto. Escala logaritmica');
+  xlabel('Cantidad de vertices (n)');
+  ylabel('Tiempo (ns)');
   hleg = legend({'50%', '80%', '100%'});
   set(hleg, 'Position', [0.2 0.55 0.3 0.3]);
   set(get(hleg,'Title'),'String','# aristas / # aristas Kn');
+  saveas(gca, ['../graficos/exacto_tiempo_log.eps'],'epsc');
 
 end

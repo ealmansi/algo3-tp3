@@ -1,13 +1,3 @@
--+-+-TODOS DE LATEX-+-+-
-
-Goloso, desarrollo, al final antes del pseudo
-  "TODO no se si queda claro, hay q explicar xq es simetrico y es al pedo demostrar el segundo"
-
-Busqueda local, desarrollo, al principio
-  "En realidad búsqueda local siempre es así, deberíamos sacar este párrafo?"
-
--+-+-FIN TODOS DE LATEX-+-+-
-
 General:
 Parece ser que el problema no es solo con numeros enteros, sino solo las entradas q nos dan.
 O sea solo la parte implementativa pero lo demas deberia ser R.
