@@ -1,0 +1,91 @@
+Para probar que nuestro algoritmo no siempre da la solucion optima, vamos a presentar una familia que no solo nuestro algoritmo no encuentra la cota, sino tambien demostramos que no es \emph{k-acotado}, para ningun $k$ finito.
+
+%TODO crear y agregar figura q represente la familia
+
+$G_n$ esta compuesto por n nodos que se dividen en tres camino simples entre los nodos $1$ y $n$. A estos caminos los llamaremos $a$, $b$ y $c$ repectivamente. Los nodos se dividiran indiferentemente entre estos 3 caminos, pero cumpliendo que el costo total de cada camino sera:
+
+$\bullet$ $W_1(a) = k+1$, $W_2(a)=1$
+
+$\bullet$ $W_1(b) = k$, $W_2(b)=Q$
+
+$\bullet$ $W_1(c) = 1$, $W_2(c)=i*Q$
+
+Con $k$ la cota sobre $W_1$, $i$ sera la proporcion entre el resultado de nuestro algoritmo y el optimo y $Q$ sera seleccionado para cumplir la condicion anterior.
+
+La idea de esta familia es que $a$ sea un camino donde se supera la cota por muy poco, pero tenga un $W_2$ muy bajo, $b$ sea el camino optimo y su valor de $W_1$ sea exactamente $k$ y $c$ sea el camino que encuentra nuestro algoritmo, que tiene un $W_1$ muy bajo pero $W_2 = i * W_2(b)$.
+
+Esto va a suceder ya que no va a existir ningun $p$ para el cual el camino $b$ sea mejor que los otros dos al mismo tiempo. Para $p$ muy chiquitos $b$ sera mejor que $a$ y para $p$ muy grandes sera mejor que $c$. Claramente si se cumple lo anterior no abra ningun $p$ que sea mejor que ambas.
+
+\textbf{Demostracion:}
+
+Primero veamos como tiene que ser $p$ para que $b$ sea menor que $a$.
+
+Sea $p$ tal que 
+
+$(1-p)*W_1(b)+p*W_2(b) < (1-p)*W_1(a)+p*W_2(a)$
+
+$(1-p)*k+p*Q < (1-p)*(k+1)+p$
+
+$k-p*k+p*Q < k-p*k-p+1+p$
+
+$p*Q < 1$
+
+$p < \frac{1}{Q}$ Para que $b$ sea mejor que $a$
+
+Ahora veamos como tiene que ser $p$ para que $b$ sea menor que $c$.
+
+Sea $p$ tal que 
+
+$(1-p)*W_1(b)+p*W_2(b) < (1-p)*W_1(c)+p*W_2(c)$
+
+$(1-p)*k+p*Q < (1-p)+p*i*Q$
+
+$k-p*k+p*Q < 1-p+p*i*Q$
+
+$k-1 < -p+p*i*Q+p*k-p*Q$
+
+$k-1 < p*(-1+i*Q+k-Q)$
+
+$\frac{k-1}{-1+i*Q+k-Q} < p$ Tomando $k,i > 1$, ya que $k > 1$ y $Q*i > Q \rightarrow i*Q-Q+k-1 > 0$ por $Q > 0$
+
+Para que $b$ sea mejor que $a$ y $c$ se deberia cumplir:
+
+$\frac{k-1}{-1+i*Q+k-Q} < p < \frac{1}{Q}$
+
+Para forzar que esto no ocurra buscamos $k$ y $Q$ tal que:
+
+$\frac{k-1}{i*Q-Q+k-1} > \frac{1}{Q}$
+
+$k-1 > \frac{i*Q-Q+k-1}{Q}$ ya que $i*Q-Q+k-1 > 0$ como vimos en el punto anterior
+
+$k-1 > \frac{k-1}{Q}+i-1$
+
+$(k-1) \frac{Q-1}{Q} > i-1$
+
+Tomando $Q=3$ y $k=2*i-1$
+
+$(2*i-2) \frac{2}{3} > i-1$
+
+$(i-1) \frac{4}{3} > i-1$
+
+$(i-1) \frac{1}{3} > 0$
+
+$i-1 > 0$
+
+$i > 1$ Como ya habiamos dicho antes.
+
+
+O sea la familia para un $n$ y un $i$ dado estaria conformada por:
+
+%TODO explicar las formas de armar el grafo
+$k = 2*i-1$
+
+$\bullet$ $W_1(a) = 2*i$, $W_2(a)=1$
+
+$\bullet$ $W_1(b) = 2*i-1$, $W_2(b)=3$
+
+$\bullet$ $W_1(c) = 1$, $W_2(c)=i*3$
+
+Veamos que para cualquier $i$, la proporcion entre el camino encontrado en la golosa y el exacto es $i$:
+
+Como demostramos previamente nuestro algoritmo va a encontrar el camino $c$ que tiene $W_2=i*3$, y el camino oprtimo es el $b$, con $W_2=3$. Por los que claramente la propocion es $i$, $\frac{3i}{3}=i$.
