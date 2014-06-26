@@ -1,1 +1,16 @@
-En esta sección implementaremos un algoritmo que utilice la técnica de \emph{búsqueda local}. Para hacer este algoritmo se define un conjunto de soluciones vecindad para cada solución factible del problema. Luego, un algoritmo de búsqueda local toma una solución factible $S$ del problema a resolver como solución inicial y mejora dicha solución recorriendo en forma iterativa los vecinos de $S$ y reemplazándolo cuando encuentra un vecino mejor. El algoritmo realiza este procedimiento hasta encontrar una solución que no tenga ningún vecino que sea mejor, o sea, hasta encontrar un máximo local.
+En esta sección implementaremos un algoritmo que utilice la técnica de \emph{búsqueda local}. Para hacer este algoritmo se define un conjunto de soluciones vecindad para cada solución factible del problema. Luego, un algoritmo de búsqueda local toma una solución factible $S$ del problema a resolver como solución inicial y mejora dicha solución recorriendo en forma iterativa los vecinos de $S$ y reemplazándolo cuando encuentra un vecino que mejore la función objetivo. El algoritmo realiza este procedimiento hasta encontrar una solución que no tenga ningún vecino que sea mejor, o sea, hasta encontrar un máximo local.
+
+Básicamente, un algoritmo de búsqueda local debería cumplir con el siguiente pseudocódigo, sea $N(S)$ el conjunto de vecinos de la solución $S$ y $f$ la función objetivo que se quiere minimizar:
+
+\begin{center}
+ \begin{figure}[H]
+  \begin{pseudo}
+   \Procedure{busquedaLocal}{}
+   \State Sea $S$ una solución inicial
+   \While{$(\exists S' \in N(S)) f(S')<f(S)$}
+      \State $S \leftarrow S'$
+   \EndWhile
+   \EndProcedure
+  \end{pseudo}
+ \end{figure}
+\end{center}
