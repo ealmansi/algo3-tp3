@@ -36,8 +36,15 @@ Cabe aclarar que nuestro algoritmo goloso original no tiene una heurística golo
     \If{$minDistU = \infty$}
       \State \textbf{break}
     \EndIf
+    \State $candidatos$ $\leftarrow$ $\emptyset$
+    \For{$i$ $=$ $1$ \textbf{to} $ |V|$}
+      \If{restricciónRCL($i$, $coef\_random$)}
+	\State $candidatos$.push\_back(i)
+      \EndIf
+    \EndFor
+    \State $u$ $\leftarrow$ $dameUnoAlAzar(candidatos)$
     \State $S \leftarrow S \cup \{nuevo\}$
-    \For{$j$ adyacente a $nuevo \wedge j \notin S$ }
+    \For{$j$ adyacente a $nuevo \wedge j \notin S$}
       \State $distancia \leftarrow (1-p)*w_1(j) + p*w_2(j)$
       \If{$distancia < dist(j)$}
 	\State $dist(i) \leftarrow distancia$
@@ -72,10 +79,10 @@ A continuación vamos a presentar el pseudocódigo de nuestro algoritmo GRASP. C
  \begin{figure}[H]
   \begin{pseudo}
   \Procedure{Resolver}{Entrada e}
-    \State Salida s, mejor\_s = golosoResolver(e, COEF\_RAND)
-    \State cant\_it\_sin\_mejora = 0   
+    \State Salida s, mejor\_s $\leftarrow$ golosoResolver(e, COEF\_RAND)
+    \State cant\_it\_sin\_mejora $\leftarrow$ 0   
     \While{MAX\_CANT\_IT\_SIN\_MEJORA $<$ cant\_it\_sin\_mejora}
-      \State s = golosoResolver(e, COEF\_RAND)
+      \State s $\leftarrow$ golosoResolver(e, COEF\_RAND)
       \State maximoLocalBusqLocal(e,s)
       \If{\textbf{not} s.hay\_solucion}
 	\State++cant\_it\_sin\_mejora
@@ -84,10 +91,10 @@ A continuación vamos a presentar el pseudocódigo de nuestro algoritmo GRASP. C
       \If{diferencia\_relativa(mejor\_s, s) $<$ EPSILON}
 	\State ++cant\_it\_sin\_mejora
       \Else
-	\State cant\_it\_sin\_mejora = 0
+	\State cant\_it\_sin\_mejora $\leftarrow$ 0
       \EndIf
       \If{s.W2 $<$ mejor\_s.W2}
-	\State mejor\_s = s
+	\State mejor\_s $\leftarrow$ s
       \EndIf
     \EndWhile
     \EndProcedure

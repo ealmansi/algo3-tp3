@@ -77,7 +77,6 @@ $i > 1$ Como ya habiamos dicho antes.
 
 O sea la familia para un $n$ y un $i$ dado estaria conformada por:
 
-%TODO explicar las formas de armar el grafo
 $k = 2*i-1$
 
 $\bullet$ $W_1(a) = 2*i$, $W_2(a)=1$
@@ -89,3 +88,11 @@ $\bullet$ $W_1(c) = 1$, $W_2(c)=i*3$
 Veamos que para cualquier $i$, la proporcion entre el camino encontrado en la golosa y el exacto es $i$:
 
 Como demostramos previamente nuestro algoritmo va a encontrar el camino $c$ que tiene $W_2=i*3$, y el camino oprtimo es el $b$, con $W_2=3$. Por los que claramente la propocion es $i$, $\frac{3i}{3}=i$.
+
+Para armar un grafo de esta familia hay diversas formas.Siempre se fijan 2 nodos como el inicial y el final. Los demas nodos se distribuyen entre tres caminos disjuntos en nodos, de forma arbitraria. Particularmente nuestra implementación distribuimos equitativamente los nodos entre los 3 caminos. (Los nodos sobrantes , $(n-2) mod 3$, los dejamos como nodos aislados por un tema de facilidad).
+
+Luego queda asignar los pesos a las aristas, hay que distribuir el peso de cada camino entre las aristas del mismo. Otra vez esto puede hacerse arbitrariamente, y en nuestro caso buscamos una distribución uniforme.
+En el caso de pesos reales, se divide el peso total del camino por la cantidad de aristas y se asigna ese peso a cada arista.
+En el caso de pesos enteros esto no se puede realizar porque no podemos asegurar que sea dividible. Para asegurarnos multiplicamos los pesos de los 3 caminos por la cantidad de aristas de un camino (las 3 tienen la misma cantidad) para asegurarnos que sea dibidible. Esto no afecta nada del analisis anteror ya que al multiplicar a todos los caminos por un mismo número no afecta ni la elección del algoritmo ni la proporción.
+
+Cabe aclarar que esta familia se puede extender agregando cualquier cantidad de nodos y aristas arbitrarias, siempre y cuando el camino $b$ siga siendo el único óptimo. En esta extención el goloso nunca encontrará el óptimo ya que al agregar otras opciones no afecta que no exista ningun $p$ para el cual el camino $b$ (óptimo) sea mejor que todos los demas, ya que no puede ser mejor que $a$ y $c$ al mismo tiempo. Pero al extender la familia lo que si se pierde es el analisis de	qué tan mala puede ser la solución.  

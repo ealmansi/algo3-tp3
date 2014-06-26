@@ -10,21 +10,21 @@ Lo que nuestro algoritmo hace es, para $p$ entre 0 y 1 encontrar el $p$ más gra
 
 Esto tiene sentido ya que nuestro algoritmo tiene dos propiedades que demostraremos luego:
 
-$\bold{1}$ El algoritmo siempre encuentra una solucion factible si existe.
+$\mathbf{1}$ El algoritmo siempre encuentra una solucion factible si existe.
 
-$\bold{2}$ El peso $W_1$ del camino encontrado en funcion de $p$ es creciente, y el peso $W_2$ decreciente.
+$\mathbf{2}$ El peso $W_1$ del camino encontrado en funcion de $p$ es creciente, y el peso $W_2$ decreciente.
 
-Primero con $\bold{1}$ nos garantizamos de siempre devolver una solucion factible.
-Gracias a $\bold{2}$ podemos ver que sea $p'$, el $p$ más grande tal que el peso $w_1$ siga estando acotado por la constante $k$, su camino asociado tendrá el menor (o igual) peso en $W_2$ entre todos los caminos factibles que encuentra el algoritmo para algun $p$.
+Primero con $\mathbf{1}$ nos garantizamos de siempre devolver una solucion factible.
+Gracias a $\mathbf{2}$ podemos ver que sea $p'$, el $p$ más grande tal que el peso $w_1$ siga estando acotado por la constante $k$, su camino asociado tendrá el menor (o igual) peso en $W_2$ entre todos los caminos factibles que encuentra el algoritmo para algun $p$.
 
 Para demostrar esto vemos dos cosas:
 
 1 - Los $p'' > p'$ no son factible ya que $p'$ era el m\'aximo $p$  tal que el peso $W_1$ siga estando acotado por la constante $k$. Si $p''$ es factible, o sea el peso $w_1$ esta acotado por la constante $k$, $p'$ no ser\'ia el m\'aximo, absurdo.
 
-2- Los $p'' < p'$ tendran peso $W_1$ mayor o igual al de $p'$ ya que por $\bold{2}$ $W_2$ es decreciente en $p$.
+2- Los $p'' < p'$ tendran peso $W_1$ mayor o igual al de $p'$ ya que por $\mathbf{2}$ $W_2$ es decreciente en $p$.
 
 
-Demostraci\'on $\bold{1}:$
+Demostraci\'on $\mathbf{1}:$
 
 Solo analizaremos el caso en que existe un camino factible, ya que si no existiese nuestro algoritmo nunca podr\'ia dar uno.
 Nuestro algoritmo busca el m\'aximo $p \in [0,1]$ tal que el camino asociado a \'el sea factible. Con mostrar que siempre habra un $p$ tal que su camino asociado es factible, existe el m\'aximo.
@@ -33,7 +33,7 @@ Tomando $p=0$, $f(e_i,0) = (1-0)*w_1(e_i) + 0*w_2(e_i) = w_1(e_i)$
 
 O sea ser\'ia buscar el camino m\'inimo en $W_1$. Si este camino no es factible (peso $W_1 < k$), no exitira ningun camino factible (ya que todos tendran peso mayor o igual al m\'inimo) absurdo porque estamos en el caso que existe un camino factible.
 
-Demostraci\'on $\bold{1}:$
+Demostraci\'on $\mathbf{1}:$
 
 Primero veamos que el peso $W_2$ del camino encontrado en funcion de $p$ es decreciente.
 
