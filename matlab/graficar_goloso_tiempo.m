@@ -206,12 +206,19 @@ function graficar_exacto_tiempo()
   plot(datos_opt(:,1), datos_opt(:,2), 'Color', cc(1,:));
   hold on;
   plot(datos_sin_opt(:,1), datos_sin_opt(:,2), 'Color', cc(2,:));
-  title('Tiempo de ejecucion algoritmo heuristico goloso.');
+  title('Tiempo de ejecucion comparativo algoritmo heuristico goloso.');
   xlabel('Cantidad de vertices (n)');
   ylabel('Tiempo (ns)');
   hleg = legend({'optimizado', 'sin optimizar'});
   set(hleg, 'Position', [0.2 0.55 0.3 0.3]);
   % set(get(hleg,'Title'),'String','# aristas / # aristas Kn');
   saveas(gca, ['../graficos/goloso_tiempo.eps'],'epsc');
+  
+  figure;
+  plot(datos_sin_opt(:,1), datos_sin_opt(:,2)./datos_sin_opt(:,1));
+  title('Tiempo de ejecucion algoritmo heuristico goloso divido n');
+  xlabel('Cantidad de vertices (n)');
+  ylabel('Tiempo / Cantidad de vertices (ns / n)');
+  saveas(gca, ['../graficos/goloso_tiempo_div_n.eps'],'epsc');
   
 end
