@@ -10,7 +10,6 @@ Goloso:
   - dibujo
 . experimentación
   - gráfico tiempo vs n (para distintos m si queda bien)
-  - grafico relación goloso/exacto vs n (sobre instancias de la familia particular)
 
 Busqueda Local:
 .	Aclarar que vamos a usar dos tipos de goloso inicial (el nuestro y dijkstra solo)

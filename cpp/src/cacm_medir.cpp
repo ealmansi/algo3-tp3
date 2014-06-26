@@ -223,7 +223,7 @@ void medir_goloso_proporcion(int n_min, int n_max)
 	for(int i = n_min; i < n_max; i += 3 ){
 		//cout << "n: " << i << endl;
 		//cout << "i: " << (i-2)/3+1 << endl;
-		entrada e = grafo_rompe_goloso(i,i-(i % 10));
+		entrada e = grafo_rompe_goloso(i,i - (i % 10));
 
     
     //cout << "goloso" << endl;
