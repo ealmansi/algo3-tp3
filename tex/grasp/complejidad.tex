@@ -1,0 +1,42 @@
+En este algoritmo de GRASP no sabemos a priori cuantas veces va a iterar. Esto se debe a que MAX\_CANT\_IT\_SIN\_MEJORA puede ser menor a cant\_it\_sin\_mejora por una gran cantidad de iteraciones, como por ejemplo un caso donde nuestro algoritmo mejora en cada iteración 2 $*$ EPSILON
+
+Como necesitamos que la complejidad sea polinomial limitamos la cantidad de iteraciónes a una variable $cantidad\_iteraciones$ esta variable podría valer $n$, $n^2$ o cualquier otro valor que permita que la complejidad del algoritmo en el peor caso sea polinomial.
+
+Cabe aclarar que esta limitación solo importa al momento de implementar el algoritmo, ya que nosotros consideramos que nuestra condición de corte es que la cantidad de iteraciones sin mejora no supere un numero dado.
+
+A continución vamos a proponer un pseudocódigo para explicar la complejidad temporal de nuestro algoritmo de GRASP.
+
+\begin{center}
+ \begin{figure}[H]
+  \begin{pseudo}
+  \Procedure{Resolver}{Entrada e}
+    \State Salida mejor\_s $\leftarrow$ golosoResolver(e, COEF\_RAND) \Ode{Goloso}
+    \State cant\_it\_sin\_mejora $\leftarrow$ 0 \Ode{1}
+    \While{MAX\_CANT\_IT\_SIN\_MEJORA $<$ cant\_it\_sin\_mejora} \Ode{1}
+      \State Salida s $\leftarrow$ golosoResolver(e, COEF\_RAND) \Ode{Goloso}
+      \State maximoLocalBusqLocal(e,s) \Ode{BusqLocal}
+      \If{\textbf{not} s.hay\_solucion} \Ode{1}
+	\State++cant\_it\_sin\_mejora \Ode{1}
+	\State \textbf{continue}
+      \EndIf
+      \If{diferencia\_relativa(mejor\_s, s) $<$ EPSILON} \Ode{1}
+	\State ++cant\_it\_sin\_mejora \Ode{1}
+      \Else
+	\State cant\_it\_sin\_mejora $\leftarrow$ 0 \Ode{1}
+      \EndIf
+      \If{s.W2 $<$ mejor\_s.W2} \Ode{1}
+	\State mejor\_s $\leftarrow$ s \Ode{1}
+      \EndIf
+    \EndWhile
+    \EndProcedure
+  \end{pseudo}
+ \end{figure}
+\end{center}
+
+Como se puede observar, la complejidad total es igual a $O(Goloso)$ + $cantidad\_iteraciones$ * $O(ciclo)$, donde $O(ciclo)$ es igual a  $O(Goloso)$ + $O(BusqLocal)$.\\
+Luego, la complejidad es $O(Goloso)$ * ($cantidad\_iteraciones$ + 1) + $cantidad\_iteraciones$ * $O(BusqLocal)$.\\
+Finalmente, la complejidad total de nuestro algoritmo de GRASP es ($O(Goloso)$ + $O(BusqLocal)$) * $cantidad\_iteraciones$.
+
+Acotándolo mejor, podemos aclarar que los dos algoritmos golosos que utilizamos son $O(n^2)$, y nuestro algoritmo de búsqueda local es $O(n^2) * cant\_iteraciones\_busqLocal$.\\
+Por esta razón, $O(Goloso)$ + $O(BusqLocal)$ = $O(BusqLocal)$ por álgebra de órdenes.\\
+Por esto, la complejidad total de nuestro algoritmo de GRASP es $O(BusqLocal)$ * $cantidad\_iteraciones$.
