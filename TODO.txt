@@ -26,11 +26,6 @@ Busqueda Local:
 . concluir cuál es la mejor configuración
 
 Grasp:
-. actualizar pseudocódigo de dijkstra
-  - en el ciclo sobre los adyacentes de nuevo, verificar que j no esté en S
-  - agregar la parte random
-. complejidad temporal (completo)
-  - O (#iteraciones * algo)
 . experimentación:
   - hay que ver qué pasa modificando:
     > coef_rand
