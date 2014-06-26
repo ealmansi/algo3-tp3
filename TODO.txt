@@ -15,7 +15,6 @@ Busqueda Local:
   - opcional: encontrar una familia de grafos que rompa el goloso pero se arregle con búsqueda local
 . experimentación
   - probar variantes para la semilla: goloso o dijkstra sobre W1
-    > gráfico tiempo vs n (para distintos m si queda bien)
     > gráfico relación entre las dos variantes
 . concluir cuál es la mejor configuración
 
