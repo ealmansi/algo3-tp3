@@ -8,8 +8,6 @@ Exacto:
 Goloso:
 . análisis de calidad
   - dibujo
-. experimentación
-  - gráfico tiempo vs n (para distintos m si queda bien)
 
 Busqueda Local:
 . análisis de la calidad de las soluciones (completo)
