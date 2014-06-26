@@ -215,7 +215,7 @@ function graficar_exacto_tiempo()
   saveas(gca, ['../graficos/goloso_tiempo.eps'],'epsc');
   
   figure;
-  plot(datos_sin_opt(:,1), datos_sin_opt(:,2)./datos_sin_opt(:,1));
+  plot(datos_sin_opt(:,1), datos_sin_opt(:,2)./datos_sin_opt(:,1), 'Color', cc(2,:));
   title('Tiempo de ejecucion algoritmo heuristico goloso divido n');
   xlabel('Cantidad de vertices (n)');
   ylabel('Tiempo / Cantidad de vertices (ns / n)');
