@@ -9,7 +9,6 @@ Exacto:
 Goloso:
 . análisis de calidad
   - dibujo
-  - terminar redacción
 . experimentación
   - gráfico tiempo vs n (para distintos m si queda bien)
   - grafico relación goloso/exacto vs n (sobre instancias de la familia particular)
