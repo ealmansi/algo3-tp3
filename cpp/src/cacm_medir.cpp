@@ -310,15 +310,21 @@ void medir_goloso_proporcion(int n_min, int n_max)
 	}
 }
 
+<<<<<<< HEAD
 #define CANT_MEDICIONES_POR_N_BUSQ 15
 
 void medir_busq_local(int n_min, int n_max)
+=======
+#define CANT_MEDICIONES_POR_N 15
+
+void medir_busq_local_tiempo(int n_min, int n_max)
+>>>>>>> 146684ccba63a24cb3deb59d2b7779ddbc0da901
 {
-	cout << "Medicion busq local" << endl;
+	cout << "Medicion busq local tiempo" << endl;
   timespec inicio, fin;
   vvlli mediciones_por_n(n_max - n_min + 1, vlli(CANT_MEDICIONES_POR_N_BUSQ));
 	srand(1234235);
-	cout << "datos_m0.8 = [";
+	cout << "datos_m = [";
 		
 		for (int i = 0; i < CANT_MEDICIONES_POR_N_BUSQ; ++i)
 		{				
@@ -346,12 +352,75 @@ void medir_busq_local(int n_min, int n_max)
   
 }
 
+void medir_busq_local_calidad(int n_min, int n_max)
+{
+	cout << "Medicion busq local calidad" << endl;
+  timespec inicio, fin;
+  vvlli mediciones_por_n(n_max - n_min + 1, vlli(CANT_MEDICIONES_POR_N));
+	srand(1234235);
+	cout << "datos_m = [";
+		
+		for (int i = 0; i < CANT_MEDICIONES_POR_N; ++i)
+		{				
+			for (int n = n_min; n < n_max + 1; ++n)
+			{
+			  int m = 0.8 * cant_aristas_K_n(n);
+			  int max_w1 = 10000;
+			  int max_w2 = 10000;
+			  int K = 1 * ((1.0l * n * max_w1) / 4.0);
+			  entrada e = generar_instancia_aleatoria(n, m, max_w1, max_w2, K);
+
+			  salida s1 = cacm_busq_local::resolver(e);
+
+			  mediciones_por_n[n - n_min][i] = s1.W2;
+			}
+		}
+		for (int n = n_min; n < n_max + 1; ++n)
+		{
+		 	sort(range(mediciones_por_n[n - n_min]));
+		 	cout << n << " " << mediciones_por_n[n - n_min][CANT_MEDICIONES_POR_N/2] << endl;
+		}
+		cout << "]; " << endl;
+  
+}
+
+void medir_busq_local_proporcion(int n_min, int n_max)
+{
+	cout << "Medicion busq local proporcion" << endl;
+	salida s;
+	entrada e;
+	double proporcion;
+	for(int i = n_min; i < n_max; i += 1 ){
+		//cout << "n: " << i << endl;
+		//cout << "i: " << (i-2)/3+1 << endl;
+		entrada e = grafo_rompe_goloso(i,i*i);
+
+    
+    //cout << "goloso" << endl;
+    s = cacm_busq_local::resolver(e);
+    //escribir_salida(s);
+    //cout << endl;	
+		proporcion = s.W2;
+		
+		//cout << "exacto" << endl;
+    s = cacm_exacto::resolver(e);
+    //escribir_salida(s);
+    //cout << endl;
+		proporcion /= s.W2;
+		
+		cout << i << " " << proporcion << endl;
+		
+	}
+}
+
 int main(int argc, char const *argv[])
 {
   
   //medir_exacto(3, 13);
   //medir_goloso_proporcion(5, 100);
-  // medir_busq_local(5, 100);
-  comparar_goloso_exacto_random(3, 10);
+  //medir_busq_local_tiempo(5, 100);
+  //medir_busq_local_calidad(5, 100);
+  medir_busq_local_proporcion(5, 100);
+
   return 0;
 }
