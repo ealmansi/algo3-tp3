@@ -12,7 +12,7 @@ A continución vamos a proponer un pseudocódigo para explicar la complejidad te
   \Procedure{Resolver}{Entrada e}
     \State Salida mejor\_s $\leftarrow$ golosoResolver(e, COEF\_RAND) \Ode{Goloso}
     \State cant\_it\_sin\_mejora $\leftarrow$ 0 \Ode{1}
-    \While{MAX\_CANT\_IT\_SIN\_MEJORA $<$ cant\_it\_sin\_mejora}
+    \While{MAX\_CANT\_IT\_SIN\_MEJORA $<$ cant\_it\_sin\_mejora} \Ode{1}
       \State Salida s $\leftarrow$ golosoResolver(e, COEF\_RAND) \Ode{Goloso}
       \State maximoLocalBusqLocal(e,s) \Ode{BusqLocal}
       \If{\textbf{not} s.hay\_solucion} \Ode{1}
