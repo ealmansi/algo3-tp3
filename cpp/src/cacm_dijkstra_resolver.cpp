@@ -19,6 +19,8 @@ typedef list<int> li;
 
 salida cacm_dijkstra::resolver(const entrada& e, double alfa, double coef_rand)
 {
+  coef_rand = 50;
+
   vb visitado(e.n + 1, false);
   vd dist(e.n + 1, INFINITY);
   vi dist_w1(e.n + 1, INFINITY);
@@ -48,8 +50,7 @@ salida cacm_dijkstra::resolver(const entrada& e, double alfa, double coef_rand)
         candidatos.push_back(i);
 
     li::iterator it = candidatos.begin();
-    if (coef_rand > 0)
-    	advance(it, rand() % candidatos.size());
+    advance(it, rand() % candidatos.size());
     int u = *it;
 
     if (u == e.v)
@@ -60,6 +61,8 @@ salida cacm_dijkstra::resolver(const entrada& e, double alfa, double coef_rand)
     lady::const_iterator i;
     for (i = e.adyacentes[u].begin(); i != e.adyacentes[u].end(); ++i)
     {
+      if (visitado[i->v]) continue;
+      
       double dist_u_uv = dist[u] + (1 - alfa) * i->w1 + alfa * i->w2;
       if (dist_u_uv < dist[i->v])
       {

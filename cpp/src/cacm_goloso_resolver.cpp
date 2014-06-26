@@ -12,7 +12,7 @@ using namespace cacm_goloso;
 salida cacm_goloso::resolver(const entrada& e, double coef_rand)
 {
   salida s;
-  //cout << "coef_rand :" << coef_rand   << endl;
+
 	double inicio = 0.0, fin = 1.0, medio;
   for (int i = 0; i < CANT_IT; ++i)
   {

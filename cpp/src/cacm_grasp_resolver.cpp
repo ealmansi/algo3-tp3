@@ -8,7 +8,7 @@ using namespace cacm_grasp;
 #include <cmath>
 using namespace std;
 
-#define COEF_RAND 50
+#define COEF_RAND 0.5
 #define MAX_CANT_IT 1000
 #define MAX_CANT_IT_SIN_MEJORA 20
 #define EPSILON 0.01
@@ -35,7 +35,7 @@ salida cacm_grasp::resolver(const entrada& e)
     cacm_busq_local::buscar_maximo_local(e, s);
 
     if (not s.hay_solucion)
-      { ++cant_it_sin_mejora; continue;}
+      { ++cant_it_sin_mejora; continue; }
     if (diferencia_relativa(mejor_s, s) < EPSILON)
       ++cant_it_sin_mejora;
     else
