@@ -379,9 +379,9 @@ int main(int argc, char const *argv[])
 {
   
   //medir_exacto(3, 13);
-  //medir_goloso_proporcion(5, 100);
+  medir_goloso_proporcion(5, 100);
   //medir_busq_local_tiempo(5, 100);
   //medir_busq_local_calidad(5, 100);
-  medir_busq_local_proporcion(5, 100);
+  //medir_busq_local_proporcion(5, 100);
   return 0;
 }
