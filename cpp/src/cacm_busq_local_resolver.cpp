@@ -1,7 +1,6 @@
 #include "cacm.h"
 #include "cacm_goloso.h"
 #include "cacm_busq_local.h"
-#include "cacm_dijkstra.h"
 using namespace cacm;
 using namespace cacm_busq_local;
 
@@ -159,7 +158,7 @@ void buscar_vecinos_tipo_3(solucion& sol, vecino& mejor_vecino, const entrada& e
 
 salida cacm_busq_local::resolver(const entrada& e)
 {
-  salida s = cacm_dijkstra::resolver(e);
+  salida s = cacm_goloso::resolver(e);
   buscar_maximo_local(e, s);
   return s;
 }
