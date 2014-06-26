@@ -1,7 +1,8 @@
 Habiendo explicado las características de nuestra vecindad, a continuación describiremos el algoritmo de busqueda local.
 
 Nuestro algoritmo recibe como entrada el grafo $G$ y una solución inicial $C$. Luego de esto el algoritmo entra en un ciclo en el que se buscan los vecinos de la mejor solución $S$ que se tenga. Si existe un vecino $S'$ mejor que $S$, entonces la mejor solución pasa a ser $S'$ y pasamos a la siguiente iteración. En la iteración en la que no exista un vecino mejor que $S$ entonces se termina la búsqueda.
-%TODO: En realidad búsqueda local siempre es así, deberíamos sacar este párrafo?
+
+Cabe aclarar que nuestra solución inicial $C$ la podemos generar utilizando nuestro algoritmo goloso descripto en la sección \ref{subsub:algoritmos-heuristicos-goloso-desarrollo.tex}, o utilizando Dijkstra sobre la función $W_1$.
 
 A continuación incluiremos un pseudocódigo del algoritmo.
 \begin{center}

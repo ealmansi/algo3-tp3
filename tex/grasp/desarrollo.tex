@@ -14,7 +14,11 @@ Un algoritmo GRASP (\emph{Greedy Randomized Adaptative Search Procedure}) es una
  \end{figure}
 \end{center}
 
-Cabe aclarar que nuestro algoritmo goloso original no tiene una heurística golosa ``aleatorizada''. En GRASP, esto significa fabricar en cada paso una Lista Restricta de Candidatos (RCL) y elegir aleatoriamente un candidato de esta lista. Por esta razón, modificamos nuestra implementación de Dijkstra para que lo podamos utilizar. La nueva implementación de Dijkstra que utilizamos es la siguiente:
+Cabe aclarar que nuestra solución $s$ que la obtenemos mediante una heurística golosa aleatorizada la podemos generar utilizando nuestro algoritmo goloso descripto en la sección \ref{subsub:algoritmos-heuristicos-goloso-desarrollo.tex}, o utilizando Dijkstra sobre la función $W_1$, modificándolo como describimos a continuación.
+
+Como nuestro algoritmo goloso original no tiene una heurística golosa ``aleatorizada'', tuvimos que modificarlo. En GRASP, esto significa fabricar en cada paso una Lista Restricta de Candidatos (RCL) y elegir aleatoriamente un candidato de esta lista. Por esta razón, modificamos nuestra implementación de Dijkstra para que lo podamos utilizar. De la misma manera, logramos poder utilizar la nueva implementación de Dijkstra sobre la función $W_1$ para tener dos tipos de goloso inicial.
+
+La nueva implementación de Dijkstra que utilizamos es la siguiente:
 
 \begin{center}
  \begin{figure}[H]
