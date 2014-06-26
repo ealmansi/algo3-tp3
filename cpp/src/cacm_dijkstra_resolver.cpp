@@ -19,8 +19,6 @@ typedef list<int> li;
 
 salida cacm_dijkstra::resolver(const entrada& e, double alfa, double coef_rand)
 {
-  coef_rand = 50;
-
   vb visitado(e.n + 1, false);
   vd dist(e.n + 1, INFINITY);
   vi dist_w1(e.n + 1, INFINITY);
