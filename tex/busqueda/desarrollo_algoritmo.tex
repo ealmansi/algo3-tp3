@@ -9,8 +9,7 @@ A continuación incluiremos un pseudocódigo del algoritmo.
   \begin{pseudo}
    \Procedure{busqueda local}{grafo G, camino sol, c}
    \State $mejorSol \leftarrow sol$\Ode{1}
-   \State $i \leftarrow 0$\Ode{1}
-   \While{$seguirBuscando \wedge i < c$}\hfill$c*O(1)$
+   \While{$seguirBuscando$}\hfill$O(1)$
       \State $buscarVecinoAgregar(mejorSol, mejorVecino, G)$\Ode{n^3}
       \State $buscarVecinoQuitar(mejorSol, mejorVecino, G)$\Ode{n^2}
       \State $buscarVecinoCambiar(mejorSol, mejorVecino, G)$\Ode{n^3}
@@ -19,7 +18,6 @@ A continuación incluiremos un pseudocódigo del algoritmo.
       \Else
 	\State $mejorSol \leftarrow mejorVecino$\Ode{1}
       \EndIf
-      \State $i \leftarrow i+1$\Ode{1}
    \EndWhile
    \State Devolver $mejorSol$\Ode{1}
    \EndProcedure
