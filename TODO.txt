@@ -3,20 +3,15 @@ Parece ser que el problema no es solo con numeros enteros, sino solo las entrada
 O sea solo la parte implementativa pero lo demas deberia ser R.
 
 Exacto:
-. experimentación
-  - gráfico tiempo vs n (para distintos m si queda bien)
+  NADA
 
 Goloso:
 . análisis de calidad
   - dibujo
 . experimentación
   - gráfico tiempo vs n (para distintos m si queda bien)
-  - grafico relación goloso/exacto vs n (sobre instancias de la familia particular)
 
 Busqueda Local:
-.	Aclarar que vamos a usar dos tipos de goloso inicial (el nuestro y dijkstra solo)
-. ver si podemos mejorar la presentación de los tipos de vecino
-. modificar complejidad temporal
 . análisis de la calidad de las soluciones (completo)
   - justificar por qué la familia de grafos que usamos para el goloso también rompe busqueda local
   - opcional: encontrar una familia de grafos que rompa el goloso pero se arregle con búsqueda local
@@ -27,7 +22,6 @@ Busqueda Local:
 . concluir cuál es la mejor configuración
 
 Grasp:
-.	Aclarar que vamos a usar dos tipos de goloso inicial (el nuestro y dijkstra rand solo)
 . experimentación:
   - hay que ver qué pasa modificando:
     > coef_rand
