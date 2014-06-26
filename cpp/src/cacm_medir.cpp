@@ -255,7 +255,7 @@ void medir_goloso_proporcion(int n_min, int n_max)
 	salida s;
 	entrada e;
 	double proporcion;
-	for(int i = n_min; i < n_max; i += 3 ){
+	for(int i = n_min; i < n_max; i += 1 ){
 		//cout << "n: " << i << endl;
 		//cout << "i: " << (i-2)/3+1 << endl;
 		entrada e = grafo_rompe_goloso(i,i - (i % 10));
@@ -275,12 +275,48 @@ void medir_goloso_proporcion(int n_min, int n_max)
 		
 		cout << i << " " << proporcion << endl;
 		
-	}}
+	}
+}
+
+void medir_busq_local(int n_min, int n_max)
+{
+	cout << "Medicion busq local" << endl;
+  timespec inicio, fin;
+  vvlli mediciones_por_n(n_max - n_min + 1, vlli(CANT_MEDICIONES_POR_N));
+	srand(1234235);
+	cout << "datos_m0.8 = [";
+		
+		for (int i = 0; i < CANT_MEDICIONES_POR_N; ++i)
+		{				
+			for (int n = n_min; n < n_max + 1; ++n)
+			{
+			  int m = 0.8 * cant_aristas_K_n(n);
+			  int max_w1 = 10000;
+			  int max_w2 = 10000;
+			  int K = 1 * ((1.0l * n * max_w1) / 4.0);
+			  entrada e = generar_instancia_aleatoria(n, m, max_w1, max_w2, K);
+
+			  clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &inicio);
+			  cacm_busq_local::resolver(e);
+			  clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &fin);
+
+			  mediciones_por_n[n - n_min][i] = (fin.tv_sec - inicio.tv_sec) * 1e9 + (fin.tv_nsec - inicio.tv_nsec);
+			}
+		}
+		for (int n = n_min; n < n_max + 1; ++n)
+		{
+		 	sort(range(mediciones_por_n[n - n_min]));
+		 	cout << n << " " << mediciones_por_n[n - n_min][CANT_MEDICIONES_POR_N/2] << endl;
+		}
+		cout << "]; " << endl;
+  
+}
 
 int main(int argc, char const *argv[])
 {
   
   //medir_exacto(3, 13);
-  medir_goloso_proporcion(5, 100);
+  //medir_goloso_proporcion(5, 100);
+  medir_busq_local(5, 100);
   return 0;
 }
