@@ -177,17 +177,17 @@ typedef long long int lli;
 typedef vector<lli> vlli;
 typedef vector<vlli> vvlli;
 
-#define CANT_MEDICIONES_POR_N 15
+#define CANT_MEDICIONES_POR_N_EXACTO 15
 #define range(c) (c).begin(), (c).end()
 
 // gráfico tiempo vs n (para distintos m si queda bien)
 void medir_exacto(int n_min, int n_max)
 {
-	cout << "Medicion exacto" << endl;
+  cout << "Medicion exacto" << endl;
   timespec inicio, fin;
-  vvlli mediciones_por_n(n_max - n_min + 1, vlli(CANT_MEDICIONES_POR_N));
+  vvlli mediciones_por_n(n_max - n_min + 1, vlli(CANT_MEDICIONES_POR_N_EXACTO));
 
-  for (int i = 0; i < CANT_MEDICIONES_POR_N; ++i)
+  for (int i = 0; i < CANT_MEDICIONES_POR_N_EXACTO; ++i)
   {
     srand(1234235);
     for (int n = n_min; n < n_max + 1; ++n)
@@ -210,7 +210,42 @@ void medir_exacto(int n_min, int n_max)
   for (int n = n_min; n < n_max + 1; ++n)
   {
     sort(range(mediciones_por_n[n - n_min]));
-    cout << n << " " << mediciones_por_n[n - n_min][CANT_MEDICIONES_POR_N/2] << endl;
+    cout << n << " " << mediciones_por_n[n - n_min][CANT_MEDICIONES_POR_N_EXACTO/2] << endl;
+  }
+}
+
+#define CANT_MEDICIONES_POR_N_GOLOSO 15
+
+// gráfico tiempo vs n (para distintos m si queda bien)
+void medir_goloso(int n_min, int n_max)
+{
+  timespec inicio, fin;
+  vvlli mediciones_por_n(n_max - n_min + 1, vlli(CANT_MEDICIONES_POR_N_GOLOSO));
+
+  for (int i = 0; i < CANT_MEDICIONES_POR_N_GOLOSO; ++i)
+  {
+    cout << i << endl;
+    srand(123235);
+    for (int n = n_min; n < n_max + 1; ++n)
+    {
+      int m = 1 * cant_aristas_K_n(n);
+      int max_w1 = 10000;
+      int max_w2 = 10000;
+      int K = 1 * ((1.0l * n * max_w1) / 4.0);
+      entrada e = generar_instancia_aleatoria(n, m, max_w1, max_w2, K);
+
+      clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &inicio);
+      cacm_goloso::resolver(e);
+      clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &fin);
+
+      mediciones_por_n[n - n_min][i] = (fin.tv_sec - inicio.tv_sec) * 1e9 + (fin.tv_nsec - inicio.tv_nsec);
+    }
+  }
+
+  for (int n = n_min; n < n_max + 1; ++n)
+  {
+    sort(range(mediciones_por_n[n - n_min]));
+    cout << n << " " << mediciones_por_n[n - n_min][CANT_MEDICIONES_POR_N_GOLOSO/2] << endl;
   }
 }
 

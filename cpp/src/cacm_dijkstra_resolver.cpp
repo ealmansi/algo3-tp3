@@ -32,7 +32,7 @@ salida cacm_dijkstra::resolver(const entrada& e, double alfa, double coef_rand)
   dist_w2[e.u] = 0;
   pred[e.u] = -1;
 
-  while (true)
+  for (int k = 0; k < e.n; ++k)
   {
     double min_dist_u = INFINITY;
     for (int i = 1; i <= e.n; ++i)
