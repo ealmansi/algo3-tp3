@@ -22,6 +22,7 @@ Goloso:
   - grafico relación goloso/exacto vs n (sobre instancias de la familia particular)
 
 Busqueda Local:
+.	Aclarar que vamos a usar dos tipos de goloso inicial (el nuestro y dijkstra solo)
 . ver si podemos mejorar la presentación de los tipos de vecino
 . modificar complejidad temporal
 . análisis de la calidad de las soluciones (completo)
@@ -34,6 +35,7 @@ Busqueda Local:
 . concluir cuál es la mejor configuración
 
 Grasp:
+.	Aclarar que vamos a usar dos tipos de goloso inicial (el nuestro y dijkstra rand solo)
 . experimentación:
   - hay que ver qué pasa modificando:
     > coef_rand
