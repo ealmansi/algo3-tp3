@@ -3,8 +3,7 @@ Parece ser que el problema no es solo con numeros enteros, sino solo las entrada
 O sea solo la parte implementativa pero lo demas deberia ser R.
 
 Exacto:
-. experimentación
-  - gráfico tiempo vs n (para distintos m si queda bien)
+  NADA
 
 Goloso:
 . análisis de calidad
