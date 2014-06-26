@@ -22,7 +22,6 @@ A continuación incluiremos un pseudocódigo del algoritmo.
    \State Devolver $mejorSol$\Ode{1}
    \EndProcedure
   \end{pseudo}
-  \label{Figura 1: busquedaLocal}
  \end{figure}
 \end{center}
 
@@ -32,7 +31,7 @@ A continuación incluiremos un pseudocódigo del algoritmo.
    \Procedure{buscarVecinoAgregar}{mejorSol, mejorVecino, G}
    \State $i \leftarrow 0$\Ode{1}
    \While{$0 \leq i < cantEjes(mejorSol)-1$}\hfill$n*O(1)$
-      \For{$j \in adyacentes(mejorSol_i,G) \cap adyacentes(mejorSol_{i+1},G)$}\hfill$n*O(n)$
+      \For{$j \in adyacentes(mejorSol_i,G) \cap adyacentes(mejorSol_{i+1},G)$}\hfill$n*O(1)$
 	  \State $W_1' \leftarrow mejorSol.W_1 - mejorSol(i,i+1).W_1 + (mejorSol_i,j).W_1 + $
 	  \State $(j,mejorSol_{i+1}).W_1$\Ode{1}
 	  \State $W_2' \leftarrow mejorSol.W_2 - mejorSol(i,i+1).W_2 + (mejorSol_i,j).W_2 + $
@@ -76,7 +75,7 @@ A continuación incluiremos un pseudocódigo del algoritmo.
    \Procedure{buscarVecinoCambiar}{mejorSol, mejorVecino, G}
    \State $i \leftarrow 0$\Ode{1}
    \While{$0 \leq j < cantEjes(mejorSol)-2$}\hfill$n*O(1)$
-      \For{$j \in adyacentes(mejorSol_i,G) \cap adyacentes(mejorSol_{i+2},G)$}\hfill$n*O(n)$
+      \For{$j \in adyacentes(mejorSol_i,G) \cap adyacentes(mejorSol_{i+2},G)$}\hfill$n*O(1)$
 	  \State $W_1' \leftarrow mejorSol.W_1 - mejorSol(i,i+1).W_1 - mejorSol(i+1,i+2).W_1 + (mejorSol_i, j).W_1 + $
 	  \State $(j, mejorSol_{i+2}).W_1$\Ode{1}
 	  \State $W_2' \leftarrow mejorSol.W_2 - mejorSol(i,i+1).W_2 - mejorSol(i+1,i+2).W_2 + (mejorSol_i, j).W_2 + $

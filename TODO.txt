@@ -15,8 +15,6 @@ Goloso:
 
 Busqueda Local:
 .	Aclarar que vamos a usar dos tipos de goloso inicial (el nuestro y dijkstra solo)
-. ver si podemos mejorar la presentación de los tipos de vecino
-. modificar complejidad temporal
 . análisis de la calidad de las soluciones (completo)
   - justificar por qué la familia de grafos que usamos para el goloso también rompe busqueda local
   - opcional: encontrar una familia de grafos que rompa el goloso pero se arregle con búsqueda local
