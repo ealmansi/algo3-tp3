@@ -2,22 +2,24 @@ La escencia de este algoritmo se encuentra principalmente en la vecindad que ele
 
 Supongamos que tenemos un camino $C$ = ($c_0$, $c_1$, ..., $c_k$) de $k+1$ nodos que es una solución factible del problema de CACM par un grafo $G$ = ($V$,$E$). Los vecinos de la solución $C$ son caminos que también sean soluciones factibles y que surgan de aplicarle una de las siguientes operaciones:
 
-$\bullet$ Quitar Nodo:
+\begin{itemize}
+ \item Quitar Nodo:
 
-Supongamos que existe un $i$ tal que $0 < i < k$ y que ($c_{i+1}$, $c_{i+1}$) $\in$ $E$. Bajo estas condiciones podemos afirmar que existe un camino en $G$ llamado $C'$ tal que $C'$ = ($c_0$, ..., $c_{i-1}$, $c_{i+1}$, ..., $c_k$). Esto significa que dado $C$ podemos eliminar el nodo $c_i$ del camino y unir $c_{i-1}$ y $c_{i+1}$ ya que estos son adyacentes entre sí, obteniendo un camino $C'$ de $k$ nodos.
+  Supongamos que existe un $i$ tal que $0 < i < k$ y que ($c_{i+1}$, $c_{i+1}$) $\in$ $E$. Bajo estas condiciones podemos afirmar que existe un camino en $G$ llamado $C'$ tal que $C'$ = ($c_0$, ..., $c_{i-1}$, $c_{i+1}$, ..., $c_k$). Esto significa que dado $C$ podemos eliminar el nodo $c_i$ del camino y unir $c_{i-1}$ y $c_{i+1}$ ya que estos son adyacentes entre sí, obteniendo un camino $C'$ de $k$ nodos.
+  \item Agregar Nodo:
 
-$\bullet$ Agregar Nodo:
+  La operación agregar nodo es la operación inversa a la operación Quitar Nodo descripta anteriormente. Supongamos que existe un $i$ tal que $0 \leq i < k$ y existe un nodo $w \in V$ tal que ($c_i$,$w$) $\in E$ y ($w$, $c_{i+1}$) $\in E$. En este caso podemos afirmar que podemos construir un camino $C'$ = ($c_0$, ..., $c_{i}$,$w$,$c_{i+1}$) de $k+2$ nodos.
 
-La operación agregar nodo es la operación inversa a la operación Quitar Nodo descripta anteriormente. Supongamos que existe un $i$ tal que $0 \leq i < k$ y existe un nodo $w \in V$ tal que ($c_i$,$w$) $\in E$ y ($w$, $c_{i+1}$) $\in E$. En este caso podemos afirmar que podemos construir un camino $C'$ = ($c_0$, ..., $c_{i}$,$w$,$c_{i+1}$) de $k+2$ nodos.
+  Vale aclarar que para realizar esta operación, el nodo $w$ no debe pertenecer a $C$, ya que queremos que el camino sea simple.
 
-Vale aclarar que para realizar esta operación, el nodo $w$ no debe pertenecer a $C$, ya que queremos que el camino sea simple.
+  \item Cambiar Nodo:
 
-$\bullet$ Cambiar Nodo:
+  Esta operación es una mezcla de las dos operaciones anteriores. Supongamos que existe un $i$ tal que $0 \leq i < k-1$ y que existe un nodo $w \in V$ (nuevamente, $w$ no debe estar en el camino $C$) tal que ($c_i$,$w$) $\in E$ y ($w$, $c_{i+2}$) $\in E$. En este caso podemos cambiar el nodo $c_{i+1}$ del camino $C$ por el nodo $w$ obteniendo un nuevo camino $C'$ de la misma cantidad de nodos.
 
-Esta operación es una mezcla de las dos operaciones anteriores. Supongamos que existe un $i$ tal que $0 \leq i < k-1$ y que existe un nodo $w \in V$ (nuevamente, $w$ no debe estar en el camino $C$) tal que ($c_i$,$w$) $\in E$ y ($w$, $c_{i+2}$) $\in E$. En este caso podemos cambiar el nodo $c_{i+1}$ del camino $C$ por el nodo $w$ obteniendo un nuevo camino $C'$ de la misma cantidad de nodos.
+  Uno podría creer que la operación Cambiar Nodo es una combinación de las dos operaciones descriptas anteriormente Agregar Nodo y Quitar Nodo, ya que se podría quitar primero el nodo $c_{i+1}$ y luego agregar el nodo $w$. Sin embargo, esto no es así ya que podría pasar que el eje ($c_i$,$c_{i+2}$) $\notin E$ y, si esto ocurre no nos sería posible quitar el nodo $c_{i+1}$ para luego agregar el nodo $w$.
 
-Uno podría creer que la operación Cambiar Nodo es una combinación de las dos operaciones descriptas anteriormente Agregar Nodo y Quitar Nodo, ya que se podría quitar primero el nodo $c_{i+1}$ y luego agregar el nodo $w$. Sin embargo, esto no es así ya que podría pasar que el eje ($c_i$,$c_{i+2}$) $\notin E$ y, si esto ocurre no nos sería posible quitar el nodo $c_{i+1}$ para luego agregar el nodo $w$.
-
+\end{itemize}
+ 
 Dadas estas tres operaciones, un vecino de una solución factible $C$ es un camino que se pueda construir aplicándole a $C$ una de estas tres operaciones. Nótese que si existiese un $C'$ que se pudiera construir a partir de aplicarle a $C$ más de una operación, $C'$ no sería vecino de $C$. Tomamos esta decisión debido a que pensamos que si consideráramos vecino a un camino que se pudiera construir a partir de aplicarle numerosas operaciones a $C$ se estaría perdiendo, por así decirlo, la localidad de la búsqueda y estaríamos incurriendo en una búsqueda más global. Es importante recalcar que sólo tomamos como un vecino de $C$ un camino $C'$ factible.
 
 Algo que pensamos mientras elegíamos nuestra vecindad es que una buena propiedad que ésta pudiese cumplir sería que, dada una solución factible $C$, aplicándole una cantidad de operaciones, pudiésemos llegar a cualquier otra solución factible.
