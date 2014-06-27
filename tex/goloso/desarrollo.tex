@@ -1,56 +1,58 @@
 El algoritmo constructivo goloso que diseñamos está basado en el algoritmo de \emph{Dijkstra} para encontrar caminos mínimos en un grafo. 
 
-Supongamos que queremos resolver CACM para un grafo $G$ $=$ ($V$,$E$) donde $E$ = $(e_1, e_2, ..., e_m)$. Lo que nuestro algoritmo hace es, para un conjunto de valores $\{p$ / $0 \leq p \leq 1\}$, correr el algoritmo de \emph{Dijkstra} para el grafo $G'$ $=$ ($V$, $E'$) donde $E'$ tiene las mismas aristas que $E$ excepto que tiene un único peso, el cual está determinado por la siguiente función $f: (\mathbb{N} x \mathbb{N}) \Rightarrow \mathbb{N}$
+Supongamos que queremos resolver CACM para un grafo $G$ $=$ ($V$,$E$) donde $E$ = $(e_1, e_2, ..., e_m)$. Lo que nuestro algoritmo hace es, para un conjunto de valores $\{p$ $\in \mathbb{R}$/ $0 \leq p \leq 1\}$, correr el algoritmo de \emph{Dijkstra} para el grafo $G'$ $=$ ($V$, $E'$) donde $E'$ tiene las mismas aristas que $E$ excepto que tiene un único peso, el cual está determinado por la siguiente función $f: (\mathbb{N} x \mathbb{N}) \Rightarrow \mathbb{N}$
 
+\begin{center}
 $f(e_i,p) = (1-p)*w_1(e_i) + p*w_2(e_i)$
+\end{center}
 
-Esta función pondera los pesos del grafo $G$ asignándole más importancia al peso $w_1$ para los valores más bajos de $p$ o a $w_2$ para los valores más altos. La nocion intuitiva es que al dar m\'as importancia a uno de los pesos el algoritmo encontrara un camino menor en ese peso.
+Esta función pondera los pesos del grafo $G$ asignándole más importancia al peso $w_1$ para los valores más bajos de $p$ o a $w_2$ para los valores más altos. La noción intuitiva es que al dar m\'as importancia a uno de los pesos el algoritmo encontrara un camino menor en ese peso.
 
 Lo que nuestro algoritmo hace es, para $p$ entre 0 y 1 encontrar el $p$ más grande tal que al correr el algoritmo de \emph{Dijkstra} en $G'$ desde el nodo $u$, el peso $w_1$ siga estando acotado por la constante $k$ en el camino de $u$ a $v$. Hacemos esto mediante una búsqueda binaria en los valores de $p$.
 
 Esto tiene sentido ya que nuestro algoritmo tiene dos propiedades que demostraremos luego:
 
-$\mathbf{1}$ El algoritmo siempre encuentra una solucion factible si existe.
+$\mathbf{1}$ El algoritmo siempre encuentra una solución factible si existe.
 
-$\mathbf{2}$ El peso $w_1$ del camino encontrado en funcion de $p$ es creciente, y el peso $w_2$ decreciente.
+$\mathbf{2}$ El peso $w_1$ del camino encontrado en función de $p$ es creciente, y el peso $w_2$ decreciente.
 
-Primero con $\mathbf{1}$ nos garantizamos de siempre devolver una solucion factible.
-Gracias a $\mathbf{2}$ podemos ver que sea $p'$, el $p$ más grande tal que el peso $w_1$ siga estando acotado por la constante $k$, su camino asociado tendrá el menor (o igual) peso en $w_2$ entre todos los caminos factibles que encuentra el algoritmo para algun $p$.
+Primero con $\mathbf{1}$ nos garantizamos de siempre devolver una solución factible.
+Gracias a $\mathbf{2}$ podemos ver que sea $p'$, el $p$ más grande tal que el peso $w_1$ siga estando acotado por la constante $k$, su camino asociado tendrá el menor (o igual) peso en $w_2$ entre todos los caminos factibles que encuentra el algoritmo para algún $p$.
 
 Para demostrar esto vemos dos cosas:
 
 1 - Los $p'' > p'$ no son factible ya que $p'$ era el m\'aximo $p$  tal que el peso $w_1$ siga estando acotado por la constante $k$. Si $p''$ es factible, o sea el peso $w_1$ esta acotado por la constante $k$, $p'$ no ser\'ia el m\'aximo, absurdo.
 
-2- Los $p'' < p'$ tendran peso $w_1$ mayor o igual al de $p'$ ya que por $\mathbf{2}$ $w_2$ es decreciente en $p$.
+2- Los $p'' < p'$ tendrán peso $w_1$ mayor o igual al de $p'$ ya que por $\mathbf{2}$ $w_2$ es decreciente en $p$.
 
 
 Demostraci\'on $\mathbf{1}:$
 
 Solo analizaremos el caso en que existe un camino factible, ya que si no existiese nuestro algoritmo nunca podr\'ia dar uno.
-Nuestro algoritmo busca el m\'aximo $p \in [0,1]$ tal que el camino asociado a \'el sea factible. Con mostrar que siempre habra un $p$ tal que su camino asociado es factible, existe el m\'aximo.
+Nuestro algoritmo busca el m\'aximo $p \in [0,1]$ tal que el camino asociado a \'el sea factible. Con mostrar que siempre habrá un $p$ tal que su camino asociado es factible, existe el m\'aximo.
 
 Tomando $p=0$, $f(e_i,0) = (1-0)*w_1(e_i) + 0*w_2(e_i) = w_1(e_i)$
 
-O sea ser\'ia buscar el camino m\'inimo en $w_1$. Si este camino no es factible (peso $w_1 < k$), no exitira ningun camino factible (ya que todos tendran peso mayor o igual al m\'inimo) absurdo porque estamos en el caso que existe un camino factible.
+O sea ser\'ia buscar el camino m\'inimo en $w_1$. Si este camino no es factible (peso $w_1 < k$), no existirá ningún camino factible (ya que todos tendrán peso mayor o igual al m\'inimo) absurdo porque estamos en el caso que existe un camino factible.
 
 Demostraci\'on $\mathbf{1}:$
 
-Primero veamos que el peso $w_2$ del camino encontrado en funcion de $p$ es decreciente.
+Primero veamos que el peso $w_2$ del camino encontrado en función de $p$ es decreciente.
 
 Tomemos $p_1 < p_2$ cuyos caminos asociados son $C_1$ y $C_2$ correspondientemente.
 
-q.v.q $w_2(C_1) > w_2(C_2)$
+Queremos ver que $w_2(C_1) > w_2(C_2)$.
 
-Priemro veamos que $\frac{p_1}{1-p_1} < \frac{p_2}{1-p_2}$
+Primero veamos que $\frac{p_1}{1-p_1} < \frac{p_2}{1-p_2}$
 
 $ p_1* (1-p_2) < p_2 * (1-p_2) < p_2 * (1-p_1)$
 
 $ p_1 - (1-p_2) < p_2 * (1-p_1)$
 
-$ \frac{p_1}{1-p_1} < \frac{p_2}{1-p_2} $ Suponiendo que ninguno es o 0 o 1.
+$ \frac{p_1}{1-p_1} < \frac{p_2}{1-p_2} $ suponiendo que ninguno es o 0 o 1.
 
 
-Sabemos que $C_1$ es el camino optimo con $p=p_1$, particularmente es menor o igual que $C_2$:
+Sabemos que $C_1$ es el camino óptimo con $p=p_1$, particularmente es menor o igual que $C_2$:
 
 $(1-p_1)*w_1(C_1) + p_1*w_2(C_1) \leq (1-p_1)*w_1(C_2) + p_1*w_2(C_2) $
 
@@ -60,7 +62,7 @@ $(1-p_1)*(w_1(C_1) - w_1(C_2)) \leq  p_1*(w_2(C_2) - w_2(C_1)) $
 
 $\frac{(1-p_1)}{p_1}*(w_1(C_1) - w_1(C_2)) \leq  w_2(C_2) - w_2(C_1) $
 
-De la misma forma que en el caso anterior, sabemos que $C_2$ es el camino optimo con $p=p_2$, particularmente es menor o igual que $C_1$:
+De la misma forma que en el caso anterior, sabemos que $C_2$ es el camino óptimo con $p=p_2$, particularmente es menor o igual que $C_1$:
 
 $(1-p_2)*w_1(C_1) + p_2*w_2(C_1) \geq (1-p_2)*w_1(C_2) + p_2*w_2(C_2) $
 
@@ -78,13 +80,13 @@ $\frac{(1-p_1)}{p_1}*(w_1(C_1) - w_1(C_2)) \leq \frac{(1-p_2)}{p_2}*(w_1(C_1) - 
 
 $ 0 \leq (\frac{(1-p_2)}{p_2} - \frac{(1-p_1)}{p_1})*(w_1(C_1) - w_1(C_2))$
 
-Como vimos al princpio $\frac{p_1}{1-p_1} < \frac{p_2}{1-p_2}$, por lo que $0 < \frac{(1-p_2)}{p_2} - \frac{(1-p_1)}{p_1} $
+Como vimos al principio $\frac{p_1}{1-p_1} < \frac{p_2}{1-p_2}$, por lo que $0 < \frac{(1-p_2)}{p_2} - \frac{(1-p_1)}{p_1} $
 
 Entonces $ 0 \leq (w_1(C_1) - w_1(C_2))$
 
 $w_2(C_1) > w_2(C_2)$
 
-Demostrar que $w_1$ es creciente es análogo a lo demostrado anteriormente. Una forma de verlo es tomar $t$ = $1-p$ por lo que se ``invierten'' $w_1$ y $w_2$. Usando exactamente el mismo razonamiento que la última demostracion llegamos a que $w_1$ es decreciente en $t$, y como $t$ = $1-p$ significa que es creciente en $p$.
+Demostrar que $w_1$ es creciente es análogo a lo demostrado anteriormente. Una forma de verlo es tomar $t$ = $1-p$ por lo que se ``invierten'' $w_1$ y $w_2$. Usando exactamente el mismo razonamiento que la última demostración llegamos a que $w_1$ es decreciente en $t$, y como $t$ = $1-p$ significa que es creciente en $p$.
 
 Vale aclarar que la componente golosa de este algoritmo se hace presente cuando corremos el algoritmo de \emph{Dijkstra}, ya que dicho algoritmo es un algoritmo goloso.
 
@@ -107,7 +109,7 @@ A continuación incluimos un pseudocódigo de nuestro algoritmo:
     \If{$w_1(solucion) \leq k$}
       \State $solucion \leftarrow Dijkstra(G, 1)$
     \EndIf
-    \State Devolver solucion
+    \State Devolver solución
    \EndProcedure
   \end{pseudo}
  \end{figure}

@@ -14,9 +14,9 @@ Un algoritmo GRASP (\emph{Greedy Randomized Adaptative Search Procedure}) es una
  \end{figure}
 \end{center}
 
-Cabe aclarar que nuestra solución $s$ que la obtenemos mediante una heurística golosa aleatorizada la podemos generar utilizando nuestro algoritmo goloso descripto en la sección \ref{subsub:algoritmos-heuristicos-goloso-desarrollo.tex}, o utilizando Dijkstra sobre la función $W_1$, modificándolo como describimos a continuación.
+Cabe aclarar que podemos generar nuestra solución $s$, la cual obtenemos mediante una heurística golosa aleatorizada, utilizando nuestro algoritmo goloso descripto en la sección \ref{subsub:algoritmos-heuristicos-goloso-desarrollo.tex}, o utilizando Dijkstra sobre la función $\omega_1$, modificándolo como describimos a continuación.
 
-Como nuestro algoritmo goloso original no tiene una heurística golosa ``aleatorizada'', tuvimos que modificarlo. En GRASP, esto significa fabricar en cada paso una Lista Restricta de Candidatos (RCL) y elegir aleatoriamente un candidato de esta lista. Por esta razón, modificamos nuestra implementación de Dijkstra para que lo podamos utilizar. De la misma manera, logramos poder utilizar la nueva implementación de Dijkstra sobre la función $W_1$ para tener dos tipos de goloso inicial.
+Como nuestro algoritmo goloso original no tiene una componente ``aleatoria'', tuvimos que modificarlo. En GRASP, la componente aleatoria del algoritmo goloso se hace  fabricando en cada paso una Lista Restricta de Candidatos (RCL) y eligiendo de manera aleatoria un candidato de esta lista. Por esta razón, modificamos nuestra implementación del algoritmo de Dijkstra para que lo podamos utilizar. De la misma manera, logramos poder utilizar la nueva implementación de Dijkstra sobre la función de peso $\omega_1$ para tener dos tipos de algoritmos golosos iniciales para el algoritmo de GRASP.
 
 La nueva implementación de Dijkstra que utilizamos es la siguiente:
 
@@ -66,7 +66,15 @@ La nueva implementación de Dijkstra que utilizamos es la siguiente:
  \end{figure}
 \end{center}
 
-Nuestro algoritmo GRASP tiene un criterio de terminación híbrido entre una cantidad máxima de iteraciones y una cantidad máxima de iteraciones seguidas sin cambios. Utilizar ambos componentes nos permite asegurarnos que no va a ejecutarse muchas veces sin conseguir cambios, y por otro lado nos permite saber que va a terminar en alguna cierta cantidad de iteraciones acotada. De esta manera, nos aseguramos que termina siempre.
+Nuestro algoritmo GRASP tiene un criterio de terminación híbrido. Este utiliza dos componentes: 
+
+\begin{itemize}
+ \item Cantidad máxima de iteraciones
+ \item Cantidad de iteraciones sin cambios
+\end{itemize}
+
+
+Utilizar la primer componente nos permite saber que va a terminar en alguna cierta cantidad de iteraciones acotada. De esta manera, nos aseguramos que termina siempre. Y por otro lado, utilizar la segunda componente nos permite asegurarnos de que el algoritmo no va a ejecutarse muchas veces sin conseguir cambios.
 
 Como ahora utilizamos una heurística golosa aleatorizada, un punto importante es la creación de una Lista Restricta de Candidatos (RCL) para poder elegir uno de ellos al azar. Para armar con nuestra RCL, la creamos con los candidatos que cumplan con:
 
@@ -74,9 +82,9 @@ Como ahora utilizamos una heurística golosa aleatorizada, un punto importante e
 dist($i$) $\leq$ $minDistU$ * (1 + $coef\_rand$)
 \end{center}
 
-donde $dist(i)$ contiene la distancia del nodo incial al nodo $i$ medida con la función $f$ y el $p$ pasado por parámetro (ver \ref{subsub:algoritmos-heuristicos-goloso-desarrollo.tex} para entender mejor $dist$), min\_dist\_u es igual al mínimo dist$\forall$ $i$, y coef\_rand es pasado por parámetro en nuestra función de GRASP.
+Donde $dist(i)$ contiene la distancia del nodo inicial al nodo $i$ medida con la función $f$ y el $p$ pasado por parámetro (ver \ref{subsub:algoritmos-heuristicos-goloso-desarrollo.tex} para entender mejor $dist$), min\_dist\_u es igual al mínimo dist$\forall$ $i$, y coef\_rand es pasado por parámetro en nuestra función de GRASP.
 
-Cabe aclarar que si cambiamos la guarda del if que contiene a la restricción, podemos crear sin mucha complicación otra RCL.
+Cabe aclarar que si cambiamos la guarda del $If$ que contiene a la restricción, podemos crear sin mucha complicación otra RCL.
 
 A continuación vamos a presentar el pseudocódigo de nuestro algoritmo GRASP. Cabe aclarar que COEF\_RAND, y MAX\_CANT\_IT\_SIN\_MEJORA son defines declarados antes de la función.
 
