@@ -25,8 +25,8 @@ La nueva implementación de Dijkstra que utilizamos es la siguiente:
   \begin{pseudo}
    \Procedure{Dijkstra}{grafo $G = (V,E)$, $p$, $u$, $v$,$coef\_random$}
     \State $S \leftarrow \emptyset$
-    \State $(\forall v \in V) dist(v) \leftarrow \infty$
-    \State $(\forall v \in V) pred(v) \leftarrow NULL$
+    \State $(\forall v \in V)\,dist(v) \leftarrow \infty$
+    \State $(\forall v \in V)\,pred(v) \leftarrow NULL$
     \While{$true$}
     \State $minDistU \leftarrow \infty$
     \For{$i =  1$ \textbf{to} $ |V|$}
