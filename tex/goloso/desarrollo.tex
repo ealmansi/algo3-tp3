@@ -45,46 +45,51 @@ Queremos ver que $w_2(C_1) > w_2(C_2)$.
 
 Primero veamos que $\frac{p_1}{1-p_1} < \frac{p_2}{1-p_2}$
 
-$ p_1* (1-p_2) < p_2 * (1-p_2) < p_2 * (1-p_1)$
+$$ p_1* (1-p_2) < p_2 * (1-p_2) < p_2 * (1-p_1)$$
 
-$ p_1 - (1-p_2) < p_2 * (1-p_1)$
+$$ p_1 * (1-p_2) < p_2 * (1-p_1)$$
 
-$ \frac{p_1}{1-p_1} < \frac{p_2}{1-p_2} $ suponiendo que ninguno es o 0 o 1.
+Suponiendo que ninguno es 1, entonces vale:
+
+$$ \frac{p_1}{1-p_1} < \frac{p_2}{1-p_2} $$ 
 
 
 Sabemos que $C_1$ es el camino óptimo con $p=p_1$, particularmente es menor o igual que $C_2$:
 
-$(1-p_1)*w_1(C_1) + p_1*w_2(C_1) \leq (1-p_1)*w_1(C_2) + p_1*w_2(C_2) $
+$$(1-p_1)*w_1(C_1) + p_1*w_2(C_1) \leq (1-p_1)*w_1(C_2) + p_1*w_2(C_2) $$
 
-$(1-p_1)*w_1(C_1) - (1-p_1)*w_1(C_2) \leq  p_1*w_2(C_2) - p_1*w_2(C_1) $
+$$(1-p_1)*w_1(C_1) - (1-p_1)*w_1(C_2) \leq  p_1*w_2(C_2) - p_1*w_2(C_1) $$
 
-$(1-p_1)*(w_1(C_1) - w_1(C_2)) \leq  p_1*(w_2(C_2) - w_2(C_1)) $
+$$(1-p_1)*(w_1(C_1) - w_1(C_2)) \leq  p_1*(w_2(C_2) - w_2(C_1)) $$
 
-$\frac{(1-p_1)}{p_1}*(w_1(C_1) - w_1(C_2)) \leq  w_2(C_2) - w_2(C_1) $
+$$\frac{(1-p_1)}{p_1}*(w_1(C_1) - w_1(C_2)) \leq  w_2(C_2) - w_2(C_1) $$
 
 De la misma forma que en el caso anterior, sabemos que $C_2$ es el camino óptimo con $p=p_2$, particularmente es menor o igual que $C_1$:
 
-$(1-p_2)*w_1(C_1) + p_2*w_2(C_1) \geq (1-p_2)*w_1(C_2) + p_2*w_2(C_2) $
+$$(1-p_2)*w_1(C_1) + p_2*w_2(C_1) \geq (1-p_2)*w_1(C_2) + p_2*w_2(C_2) $$
 
-$(1-p_2)*w_1(C_1) - (1-p_2)*w_1(C_2) \geq  p_2*w_2(C_2) - p_2*w_2(C_1) $
+$$(1-p_2)*w_1(C_1) - (1-p_2)*w_1(C_2) \geq  p_2*w_2(C_2) - p_2*w_2(C_1) $$
 
-$(1-p_2)*(w_1(C_1) - w_1(C_2)) \geq  p_2*(w_2(C_2) - w_2(C_1)) $
+$$(1-p_2)*(w_1(C_1) - w_1(C_2)) \geq  p_2*(w_2(C_2) - w_2(C_1)) $$
 
-$\frac{(1-p_2)}{p_2}*(w_1(C_1) - w_1(C_2)) \geq  w_2(C_2) - w_2(C_1) $
+$$\frac{(1-p_2)}{p_2}*(w_1(C_1) - w_1(C_2)) \geq  w_2(C_2) - w_2(C_1) $$
 
 Por los que nos queda:
 
-$\frac{(1-p_1)}{p_1}*(w_1(C_1) - w_1(C_2)) \leq  w_2(C_2) - w_2(C_1) \leq \frac{(1-p_2)}{p_2}*(w_1(C_1) - w_1(C_2))$
+$$\frac{(1-p_1)}{p_1}*(w_1(C_1) - w_1(C_2)) \leq  w_2(C_2) - w_2(C_1) \leq \frac{(1-p_2)}{p_2}*(w_1(C_1) - w_1(C_2))$$
 
-$\frac{(1-p_1)}{p_1}*(w_1(C_1) - w_1(C_2)) \leq \frac{(1-p_2)}{p_2}*(w_1(C_1) - w_1(C_2))$
+$$\frac{(1-p_1)}{p_1}*(w_1(C_1) - w_1(C_2)) \leq \frac{(1-p_2)}{p_2}*(w_1(C_1) - w_1(C_2))$$
 
-$ 0 \leq (\frac{(1-p_2)}{p_2} - \frac{(1-p_1)}{p_1})*(w_1(C_1) - w_1(C_2))$
+$$ 0 \leq (\frac{(1-p_2)}{p_2} - \frac{(1-p_1)}{p_1})*(w_1(C_1) - w_1(C_2))$$
 
-Como vimos al principio $\frac{p_1}{1-p_1} < \frac{p_2}{1-p_2}$, por lo que $0 < \frac{(1-p_2)}{p_2} - \frac{(1-p_1)}{p_1} $
+Como vimos al principio $\frac{p_1}{1-p_1} < \frac{p_2}{1-p_2}$, por lo que 
 
-Entonces $ 0 \leq (w_1(C_1) - w_1(C_2))$
+$$0 < \frac{(1-p_2)}{p_2} - \frac{(1-p_1)}{p_1} $$
 
-$w_2(C_1) > w_2(C_2)$
+Entonces:
+$$ 0 \leq (w_1(C_1) - w_1(C_2))$$
+
+$$w_2(C_1) > w_2(C_2)$$
 
 Demostrar que $w_1$ es creciente es análogo a lo demostrado anteriormente. Una forma de verlo es tomar $t$ = $1-p$ por lo que se ``invierten'' $w_1$ y $w_2$. Usando exactamente el mismo razonamiento que la última demostración llegamos a que $w_1$ es decreciente en $t$, y como $t$ = $1-p$ significa que es creciente en $p$.
 
