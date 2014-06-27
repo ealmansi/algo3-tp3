@@ -10,7 +10,7 @@ Como ya sabemos, el algoritmo de Dijkstra devuelve el camino de un nodo inicial 
   \hfill
   \begin{minipage}{0.5\linewidth}
     \includegraphics[width=\linewidth]{graficos/goloso_tiempo_div_n.eps}
-    \caption{Goloso sin optimización}\label{fig:goloso-tiempo-n}
+    \caption{Tiempo de goloso dividido n}\label{fig:goloso-tiempo-n}
   \end{minipage}
 \end{figure}
 
@@ -107,7 +107,7 @@ Como se puede observar en la tabla de arriba, el error proporcional del algoritm
 %   \end{minipage}
 % \end{figure}
 
-En los siguientes gráficos, vamos a comparar empíricamente la proporción entre los pesos $\omega_2$ totales entre las soluciones del algoritmo exacto y el goloso para la familia de grafos previamente mencionada. Creamos una función, la cual recibe un parámetro que es la diferencia deseada entre el goloso y el exacto. Recordemos que dijimos que podemos hacer que la diferencia entre la solución óptima y la que devuelve nuestro algoritmo goloso para esta familia puede ser tan grande como queramos.
+En los siguientes gráficos, vamos a comparar empíricamente la proporción entre los pesos $\omega_2$ totales entre las soluciones del algoritmo exacto y el goloso para la familia de grafos \emph{3-caminos}. Creamos una función, la cual recibe un parámetro que es la diferencia deseada entre el goloso y el exacto. Recordemos que dijimos que podemos hacer que la diferencia entre la solución óptima y la que devuelve nuestro algoritmo goloso para esta familia puede ser tan grande como queramos.
 
 Sea $S$ la solución devuelta por el algoritmo exacto, y $S'$ la solución devuelta por el algoritmo goloso, vamos a graficar $\omega_2(S')$ / $\omega_2(S)$ para distintos $n$.
 
