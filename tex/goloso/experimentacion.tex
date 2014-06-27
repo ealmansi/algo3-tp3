@@ -1,6 +1,6 @@
 En esta sección, vamos a realizar experimentos para comprobar empíricamente tanto el tiempo de ejecución como la calidad de las soluciones devueltas por nuestro algoritmo goloso.
 
-Como ya sabemos, el algoritmo de Dijkstra devuelve el camino de un nodo inical hacia todos. Particualarmente, a nosotros nos interesa el camino de $u$ a $v$. Por esto, se nos ocurrió una simple optimización: cortar la ejecución del algoritmo cuando alcanza $v$.
+Como ya sabemos, el algoritmo de Dijkstra devuelve el camino de un nodo inicial hacia todos. Particularmente, a nosotros nos interesa el camino de $u$ a $v$. Por esto, se nos ocurrió una simple optimización: cortar la ejecución del algoritmo cuando alcanza $v$.
 
 \begin{figure}[H]
   \begin{minipage}{0.5\linewidth}
@@ -37,7 +37,7 @@ Luego, nos propusimos comparar la calidad de las soluciones entre el goloso y el
     \end{tabular}
 \end{center}
 
-Como se puede observar en la tabla de arriba, el error proporcional del algoritmo goloso respecto del algoritmo exacto para grafos con pocos nodos, es muy pequeño. Por esta razón, no vamos a incluir gráficos que comparen dichos algoritmos, ya que es díficil de apreciar visualmente.
+Como se puede observar en la tabla de arriba, el error proporcional del algoritmo goloso respecto del algoritmo exacto para grafos con pocos nodos, es muy pequeño. Por esta razón, no vamos a incluir gráficos que comparen dichos algoritmos, ya que es difícil de apreciar visualmente.
 
 
 % \begin{figure}[H]
@@ -107,9 +107,9 @@ Como se puede observar en la tabla de arriba, el error proporcional del algoritm
 %   \end{minipage}
 % \end{figure}
 
-En los siguientes gráficos, vamos a comparar empíricamente la proporción entre los pesos $\omega_2$ totales entre las solucionesdel algoritmo exacto y el goloso para la familia de grafos previamente mencionada. Creamos una función, la cual recibe un parámetro que es la diferencia deseada entre el goloso y el exacto. Recordemos que dijimos que podemos hacer que la diferencia entre la solución óptima y la que devuelve nuestro algoritmo goloso para esta familia puede ser tan grande como queramos.
+En los siguientes gráficos, vamos a comparar empíricamente la proporción entre los pesos $\omega_2$ totales entre las soluciones del algoritmo exacto y el goloso para la familia de grafos previamente mencionada. Creamos una función, la cual recibe un parámetro que es la diferencia deseada entre el goloso y el exacto. Recordemos que dijimos que podemos hacer que la diferencia entre la solución óptima y la que devuelve nuestro algoritmo goloso para esta familia puede ser tan grande como queramos.
 
-Sea $S$ la solución devuelta por el algoritmo exacto, y $S'$ la solución devuelta por el algoritmo goloso, vamos a gráficar $\omega_2(S')$ / $\omega_2(S)$ para distintos $n$.
+Sea $S$ la solución devuelta por el algoritmo exacto, y $S'$ la solución devuelta por el algoritmo goloso, vamos a graficar $\omega_2(S')$ / $\omega_2(S)$ para distintos $n$.
 
 \begin{figure}[H]
   \begin{minipage}{0.5\linewidth}
