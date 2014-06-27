@@ -123,11 +123,11 @@ Sea $S$ la solución devuelta por el algoritmo exacto, y $S'$ la solución devue
   \end{minipage}
 \end{figure}
 
-En el gráfico \ref{fig:goloso-n2} colocamos la diferencia de $n^2$ para cada $n$, mientras que en el gráfico \ref{fig:goloso-escalonado} utilizamos la siguiente función:
+En el gráfico de la Figura \ref{fig:goloso-n2} colocamos la diferencia de $n^2$ para cada $n$, mientras que en el gráfico \ref{fig:goloso-escalonado} utilizamos la siguiente función:
 \begin{verbatim}
 error(n) = n - (n mod 10)
 \end{verbatim}
 
-Cabe aclarar que estos gráficos utilizan valores de $n$ mayores a 10, ya que el error tiene que ser mayor o igual a uno. En el caso en que se use un error menor a 1, el algoritmo no funciona ya que esto significaría que es ``más exacto'' que el exacto.
+Cabe aclarar que, a diferencia de la tabla anterior, estos gráficos utilizan valores de $n$ mayores a 10, ya que el error tiene que ser mayor o igual a uno. En el caso en que se use un error menor a 1, el algoritmo no funciona ya que esto significaría que es ``más exacto'' que el exacto.
 
 De esta forma, podemos asegurar que nuestro algoritmo goloso no es $\alpha$-aproximado para esta familia de grafos. Esto se puede observar fácilmente, ya que dado un $\alpha$ podemos generar un grafo donde el error proporcional sea mayor a $\alpha$.
