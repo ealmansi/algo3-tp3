@@ -23,7 +23,6 @@ cacm::salida cacm_grasp::resolver(const cacm::entrada& e, int coef_rand, int max
       break;
 
     s = cacm_goloso::resolver(e, coef_rand);
-    escribir_salida(s);
     cacm_busq_local::buscar_maximo_local(e, s);
 
     if (not s.hay_solucion)
