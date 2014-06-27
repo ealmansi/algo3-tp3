@@ -6,14 +6,10 @@ Exacto:
   NADA
 
 Goloso:
-. análisis de calidad
-  - dibujo
+	NADA
 
 Busqueda Local:
-. análisis de la calidad de las soluciones (completo)
-  - justificar por qué la familia de grafos que usamos para el goloso también rompe busqueda local
-  - opcional: encontrar una familia de grafos que rompa el goloso pero se arregle con búsqueda local
-. concluir cuál es la mejor configuración
+	NADA
 
 Grasp:
 . experimentación:

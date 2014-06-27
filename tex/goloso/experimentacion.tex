@@ -14,11 +14,11 @@ Como ya sabemos, el algoritmo de Dijkstra devuelve el camino de un nodo inical h
   \end{minipage}
 \end{figure}
 
-Como se puede observar en la figura \ref{fig:goloso-tiempo}, nuestro algoritmo sin la optimización se comporta de forma cuadrática. Esto es lógico ya que nuestro algoritmo sin la optimización corre el algoritmo de Dijkstra de principio a fin, utilizando listas de adyacencia.
+Como se puede observar tanto en la Figura \ref{fig:goloso-tiempo} como en la Figura \ref{fig:goloso-tiempo-n}, nuestro algoritmo sin la optimización se comporta de forma cuadrática. Esto es lógico ya que nuestro algoritmo sin la optimización corre el algoritmo de Dijkstra de principio a fin, utilizando listas de adyacencia.
 
-Además, en la figura \ref{fig:goloso-tiempo} podemos observar que el algoritmo con la optimización tiene un tiempo de ejecución menor o igual al algoritmo sin la optimización. Esto depende del momento en que el algoritmo encuentra a $v$, con lo cual puede ser el primer nodo o el último según la corrida.
+Además, en la figura \ref{fig:goloso-tiempo} podemos observar que el algoritmo con la optimización tiene un tiempo de ejecución menor o igual al algoritmo sin la optimización. Esto depende del momento en que el algoritmo de Dijkstra encuentra a $v$.
 
-Luego, nos propusimos comparar la calidad de las soluciones entre el goloso y el exacto, para casos random. Cabe aclarar que vamos a utilizar casos con $n$ chico, ya que el algoritmo exacto tiene tiempo de ejecución exponencial.
+Luego, nos propusimos comparar la calidad de las soluciones entre el goloso y el exacto, para casos aleatorios. Cabe aclarar que vamos a utilizar casos con valores bajos de $n$, ya que el algoritmo exacto tiene tiempo de ejecución exponencial.
 
 \begin{center}
  \begin{tabular}{|c|c|}
@@ -39,7 +39,7 @@ Luego, nos propusimos comparar la calidad de las soluciones entre el goloso y el
 
 Como se puede observar en la tabla de arriba, el error proporcional del algoritmo goloso respecto del algoritmo exacto para grafos con pocos nodos, es muy pequeño. Por esta razón, no vamos a incluir gráficos que comparen dichos algoritmos, ya que es díficil de apreciar visualmente.
 
-% 
+
 % \begin{figure}[H]
 %   \begin{minipage}{0.25\linewidth}
 %     \begin{tabular}{|c|c|}
@@ -107,7 +107,7 @@ Como se puede observar en la tabla de arriba, el error proporcional del algoritm
 %   \end{minipage}
 % \end{figure}
 
-En los siguientes gráficos, vamos a comparar empíricamente la proporción entre los pesos $\omega_2$ totales de los caminos solución corriendo el algoritmo exacto y el goloso para la familia de grafos previamente mencionada. Creamos una función la cual recibe un parámetro que es la diferencia deseada entre el goloso y el exacto.
+En los siguientes gráficos, vamos a comparar empíricamente la proporción entre los pesos $\omega_2$ totales entre las solucionesdel algoritmo exacto y el goloso para la familia de grafos previamente mencionada. Creamos una función, la cual recibe un parámetro que es la diferencia deseada entre el goloso y el exacto. Recordemos que dijimos que podemos hacer que la diferencia entre la solución óptima y la que devuelve nuestro algoritmo goloso para esta familia puede ser tan grande como queramos.
 
 Sea $S$ la solución devuelta por el algoritmo exacto, y $S'$ la solución devuelta por el algoritmo goloso, vamos a gráficar $\omega_2(S')$ / $\omega_2(S)$ para distintos $n$.
 
@@ -128,6 +128,6 @@ En el gráfico \ref{fig:goloso-n2} colocamos la diferencia de $n^2$ para cada $n
 error(n) = n - (n mod 10)
 \end{verbatim}
 
-Cabe aclarar que el segundo gráfico utiliza $n$ mayores a 10, ya que el error tiene que ser mayor o igual a uno. En el caso en que se use un error menor a 1, el algoritmo no funciona ya que esto significaría que es ``más exacto'' que el exacto.
+Cabe aclarar que estos gráficos utilizan valores de $n$ mayores a 10, ya que el error tiene que ser mayor o igual a uno. En el caso en que se use un error menor a 1, el algoritmo no funciona ya que esto significaría que es ``más exacto'' que el exacto.
 
 De esta forma, podemos asegurar que nuestro algoritmo goloso no es $\alpha$-aproximado para esta familia de grafos. Esto se puede observar fácilmente, ya que dado un $\alpha$ podemos generar un grafo donde el error proporcional sea mayor a $\alpha$.
