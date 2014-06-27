@@ -232,7 +232,7 @@ void Test_rompe_goloso2(int n, int intervalo){
     proporcion2 /= s.W2;
 
     cout << "Proporcion 1: " << proporcion  << endl;
-    cout << "Proporcion 1: " << proporcion2  << endl << endl;
+    cout << "Proporcion 2: " << proporcion2  << endl << endl;
   }
 
 
