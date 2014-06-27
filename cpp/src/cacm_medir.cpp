@@ -654,9 +654,54 @@ void medir_proporcion_todos_caminos_puentes(int n_inicio, int n_max){
     cout << proporcion2  << " ";
     cout  << proporcion3  << endl;
   }
-
-
 }
+
+void medir_calidad_todos(int n_min, int n_max)
+{
+  cout << fixed << setprecision(4);
+
+  entrada e;
+  salida s0, s1, s2, s3;
+  lld ratios_b, ratios_g;
+  ld prom_ratios_b, prom_ratios_g;
+  
+  int seed = time(0);
+  //int seed = 1403878979;
+  srand(seed);
+  cout << "seed: " << seed << endl;
+  for(int n = n_min; n < n_max + 1; ++n)
+  {
+    ratios_b.clear();
+    ratios_g.clear();
+    for (int i = 0; i < 10; ++i)
+    {
+      int m = 0.8 * cant_aristas_K_n(n);
+      int max_w1 = 10000;
+      int max_w2 = 10000;
+      int K = 0.1 * ((1.0l * n * max_w1) / 4.0);
+      entrada e = generar_instancia_aleatoria(n, m, max_w1, max_w2, K);
+      
+      s0 = cacm_grasp::resolver(e,20);
+      s1 = cacm_busq_local::resolver(e);
+      s2 = cacm_goloso::resolver(e);
+
+      if (s2.hay_solucion)
+      {
+        ratios_b.push_back(1.0l * s1.W2 / s2.W2);
+        ratios_g.push_back(1.0l * s0.W2 / s2.W2);
+   		}
+   }
+
+    prom_ratios_b = accumulate(range(ratios_b), 0.0l) / ratios_b.size();
+    cout << n << " " << prom_ratios_b << " ";
+    
+    prom_ratios_g = accumulate(range(ratios_g), 0.0l) / ratios_g.size();
+    cout <<  prom_ratios_g << endl;
+  }
+}
+
+
+
 
 int main(int argc, char const *argv[])
 {
@@ -669,7 +714,8 @@ int main(int argc, char const *argv[])
   //medir_busq_local_proporcion2(8, 50);
   //medir_grasp_intmax(5,100);
   //comparar_grasp_coef(5,50);
-  //medir_proporcion_todos_caminos(5,100);
-  medir_proporcion_todos_caminos_puentes(8,100);
+  //medir_proporcion_todos_caminos(5,800);
+  //medir_proporcion_todos_caminos_puentes(8,100);
+  medir_calidad_todos(5,100);
   return 0;
 }

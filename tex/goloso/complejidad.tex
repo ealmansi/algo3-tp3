@@ -15,10 +15,10 @@
     \If{$W_1(solucion) \leq k$} \Ode{1}
       \State $solucion \leftarrow Dijkstra(G, 1)$ \Ode{n^2}
     \EndIf
-    \State Devolver solucion \Ode{1}
+    \State Devolver solución \Ode{1}
    \EndProcedure
   \end{pseudo}
  \end{figure}
 \end{center}
 
- Como podemos ver el algoritmo esta compuesto por una instruccion $O(1)$ luego un for,y por ultimo 2 $O(1)$ y una vez Dijskstra, que como sabemos tiene complejidad $O(n^2)$. El for itera $Cant\_Iteraciones$ instrucciones $4*O(1) + O(n^2)$. Como $Cant\_Iteraciones$ es un numero acotado, la compleijad del for es $O(n^2)$. Por algebra de ordenes $O(1)+O(n^2)+2*O(1)+O(n^2)=O(n^2)$.  
+ Como podemos ver el algoritmo esta compuesto por una instrucción $O(1)$ luego un for,y por ultimo 2 $O(1)$ y una vez Dijkstra, que como sabemos tiene complejidad $O(n^2)$. El for itera $Cant\_Iteraciones$ instrucciones $4*O(1) + O(n^2)$. Como $Cant\_Iteraciones$ es un numero acotado, la complejidad del for es $O(n^2)$. Por álgebra de ordenes $O(1)+O(n^2)+2*O(1)+O(n^2)=O(n^2)$.  
