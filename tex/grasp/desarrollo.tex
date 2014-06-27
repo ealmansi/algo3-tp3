@@ -38,10 +38,11 @@ La nueva implementación de Dijkstra que utilizamos es la siguiente:
     \If{$minDistU = \infty$}
       \State \textbf{break}
     \EndIf
+    \State //Armamos RCL
     \State $candidatos$ $\leftarrow$ $\emptyset$
     \For{$i$ $=$ $1$ \textbf{to} $ |V|$}
-      \If{restricciónRCL($i$, $coef\_random$)}
-	\State $candidatos$.push\_back(i)
+      \If{$dist(i)$ $\leq$ $minDistU$ * (1 + $coef\_rand$)}
+	\State $candidatos$.push\_back($i$)
       \EndIf
     \EndFor
     \State $u$ $\leftarrow$ $dameUnoAlAzar(candidatos)$
@@ -69,11 +70,13 @@ Nuestro algoritmo GRASP tiene un criterio de terminación híbrido entre una can
 
 Como ahora utilizamos una heurística golosa aleatorizada, un punto importante es la creación de una Lista Restricta de Candidatos (RCL) para poder elegir uno de ellos al azar. Para armar con nuestra RCL, la creamos con los candidatos que cumplan con:
 
-\begin{verbatim}
-dist[i] <= min_dist_u * (1 + coef_rand)
-\end{verbatim}
+\begin{center}
+dist($i$) $\leq$ $minDistU$ * (1 + $coef\_rand$)
+\end{center}
 
-donde dist[i] contiene la distancia del nodo incial al nodo $i$ medida con la función $f$ y el $p$ pasado por parámetro (ver \ref{subsub:algoritmos-heuristicos-goloso-desarrollo.tex} para entender mejor dist), min\_dist\_u es igual al mínimo dist $\forall$ $i$, y coef\_rand es pasado por parámetro en nuestra función de GRASP.
+donde $dist(i)$ contiene la distancia del nodo incial al nodo $i$ medida con la función $f$ y el $p$ pasado por parámetro (ver \ref{subsub:algoritmos-heuristicos-goloso-desarrollo.tex} para entender mejor $dist$), min\_dist\_u es igual al mínimo dist$\forall$ $i$, y coef\_rand es pasado por parámetro en nuestra función de GRASP.
+
+Cabe aclarar que si cambiamos la guarda del if que contiene a la restricción, podemos crear sin mucha complicación otra RCL.
 
 A continuación vamos a presentar el pseudocódigo de nuestro algoritmo GRASP. Cabe aclarar que COEF\_RAND, y MAX\_CANT\_IT\_SIN\_MEJORA son defines declarados antes de la función.
 
