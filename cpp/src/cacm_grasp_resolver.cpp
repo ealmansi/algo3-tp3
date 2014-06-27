@@ -1,4 +1,5 @@
 #include "cacm.h"
+#include "cacm_dijkstra.h"
 #include "cacm_goloso.h"
 #include "cacm_busq_local.h"
 #include "cacm_grasp.h"
@@ -14,7 +15,11 @@ double diferencia_relativa(salida& mejor_s, salida& s)
 
 cacm::salida cacm_grasp::resolver(const cacm::entrada& e, int coef_rand, int max_cant_it_sin_mejora, double epsilon)
 {
-  salida s, mejor_s = cacm_goloso::resolver(e, coef_rand);
+  salida s, mejor_s;
+  if (max_cant_it_sin_mejora % 2 == 0)
+    mejor_s = cacm_dijkstra::resolver(e, 0, coef_rand);
+  else
+    mejor_s = cacm_goloso::resolver(e, coef_rand);
 
   int cant_it_sin_mejora = 0;
   for (int cant_it = 0; cant_it < MAX_CANT_IT; ++cant_it)
@@ -22,7 +27,11 @@ cacm::salida cacm_grasp::resolver(const cacm::entrada& e, int coef_rand, int max
     if (max_cant_it_sin_mejora < cant_it_sin_mejora)
       break;
 
-    s = cacm_goloso::resolver(e, coef_rand);
+    if (max_cant_it_sin_mejora % 2 == 0)
+      s = cacm_dijkstra::resolver(e, 0, coef_rand);
+    else
+      s = cacm_goloso::resolver(e, coef_rand);
+
     cacm_busq_local::buscar_maximo_local(e, s);
 
     if (not s.hay_solucion)

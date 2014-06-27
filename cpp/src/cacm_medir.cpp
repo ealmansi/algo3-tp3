@@ -7,6 +7,7 @@
 using namespace cacm;
 
 #include <iostream>
+#include <iomanip>
 #include <cstdlib>
 #include <cassert>
 #include <set>
@@ -501,6 +502,8 @@ void medir_busq_local_proporcion2(int n_inicio, int n_max){
 
 void comparar_grasp_coef(int n_min, int n_max)
 {
+  cout << fixed << setprecision(4);
+
   entrada e;
   salida s0, s1, s2, s3;
   lld ratios10, ratios20;
@@ -516,26 +519,22 @@ void comparar_grasp_coef(int n_min, int n_max)
     ratios20.clear();
     for (int i = 0; i < 10; ++i)
     {
-      int m = 1 * cant_aristas_K_n(n);
+      int m = 0.5 * cant_aristas_K_n(n);
       int max_w1 = 10000;
       int max_w2 = 10000;
       int K = 1 * ((1.0l * n * max_w1) / 4.0);
       entrada e = generar_instancia_aleatoria(n, m, max_w1, max_w2, K);
       
-      s0 = cacm_goloso::resolver(e);
-      s1 = cacm_busq_local::resolver(e);
-      s2 = cacm_grasp::resolver(e, n, 20, 0.01);
+      s0 = cacm_grasp::resolver(e, 0.5, 50, 0.0001);
+      s1 = cacm_grasp::resolver(e, 0.5, 51, 0.0001);
 
-      if (s1.hay_solucion)
-      {
-        ratios10.push_back(1.0l * s1.W2 / s0.W2);
-        ratios20.push_back(1.0l * s2.W2 / s0.W2);
-      }
+      if (s0.hay_solucion and s1.hay_solucion)
+        cout << s0.W2 << " " << s1.W2 << endl;
+      //   ratios10.push_back(1.0l * s1.W2 / s0.W2);
     }
 
-    prom_ratios10 = accumulate(range(ratios10), 0.0l) / ratios10.size();
-    prom_ratios20 = accumulate(range(ratios20), 0.0l) / ratios20.size();
-    cout << n << " " << prom_ratios10 << " " << prom_ratios20 << endl;
+    //prom_ratios10 = accumulate(range(ratios10), 0.0l) / ratios10.size();
+    //cout << n << " " << prom_ratios10 << endl;
   }
 }
 
