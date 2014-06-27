@@ -95,18 +95,18 @@ A continuación incluimos un pseudocódigo de nuestro algoritmo:
 \begin{center}
  \begin{figure}[H]
   \begin{pseudo}
-   \Procedure{cacm\_goloso}{grafo $G$, nodo $u$, nodo $v$}
+   \Procedure{cacm\_goloso}{grafo $G$, nodo $u$, nodo $v$, entero $K$}
     \State $pInicial \leftarrow 0$, $pFinal \leftarrow 1$, $pMedio$
     \For{$i < Cant\_Iteraciones$}
       \State $pMedio \leftarrow (pInicial + pFinal)/2$
       \State $solucion$ $\leftarrow$ $Dijkstra(G$, $pMedio$, $u$, $v)$
-      \If{$w_1(solucion) \leq k$}
+      \If{$w_1(solucion) \leq K$}
 	 \State $pInicial \leftarrow pMedio$
       \Else
 	 \State $pFinal \leftarrow pMedio$
       \EndIf
     \EndFor
-    \If{$w_1(solucion) \leq k$}
+    \If{$w_1(solucion) \leq K$}
       \State $solucion \leftarrow Dijkstra(G, 1)$
     \EndIf
     \State Devolver solución
