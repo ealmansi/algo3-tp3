@@ -1,4 +1,4 @@
-La esencia de este algoritmo se encuentra principalmente en la vecindad que elegimos para las posibles soluciones, a continuación la detallaremos.
+La esencia de este algoritmo se encuentra principalmente en la vecindad que elegimos para las posibles soluciones, la cual detallaremos a continuación.
 
 Supongamos que tenemos un camino $C$ = ($c_0$, $c_1$, ..., $c_k$) de $k+1$ nodos que es una solución factible del problema de CACM par un grafo $G$ = ($V$,$E$). Los vecinos de la solución $C$ son caminos que también sean soluciones factibles y que surjan de aplicarle una de las siguientes operaciones:
 
@@ -8,19 +8,21 @@ Supongamos que tenemos un camino $C$ = ($c_0$, $c_1$, ..., $c_k$) de $k+1$ nodos
   Supongamos que existe un $i$ tal que $0 < i < k$ y que ($c_{i+1}$, $c_{i+1}$) $\in$ $E$. Bajo estas condiciones podemos afirmar que existe un camino en $G$ llamado $C'$ tal que $C'$ = ($c_0$, ..., $c_{i-1}$, $c_{i+1}$, ..., $c_k$). Esto significa que dado $C$ podemos eliminar el nodo $c_i$ del camino y unir $c_{i-1}$ y $c_{i+1}$ ya que estos son adyacentes entre sí, obteniendo un camino $C'$ de $k$ nodos.
   \item Agregar Nodo:
 
-  La operación agregar nodo es la operación inversa a la operación Quitar Nodo descripta anteriormente. Supongamos que existe un $i$ tal que $0 \leq i < k$ y existe un nodo $w \in V$ tal que ($c_i$,$w$) $\in E$ y ($w$, $c_{i+1}$) $\in E$. En este caso podemos afirmar que podemos construir un camino $C'$ = ($c_0$, ..., $c_{i}$,$w$,$c_{i+1}$) de $k+2$ nodos.
+  La operación agregar nodo es la operación inversa a la operación Quitar Nodo descripta anteriormente. Supongamos que existe un $i$ tal que $0 \leq i < k$ y existe un nodo $x \in V$ tal que ($c_i$,$x$) $\in E$ y ($x$, $c_{i+1}$) $\in E$. En este caso podemos afirmar que podemos construir un camino $C'$ = ($c_0$, ..., $c_{i}$,$x$,$c_{i+1}$) de $k+2$ nodos.
 
-  Vale aclarar que para realizar esta operación, el nodo $w$ no debe pertenecer a $C$, ya que queremos que el camino sea simple.
+  Vale aclarar que para realizar esta operación, el nodo $x$ no debe pertenecer a $C$, ya que queremos que el camino sea simple.
 
   \item Cambiar Nodo:
 
-  Esta operación es una mezcla de las dos operaciones anteriores. Supongamos que existe un $i$ tal que $0 \leq i < k-1$ y que existe un nodo $w \in V$ (nuevamente, $w$ no debe estar en el camino $C$) tal que ($c_i$,$w$) $\in E$ y ($w$, $c_{i+2}$) $\in E$. En este caso podemos cambiar el nodo $c_{i+1}$ del camino $C$ por el nodo $w$ obteniendo un nuevo camino $C'$ de la misma cantidad de nodos.
+  Esta operación es una mezcla de las dos operaciones anteriores. Supongamos que existe un $i$ tal que $0 \leq i < k-1$ y que existe un nodo $x \in V$ $\wedge$ $x$ $\notin$ $C$ tal que ($c_i$,$x$) $\in E$ y ($x$, $c_{i+2}$) $\in E$. En este caso podemos cambiar el nodo $c_{i+1}$ del camino $C$ por el nodo $x$ obteniendo un nuevo camino $C'$ de la misma cantidad de nodos.
 
-  Uno podría creer que la operación Cambiar Nodo es una combinación de las dos operaciones descriptas anteriormente Agregar Nodo y Quitar Nodo, ya que se podría quitar primero el nodo $c_{i+1}$ y luego agregar el nodo $w$. Sin embargo, esto no es así ya que podría pasar que el eje ($c_i$,$c_{i+2}$) $\notin E$ y, si esto ocurre no nos sería posible quitar el nodo $c_{i+1}$ para luego agregar el nodo $w$.
+  Uno podría creer que la operación Cambiar Nodo es una combinación de las dos operaciones descriptas anteriormente Agregar Nodo y Quitar Nodo, ya que se podría quitar primero el nodo $c_{i+1}$ y luego agregar el nodo $x$. Sin embargo, esto no es así ya que podría pasar que el eje ($c_i$,$c_{i+2}$) $\notin E$ y, si esto ocurre no nos sería posible quitar el nodo $c_{i+1}$ utilizando Quitar Nodo para luego agregar el nodo $x$ utilizando Agregar Nodo.
 
 \end{itemize}
  
-Dadas estas tres operaciones, un vecino de una solución factible $C$ es un camino que se pueda construir aplicándole a $C$ una de estas tres operaciones. Recordar que si existiese un $C'$ que se pudiera construir a partir de aplicarle a $C$ más de una operación, $C'$ no sería vecino de $C$. Tomamos esta decisión debido a que pensamos que si consideráramos vecino a un camino que se pudiera construir a partir de aplicarle numerosas operaciones a $C$ se estaría perdiendo, por así decirlo, la localidad de la búsqueda y estaríamos incurriendo en una búsqueda más global. Es importante recalcar que sólo tomamos como un vecino de $C$ un camino $C'$ factible.
+Dadas estas tres operaciones, un vecino de una solución factible $C$ es un camino que se pueda construir aplicándole a $C$ una de estas tres operaciones. Recordar que si existiese un $C'$ que se pudiera construir a partir de aplicarle a $C$ más de una operación, $C'$ no sería vecino de $C$.
+
+Tomamos esta decisión debido a que pensamos que si consideráramos vecino a un camino que se pudiera construir a partir de aplicarle numerosas operaciones a $C$ estaríamos perdiendo, por así decirlo, la localidad de la búsqueda y estaríamos incurriendo en una búsqueda más global. También nos parece importante recalcar que sólo tomamos como un vecino de $C$ un camino $C'$ factible.
 
 Algo que pensamos mientras elegíamos nuestra vecindad es que una buena propiedad que ésta pudiese cumplir sería que, dada una solución factible $C$, aplicándole una cantidad de operaciones, pudiésemos llegar a cualquier otra solución factible.
 
@@ -28,9 +30,9 @@ Para explicar esto pensemos en los números reales. Supongamos tenemos una funci
 
 Que una función de vecindad cumpla con esta propiedad nos parece bueno porque al poder moverse de cualquier solución factible a cualquier otra, hay menos probabilidad de perder soluciones factibles buenas. Más aún, si esta propiedad vale y tuviésemos un oráculo que nos dijera que vecino tomar, podemos afirmar que si aplicamos muchas veces la función de vecindad (empezando de una solución $C$ luego en un vecino de $C$ y así) eventualmente llegaremos a la solución óptima del problema.
 
-Luego de pensarlo llegamos a la conclusión de que nuestra vecindad no cumple con esa propiedad, ya que existen casos en los que a partir de una solución nos es imposible llegar a otra.
+Luego de pensarlo, llegamos a la conclusión de que nuestra vecindad no cumple con esa propiedad, ya que existen casos en los que a partir de una solución nos es imposible llegar a otra.
 
-Supongamos que nuestro grafo es $C_n$ y que nuestro nodo inicial es $c_1$ y nuestro nodo destino es $c_n$. Supongamos además que tenemos una solución que es $S$ = ($c_1$, $c_2$, ... , $c_n$). Podemos observar que hay otra posible solución, que es $S'$ = ($c_1$,$c_n$) ya que como nuestro grafo es $C_n$ entonces $c_1$ y $c_n$ son adyacentes. Sin embargo, con nuestra función de vecindad nos es imposible llegar de la solución $S$ a la solución $S'$. ya que no hay ninguna operación que se pueda realizar a $S$.
+Supongamos que nuestro grafo es $C_n$, con $n$ $>$ $3$ y que nuestro nodo inicial es $c_1$ y nuestro nodo destino es $c_n$. Supongamos además que tenemos una solución que es $S$ = ($c_1$, $c_2$, ... , $c_n$). Podemos observar que hay otra posible solución, que es $S'$ = ($c_1$,$c_n$) ya que como nuestro grafo es $C_n$ entonces $c_1$ y $c_n$ son adyacentes. Sin embargo, con nuestra función de vecindad nos es imposible llegar de la solución $S$ a la solución $S'$. ya que no hay ninguna operación que se pueda realizar a $S$.
 
 Supongamos ahora que tenemos como solución inicial $S'$. En este caso tampoco podemos aplicar ninguna operación a $S'$ y no podremos llegar a la otra solución. Podemos decir que en este caso, en nuestra vecindad tanto $S$ como $S'$ son soluciones sin vecinos.
 
