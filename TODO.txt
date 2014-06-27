@@ -19,7 +19,6 @@ Grasp:
     > epsilon
     > tipo de semilla (goloso o dijkstra sobre W1)
   - gráficos comparativos de tiempo y calidad de soluciones
-. concluir cuál es la mejor configuración
 
 Comparación entre todos:
   . comparar tiempo y calidad entre la mejor configuración de goloso, busqueda local y grasp
