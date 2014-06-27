@@ -366,7 +366,8 @@ void medir_busq_local_calidad(int n_min, int n_max)
 			  entrada e = generar_instancia_aleatoria(n, m, max_w1, max_w2, K);
 
 			  salida s1 = cacm_busq_local::resolver(e);
-
+				
+				
 			  mediciones_por_n[n - n_min][i] = s1.W2;
 			}
 		}
@@ -410,12 +411,14 @@ void medir_busq_local_proporcion(int n_min, int n_max)
 
 #define CANT_MEDICIONES_POR_N_GRASP 15
 
+typedef vector<lld> vvlli;
+
 void medir_grasp_intmax(int n_min, int n_max)
 {
 	cout << "Medicion grasp intmax" << endl;
 	srand(1234235);
 	cout << "datos_m = [";
-	vector<vvlli> mediciones_por_n(vvlli(n_max - n_min + 1, vlli(CANT_MEDICIONES_POR_N_GRASP)));
+	vector < vvlli > mediciones_por_n(vvlli(n_max - n_min + 1, vlli(CANT_MEDICIONES_POR_N_GRASP)));
 		for (int i = 0; i < CANT_MEDICIONES_POR_N_GRASP; ++i)
 		{				
 			for (int n = n_min; n < n_max + 1; ++n)
