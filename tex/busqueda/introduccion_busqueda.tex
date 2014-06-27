@@ -7,9 +7,10 @@ Básicamente, un algoritmo de búsqueda local debería cumplir con el siguiente 
   \begin{pseudo}
    \Procedure{busquedaLocal}{}
    \State Sea $S$ una solución inicial
-   \While{$(\exists S' \in N(S)) f(S')<f(S)$}
+   \While{$(\exists S' \in N(S))\, f(S')<f(S)$}
       \State $S \leftarrow S'$
    \EndWhile
+   \State \textbf{return} $S$
    \EndProcedure
   \end{pseudo}
  \end{figure}
