@@ -17,9 +17,9 @@ A continuación incluiremos dos gráficos. Uno para poder observar como se compo
 En estos gráficos mostramos el comportamiento de tanto de los siguientes algoritmos para dos familias de grafos. Los algoritmos medidos son los siguientes (todos en proporción al algoritmo exacto):
 
 \begin{itemize}
- \item Algoritmo Goloso implementado en el trabajo
- \item Algoritmo de búsqueda local con algoritmo goloso como semilla
- \item Algoritmo GRASP que utiliza nuestro algoritmo goloso aleatorio y nuestro algoritmo de búsqueda local
+ \item Algoritmo Goloso implementado en el trabajo.
+ \item Algoritmo de búsqueda local, que utiliza nuestro algoritmo goloso.
+ \item Algoritmo GRASP que utiliza nuestro algoritmo goloso aleatorio y nuestro algoritmo de búsqueda local.
 \end{itemize}
 
 Vale aclarar que todas las soluciones se muestran en proporción a las del algoritmo exacto.
@@ -34,12 +34,11 @@ Para continuar incluimos un gráfico que compara las soluciones de nuestro algor
   \begin{center}
     \begin{minipage}{0.5\linewidth}
     \includegraphics[width=\linewidth]{graficos/todos_calidad.eps}
-    \caption{Soluciones en proporción con goloso }\label{fig:proporcion-goloso}
+    \caption{Soluciones en proporción con goloso}\label{fig:proporcion-goloso}
     \end{minipage}
   \end{center}
 \end{figure}
 
-
 El algoritmo de búsqueda local siempre da soluciones que son mejores o iguales a las que da el algoritmo goloso, ya que la proporción es siempre menor o igual a uno. Esto es lógico ya que nuestro algoritmo de búsqueda local toma como solución inicial la que da el goloso e intenta mejorarlas, lo cual no siempre logra, pero nunca empeora la solución inicial que se le da.
 
-Además podemos ver que las soluciones que da el algoritmo GRASP son a veces mejores que las del algoritmo de búsqueda local pero a veces son peores. Esto es debido a que el algoritmo de GRASP hace búsqueda local sobre la solución inicial que le da nuestro algoritmo goloso aleatorio en cada iteración. Por lo tanto GRASP hace búsqueda local a partir de soluciones iniciales distintas a la del algoritmo de búsqueda local que toma como solución inicial la dada por nuestro algoritmo goloso que no es aleatorio. Entonces, tiene sentido que GRASP llegue a soluciones distintas al algoritmo de búsqueda local, las cuales a veces son mejores y a veces son peores.
+Además, podemos ver que las soluciones que da el algoritmo GRASP son a veces mejores que las del algoritmo de búsqueda local pero a veces son peores. Esto es debido a que el algoritmo de GRASP hace búsqueda local sobre la solución inicial que le da nuestro algoritmo goloso aleatorio en cada iteración. Por lo tanto, GRASP hace búsqueda local a partir de soluciones iniciales distintas a la del algoritmo de búsqueda local que toma como solución inicial la dada por nuestro algoritmo goloso que no es aleatorio. Entonces, tiene sentido que GRASP llegue a soluciones distintas al algoritmo de búsqueda local, las cuales a veces son mejores y a veces son peores.

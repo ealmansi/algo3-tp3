@@ -1,10 +1,12 @@
-En esta sección, vamos a analizar el peso total del resultado devuelto por nuestro algoritmo de GRASP frente a distintas soluciones iniciales. Vamos a utilizar como soluciones iniciales a nuestro algoritmo goloso, y Dijkstra sobre $\omega_1$.
+En esta sección, vamos a analizar el peso total del resultado devuelto por nuestro algoritmo de GRASP frente a distintas soluciones iniciales. Vamos a utilizar como soluciones iniciales a nuestro algoritmo goloso, y el resultado de recorrer el algoritmo de Dijkstra sobre la función de peso $\omega_1$.
+
+En la figura (\ref{fig:grasp-soluciones-iniciales}) incluimos un gráfico tipo \emph{scatter} con los puntos que tienen como coordenadas $x$ e $y$ los valores de $W_2$ obtenidos utilizando los diferentes tipos de solución inicial, respectivamente.
 
 \begin{figure}[H]
   \begin{center}
-    \begin{minipage}{0.5\linewidth}
+    \begin{minipage}{0.7\linewidth}
       \includegraphics[width=\linewidth]{graficos/grasp_comparacion_soluciones_iniciales.eps}
-      \caption{Comparación Soluciones iniciales}\label{fig:grasp-proporcion}
+      \caption{Comparación Soluciones iniciales}\label{fig:grasp-soluciones-iniciales}
     \end{minipage}
   \end{center}
 \end{figure}
