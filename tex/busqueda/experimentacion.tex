@@ -16,9 +16,9 @@ En los gráficos que presentamos a continuación, mostramos el tiempo de ejecuci
   \end{minipage}
 \end{figure}
 
-Como podemos observar en el gráfico \ref{fig:busq-local-tiempo} el algoritmo de búsqueda local utilizando nuestro algoritmo goloso tiene un tiempo de ejecución mayor al que utiliza el algoritmo de Dijkstra. Esto se debe a que lo que medimos es el tiempo en correr primero los algoritmos que generan las soluciones iniciales y luego correr el algoritmo de búsqueda local. Como ya sabemos nuestro algoritmo goloso corre el algoritmo de Dijkstra una cantidad de iteraciones prefijada. Resulta lógico pensar que un algoritmo que corre el algoritmo de Dijkstra muchas veces tendrá un tiempo de ejecución mayor al de un algoritmo que lo corre sólo una.
+Como podemos observar en el gráfico de la Figura \ref{fig:busq-local-tiempo} el algoritmo de búsqueda local utilizando nuestro algoritmo goloso tiene un tiempo de ejecución mayor al que utiliza el algoritmo de Dijkstra. Esto se debe a que lo que medimos es el tiempo en correr primero los algoritmos que generan las soluciones iniciales y luego correr el algoritmo de búsqueda local. Como ya sabemos nuestro algoritmo goloso corre el algoritmo de Dijkstra una cantidad de iteraciones prefijada. Resulta lógico pensar que un algoritmo que corre el algoritmo de Dijkstra muchas veces tendrá un tiempo de ejecución mayor al de un algoritmo que lo corre sólo una.
 
-Por esto en el gráfico \ref{fig:busq-local-tiempo-div10} mostramos los mismos tiempos que en el otro gráfico pero dividimos el tiempo que tarda el algoritmo de búsqueda local que usa nuestro algoritmo goloso por \emph{cant iteraciones}. Con este gráfico, logramos ver que el tiempo de ejecución de ambos algoritmos de búsqueda es parecido cuando reducimos el factor de tiempo de ejecución del algoritmo nos da la solución inicial.
+Por esto en el gráfico de a Figura \ref{fig:busq-local-tiempo-div10} mostramos los mismos tiempos que en el otro gráfico pero dividimos el tiempo que tarda el algoritmo de búsqueda local que usa nuestro algoritmo goloso por \emph{cant iteraciones}. Con este gráfico, logramos ver que el tiempo de ejecución de ambos algoritmos de búsqueda es parecido cuando reducimos el factor de tiempo de ejecución del algoritmo nos da la solución inicial.
 
 A continuación incluimos unos gráficos que comparan la calidad de las soluciones del algoritmo de búsqueda local.
 
@@ -34,7 +34,7 @@ A continuación incluimos unos gráficos que comparan la calidad de las solucion
   \end{minipage}
 \end{figure}
 
-El gráfico \ref{fig:busq-local-proporcion} muestra la diferencia proporcional entre las soluciones que nos da el algoritmo de búsqueda local con una solución inicial dada por nuestro algoritmo goloso y el algoritmo exacto para la familia de grafos que rompe nuestro algoritmo goloso. El gráfico de la Figura \ref{fig:busq-local-proporcion-comparacion} compara la proporción con respecto al algoritmo exacto de las soluciones dadas por el algoritmo goloso y las soluciones resultantes de aplicar búsqueda local tomando como soluciones iniciales a las soluciones dadas por el algoritmo goloso para la misma familia de grafos del gráfico de la Figura \ref{fig:busq-local-proporcion}. Mostramos esto en dos gráficos distintos para que se logre apreciar que para la mayoría de los casos, el algoritmo de búsqueda local no logra mejorar las soluciones del nuestro algoritmo goloso para esta familia.
+El gráfico de la Figura \ref{fig:busq-local-proporcion} muestra la diferencia proporcional entre las soluciones que nos da el algoritmo de búsqueda local con una solución inicial dada por nuestro algoritmo goloso y el algoritmo exacto para la familia de grafos que rompe nuestro algoritmo goloso. El gráfico de la Figura \ref{fig:busq-local-proporcion-comparacion} compara la proporción con respecto al algoritmo exacto de las soluciones dadas por el algoritmo goloso y las soluciones resultantes de aplicar búsqueda local tomando como soluciones iniciales a las soluciones dadas por el algoritmo goloso para la misma familia de grafos del gráfico de la Figura \ref{fig:busq-local-proporcion}. Mostramos esto en dos gráficos distintos para que se logre apreciar que para la mayoría de los casos, el algoritmo de búsqueda local no logra mejorar las soluciones del nuestro algoritmo goloso para esta familia.
 
 Vale aclarar que en este experimento pudimos correr el algoritmo exacto para grafos con una cantidad de nodos un poco mayor que en las anteriores mediciones. Esto se debe a que para esta familia de grafos el algoritmo exacto tarda menos tiempo en correr ya que hay menos caminos que revisar (recordemos que los grafos de nuestra familia se componen de tres caminos disjuntos en aristas).
 
@@ -45,7 +45,7 @@ A continuación incluiremos un gráfico que compara la calidad de las soluciones
 \begin{figure}[H]
   \begin{minipage}{0.5\linewidth}
     \includegraphics[width=\linewidth]{graficos/busq_local_calidad.eps}
-    \caption{Diferencia proporcional busqueda/exacto}\label{fig:busq-local-calidad}
+    \caption{Comparacion Soluciones iniciales}\label{fig:busq-local-calidad}
   \end{minipage}
 \end{figure}
   
