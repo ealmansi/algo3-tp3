@@ -27,3 +27,16 @@ Dado que el análisis previo ignora el efecto del tamaño del grafo en la relaci
 Como ya habíamos visto antes, usar como solución inicial nuestro algoritmo goloso siempre da mejores soluciones que usando Dijkstra, por eso todos los valores son inferiores a 1 (goloso $<$ Dijkstra). Algo interesante que deducimos de este ultimo gráfico, es que a medida que el $n$ crece, el beneficio de usar el algoritmo goloso como solución inicial es cada vez mejor en comparación con usar Dijkstra.
 
 Creemos que esto ocurre ya que las soluciones que encuentra Dijkstra, aunque tiene una componente aleatoria, van a tener un $w_1$ bajo pero posiblemente un $w_2$ alto. En cambio, el goloso busca soluciones más intermedias, no solo usando $w_1$. Creemos que al aumentar el $n$ la distancia entre estas soluciones borde de Dijkstra y las soluciones intermedias del goloso crece, generando el comportamiento observado en el gráfico.
+
+\subsubsection{Observaciones finales}
+
+El algoritmo tipo GRASP que desarrollamos contiene múltiples parámetros ajustables, tales como el coeficiente de randomización, el valor de epsilon que determina si una solución es significativamente mejor que otra, o la máxima cantidad de iteraciones sin mejora permitidas. Esto pareciera dar mucho lugar a experimentar de forma tal de obtener la mejor configuración posible para el algoritmo; sin embargo, en la práctica esto no fue así.
+
+En primer lugar, encontramos que, independientemente del nivel de randomización, la cantidad de iteraciones con mejoras significativas en la solución encontrada fue muy limitada; en tan solo una o dos iteraciones se hallaba una solución que luego no se lograba mejorar. Esto significa que cualquier variación en la máxima cantidad de iteraciones sin mejora permitidas no afectaba la calidad de las soluciones obtenidas, al igual que variaciones en el valor de epsilon.
+
+Luego, analizando la influencia del valor del coeficiente de randomización encontramos el siguiente comportamiento: para valores bajos de randomización, la solución inicial era sistemáticamente la misma; para valores altos de randomización, la variedad de soluciones iniciales era apreciable (de peor calidad que en el caso anterior), pero la calidad de las soluciones obtenidas empeoraba manifiestamente en comparación las del algoritmo de búsqueda local.
+
+Aducimos que ambas características del algoritmo pueden ser consecuencia de un algoritmo de búsqueda local muy inefectivo. Si la función de vecindad es muy restrictiva, es previsible que el máximo local más cercano a cada solución inicial tenga muy poca mejora respecto a la misma (posiblemente nula); por eso es que al incrementar el nivel de randomización, la calidad de las soluciones iniciales decae, y la búsqueda local no logra mejorarlas significativamente.
+
+
+
