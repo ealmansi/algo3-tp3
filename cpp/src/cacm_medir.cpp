@@ -409,19 +409,18 @@ void medir_busq_local_proporcion(int n_min, int n_max)
 	}
 }
 
-<<<<<<< HEAD
+#define CANT_MEDICIONES_POR_N_GRASP 15
+
 void comparar_grasp_coef_rand(int n_min, int n_max)
 {
   entrada e;
   salida s0, s1, s2, s3;
   lld ratios10, ratios20;
   ld prom_ratios10, prom_ratios20;
-
   // int seed = time(0);
   int seed = 1403828919;
   srand(seed);
   cout << "seed: " << seed << endl;
-
   for(int n = n_min; n < n_max + 1; ++n)
   {
     ratios10.clear();
@@ -433,8 +432,7 @@ void comparar_grasp_coef_rand(int n_min, int n_max)
       // int max_w2 = 10000;
       // int K = 0.1 * ((1.0l * n * max_w1) / 4.0);
       // entrada e = generar_instancia_aleatoria(n, m, max_w1, max_w2, K);
-      entrada e = grafo_rompe_goloso(n, n);
-
+      entrada e = grafo_rompe_goloso(n, n*n);
       s0 = cacm_goloso::resolver(e);
       s1 = cacm_busq_local::resolver(e);
       s2 = cacm_grasp::resolver(e, n, 20, 0.01);
@@ -450,7 +448,6 @@ void comparar_grasp_coef_rand(int n_min, int n_max)
       // if (s0.hay_solucion)
       //   cout << n << " " << (1.0l * s1.W2 / s0.W2) << " " << (1.0l * s2.W2 / s0.W2) << " " << (1.0l * s3.W2 / s0.W2) << endl;
     }
-
     prom_ratios10 = accumulate(range(ratios10), 0.0l) / ratios10.size();
     prom_ratios20 = accumulate(range(ratios20), 0.0l) / ratios20.size();
     cout << n << " " << prom_ratios10 << " " << prom_ratios20;
@@ -460,13 +457,9 @@ void comparar_grasp_coef_rand(int n_min, int n_max)
   }
 }
 
-=======
-#define CANT_MEDICIONES_POR_N_GRASP 15
-
-typedef vector<lld> vvlli;
 
 void medir_grasp_intmax(int n_min, int n_max)
-{
+{/*
 	cout << "Medicion grasp intmax" << endl;
 	srand(1234235);
 	cout << "datos_m = [";
@@ -495,7 +488,7 @@ void medir_grasp_intmax(int n_min, int n_max)
 		 	cout << n << " " << mediciones_por_n[n - n_min][CANT_MEDICIONES_POR_N_GRASP/2] << endl;
 		}
 		cout << "]; " << endl;
-  
+  */
 }
 
 
@@ -503,13 +496,11 @@ int main(int argc, char const *argv[])
 {
   
   //medir_exacto(3, 13);
-  // medir_goloso_proporcion(5, 100);
-  comparar_grasp_coef_rand(5, 100);
   //medir_goloso_proporcion(5, 100);
   //medir_busq_local_tiempo(5, 100);
   //medir_busq_local_calidad(5, 100);
   //medir_busq_local_proporcion(5, 100);
-  // medir_grasp_intmax(5,100);
-
+   //medir_grasp_intmax(5,100);
+  comparar_grasp_coef_rand(5,50);
   return 0;
 }
