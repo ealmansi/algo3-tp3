@@ -1,0 +1,31 @@
+\subsection{Lenguaje de implementación}
+
+Para implementar los diferentes algoritmos propuestos utilizamos el lenguaje C++, el cual presenta una serie de características muy convenientes. Este lenguaje es imperativo, al igual que el lenguaje de pseudocódigo utilizado para describir las soluciones y probar su correctitud. Adicionalmente, el mismo posee librerías estándar muy completas, versátiles y bien documentadas, lo cual permite abstraer el manejo de memoria, la implementación de estructuras de datos y algoritmos de uso frecuente, y provee mecanismos para realizar mediciones de tiempo de manera fidedigna.
+
+\subsection{Mediciones de tiempo}
+\label{subsec:mediciones-de-tiempo}
+
+En las diferentes etapas de experimentación, llevamos a cabo mediciones de rendimiento sobre las implementaciones desarrolladas, midiendo el tiempo consumido para resolver diferentes instancias según el caso. Nos aseguramos de medir exclusivamente el tiempo consumido por la etapa de resolución, ignorando tareas adicionales propias al proceso como, por ejemplo, la generación de la instancia a ser resuelta.
+
+La función del sistema que se escogió para medir intervalos de tiempo es la siguiente:
+
+\begin{verbatim}
+  int clock_gettime(clockid_t clk_id, struct timespec *tp);
+\end{verbatim}
+
+de la librería \emph{time.h}. La misma nos permite realizar mediciones de alta resolución, específicas al tiempo de ejecución del proceso que la invoca (y no al sistema en su totalidad), configurando el parámetro clk\_id con el valor CLOCK\_PROCESS\_CPUTIME\_ID\footnote{http://linux.die.net/man/3/clock\_gettime}.
+
+Por otro lado, dado que la medición de tiempos en un sistema operativo activo introduce inherentemente un cierto nivel de ruido, la medición sobre cada instancia se realizó múltiples veces. Una vez obtenidos los distintos valores para una misma medición (es decir, para diferentes instancias del mismo tamaño), registramos como valor definitivo la mediana de la serie de valores. Escogimos este criterio en vez de, por ejemplo, tomar la media, ya que utilizar la mediana es menos susceptible a la presencia de valores atípicos o \emph{outliers}.
+
+\subsection{Generación de instancias aleatorias}
+\label{subsec:generacion-instancias-aleatorias}
+
+Para la etapa de experimentación, desarrollamos un generador de instancias aleatorias del problema CACM. El mismo recibe como parámetros los valores $n, m, max_{w_1}, max_{w_2}, K$, y genera una instancia conteniendo un grafo $G$ con las siguientes características:
+
+\begin{itemize}
+  \item $\#V(G) = n$.
+  \item $\#E(G) = m$.
+  \item $(\forall e \in E(G))\,w_1(e) \leq max_{w_1} \land w_2(e) \leq max_{w_2}$.
+\end{itemize}
+
+Se definen adicionalmente los nodos origen y destino $u$ y $v$, y se establece a $K$ como la cota para el peso del camino según $w_1$.
