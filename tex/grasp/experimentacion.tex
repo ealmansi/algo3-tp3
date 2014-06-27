@@ -1,16 +1,28 @@
 En esta sección, vamos a analizar el peso total del resultado devuelto por nuestro algoritmo de GRASP frente a distintas soluciones iniciales. Vamos a utilizar como soluciones iniciales a nuestro algoritmo goloso, y el resultado de recorrer el algoritmo de Dijkstra sobre la función de peso $\omega_1$.
 
-En la figura (\ref{fig:grasp-soluciones-iniciales}) incluimos un gráfico tipo \emph{scatter} con los puntos que tienen como coordenadas $x$ e $y$ los valores de $W_2$ obtenidos utilizando los diferentes tipos de solución inicial, respectivamente.
+En la figura \ref{fig:grasp-soluciones-iniciales} incluimos un gráfico tipo \emph{scatter} con los puntos que tienen como coordenadas $x$ e $y$ los valores de $W_2$ obtenidos utilizando los diferentes tipos de solución inicial, respectivamente, sobre instancias aleatorias de múltiples $n$.
 
 \begin{figure}[H]
   \begin{center}
     \begin{minipage}{0.7\linewidth}
       \includegraphics[width=\linewidth]{graficos/grasp_comparacion_soluciones_iniciales.eps}
-      \caption{Comparación Soluciones iniciales}\label{fig:grasp-soluciones-iniciales}
+      \caption{Comparación de los valores de $W_2$ obtenidos para las distintas soluciones iniciales}\label{fig:grasp-soluciones-iniciales}
     \end{minipage}
   \end{center}
 \end{figure}
 
 Como podemos observar en el gráfico, frente a casos al azar, utilizar como solución inicial nuestro algoritmo goloso es mejor o igual que utilizar Dijkstra sobre $\omega_1$. Para facilitar la lectura, imprimimos una línea azul que representa a la función identidad.
+
+Dado que el análisis previo ignora el efecto del tamaño del grafo en la relación entre ambos valores de $W_2$, incluimos el siguiente gráfico en la figura \ref{fig:grasp-soluciones-iniciales-tiempo} mostrando la proporción entre los mismos, en función de $n$:
+
+\begin{figure}[H]
+  \begin{center}
+    \begin{minipage}{0.7\linewidth}
+      \includegraphics[width=\linewidth]{graficos/grasp_comparacion_soluciones_iniciales_tiempo.eps}
+      \caption{Proporción de los valores de $W_2$ obtenidos para las distintas soluciones iniciales, en función de $n$.}\label{fig:grasp-soluciones-iniciales-tiempo}
+    \end{minipage}
+  \end{center}
+\end{figure}
+
 
 Como utilizar nuestro algoritmo goloso como solución inicial nos devuelve los mejores resultados, decidimos utilizarla al momento de comparar las distintas heurísticas.

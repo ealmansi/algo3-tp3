@@ -5,7 +5,7 @@ Supongamos que tenemos un camino $C$ = ($c_0$, $c_1$, ..., $c_k$) de $k+1$ nodos
 \begin{itemize}
  \item Quitar Nodo:
 
-  Supongamos que existe un $i$ tal que $0 < i < k$ y que ($c_{i+1}$, $c_{i+1}$) $\in$ $E$. Bajo estas condiciones podemos afirmar que existe un camino en $G$ llamado $C'$ tal que $C'$ = ($c_0$, ..., $c_{i-1}$, $c_{i+1}$, ..., $c_k$). Esto significa que dado $C$ podemos eliminar el nodo $c_i$ del camino y unir $c_{i-1}$ y $c_{i+1}$ ya que estos son adyacentes entre sí, obteniendo un camino $C'$ de $k$ nodos.
+  Supongamos que existe un $i$ tal que $0 < i < k$ y que ($c_{i-1}$, $c_{i+1}$) $\in$ $E$. Bajo estas condiciones podemos afirmar que existe un camino en $G$ llamado $C'$ tal que $C'$ = ($c_0$, ..., $c_{i-1}$, $c_{i+1}$, ..., $c_k$). Esto significa que dado $C$ podemos eliminar el nodo $c_i$ del camino y unir $c_{i-1}$ y $c_{i+1}$ ya que estos son adyacentes entre sí, obteniendo un camino $C'$ de $k$ nodos.
   \item Agregar Nodo:
 
   La operación agregar nodo es la operación inversa a la operación Quitar Nodo descripta anteriormente. Supongamos que existe un $i$ tal que $0 \leq i < k$ y existe un nodo $x \in V$ tal que ($c_i$,$x$) $\in E$ y ($x$, $c_{i+1}$) $\in E$. En este caso podemos afirmar que podemos construir un camino $C'$ = ($c_0$, ..., $c_{i}$,$x$,$c_{i+1}$) de $k+2$ nodos.
