@@ -1,4 +1,4 @@
-En este algoritmo de GRASP no sabemos a priori cuantas veces va a iterar. Esto se debe a que MAX\_CANT\_IT\_SIN\_MEJORA puede ser menor a cant\_it\_sin\_mejora por una gran cantidad de iteraciones, como por ejemplo un caso donde nuestro algoritmo mejora en cada iteración 2 $*$ EPSILON
+En este algoritmo de GRASP no sabemos a priori cuantas veces va a iterar. Esto se debe a que max\_cant\_it\_sin\_mejora puede ser menor a cant\_it\_sin\_mejora por una gran cantidad de iteraciones, como por ejemplo un caso donde nuestro algoritmo mejora en cada iteración 2 $*$ epsilon
 
 Como necesitamos que la complejidad sea polinomial limitamos la cantidad de iteraciones a una variable $cantidad\_iteraciones$ esta variable podría valer $n$, $n^2$ o cualquier otro valor que permita que la complejidad del algoritmo en el peor caso sea polinomial.
 
@@ -10,16 +10,16 @@ A continuación vamos a proponer un pseudocódigo para explicar la complejidad t
  \begin{figure}[H]
   \begin{pseudo}
   \Procedure{Resolver}{Entrada $e$}
-    \State Salida $mejor\_s$ $\leftarrow$ golosoResolver($e$, COEF\_RAND) \Ode{Goloso}
+    \State Salida $mejor\_s$ $\leftarrow$ golosoResolver($e$, coef\_rand) \Ode{Goloso}
     \State $cant\_it\_sin\_mejora$ $\leftarrow$ 0 \Ode{1}
-    \While{MAX\_CANT\_IT\_SIN\_MEJORA $<$ $cant\_it\_sin\_mejora$} \Ode{1}
-      \State Salida $s$ $\leftarrow$ golosoResolver($e$, COEF\_RAND) \Ode{Goloso}
+    \While{max\_cant\_it\_sin\_mejora $<$ $cant\_it\_sin\_mejora$} \Ode{1}
+      \State Salida $s$ $\leftarrow$ golosoResolver($e$, coef\_rand) \Ode{Goloso}
       \State maximoLocalBusqLocal($e$,$s$) \Ode{BusqLocal}
       \If{\textbf{not} $s.hay\_solucion$} \Ode{1}
 	\State++$cant\_it\_sin\_mejora$ \Ode{1}
 	\State \textbf{continue}
       \EndIf
-      \If{diferencia\_relativa($mejor\_s$, $s$) $<$ EPSILON} \Ode{1}
+      \If{diferencia\_relativa($mejor\_s$, $s$) $<$ epsilon} \Ode{1}
 	\State ++$cant\_it\_sin\_mejora$ \Ode{1}
       \Else
 	\State $cant\_it\_sin\_mejora$ $\leftarrow$ 0 \Ode{1}
