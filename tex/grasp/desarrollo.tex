@@ -23,13 +23,13 @@ La nueva implementación de Dijkstra que utilizamos es la siguiente:
 \begin{center}
  \begin{figure}[H]
   \begin{pseudo}
-   \Procedure{Dijkstra}{grafo $G = (V,E)$, $p$, $u$, $v$, $coef\_random$}
+   \Procedure{Dijkstra}{grafo $G = (V,E)$, $p$, $u$, $v$,$coef\_random$}
     \State $S \leftarrow \emptyset$
     \State $(\forall v \in V) dist(v) \leftarrow \infty$
     \State $(\forall v \in V) pred(v) \leftarrow NULL$
     \While{$true$}
     \State $minDistU \leftarrow \infty$
-    \For{$k =  1$ \textbf{to} $ |V|$}
+    \For{$i =  1$ \textbf{to} $ |V|$}
       \If{$i \in V-S \wedge dist(i) < minDistU$}
 	\State $minDistU \leftarrow dist(i)$
 	\State $nuevo \leftarrow i$
@@ -91,23 +91,23 @@ A continuación vamos a presentar el pseudocódigo de nuestro algoritmo GRASP. C
 \begin{center}
  \begin{figure}[H]
   \begin{pseudo}
-  \Procedure{Resolver}{Entrada e}
-    \State Salida s, mejor\_s $\leftarrow$ golosoResolver(e, COEF\_RAND)
-    \State cant\_it\_sin\_mejora $\leftarrow$ 0   
-    \While{MAX\_CANT\_IT\_SIN\_MEJORA $<$ cant\_it\_sin\_mejora}
-      \State s $\leftarrow$ golosoResolver(e, COEF\_RAND)
-      \State maximoLocalBusqLocal(e,s)
-      \If{\textbf{not} s.hay\_solucion}
-	\State++cant\_it\_sin\_mejora
+  \Procedure{Resolver}{Entrada $e$}
+    \State Salida $s$, $mejor\_s$ $\leftarrow$ golosoResolver($e$, COEF\_RAND)
+    \State $cant\_it\_sin\_mejora$ $\leftarrow$ 0   
+    \While{MAX\_CANT\_IT\_SIN\_MEJORA $<$ $cant\_it\_sin\_mejora$}
+      \State $s$ $\leftarrow$ golosoResolver($e$, COEF\_RAND)
+      \State maximoLocalBusqLocal($e$,$s$)
+      \If{\textbf{not} $s$.hay\_solucion}
+	\State++$cant\_it\_sin\_mejora$
 	\State \textbf{continue}
       \EndIf
-      \If{diferencia\_relativa(mejor\_s, s) $<$ EPSILON}
-	\State ++cant\_it\_sin\_mejora
+      \If{diferencia\_relativa($mejor\_s$, $s$) $<$ EPSILON}
+	\State ++$cant\_it\_sin\_mejora$
       \Else
-	\State cant\_it\_sin\_mejora $\leftarrow$ 0
+	\State $cant\_it\_sin\_mejora$ $\leftarrow$ 0
       \EndIf
-      \If{s.W2 $<$ mejor\_s.W2}
-	\State mejor\_s $\leftarrow$ s
+      \If{$s.w2$ $<$ mejor\_$s.w2$}
+	\State $mejor\_s$ $\leftarrow$ s
       \EndIf
     \EndWhile
     \EndProcedure
@@ -118,8 +118,8 @@ A continuación vamos a presentar el pseudocódigo de nuestro algoritmo GRASP. C
 \begin{center}
  \begin{figure}[H]
   \begin{pseudo}
-  \Procedure{diferencia\_relativa}{salida mejor\_s, salida s}
-    \State \textbf{return}(mejor\_s.W2 - s.W2) / mejor\_s.W2
+  \Procedure{diferencia\_relativa}{salida $mejor\_s$, salida $s$}
+    \State \textbf{return}($mejor\_s.w2$ - $s.w2$) / $mejor\_s.w2$
   \EndProcedure
   \end{pseudo}
  \end{figure}
