@@ -12,7 +12,7 @@ Goloso:
 Busqueda Local:
 . análisis de la calidad de las soluciones (completo)
   - justificar por qué la familia de grafos que usamos para el goloso también rompe busqueda local
-  - opcional: encontrar una familia de grafos que rompa el goloso pero se arregle con búsqueda local
+  - Describir encontrar una familia de grafos que rompa el goloso pero se arregle con búsqueda local
 . experimentación
   - probar variantes para la semilla: goloso o dijkstra sobre W1
   - decir porque es mejor con el goloso que con dijkstra
