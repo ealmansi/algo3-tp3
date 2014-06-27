@@ -2,7 +2,7 @@ En esta sección, realizaremos diversos experimentos para verificar tanto el tie
 
 Como dijimos anteriormente, el algoritmo de búsqueda local toma una solución inicial. Nosotros tomamos como un parámetro del algoritmo la solución inicial que éste recibe.
 
-En los gráficos que presentamos a continuación, mostramos el tiempo de ejecución de correr búsqueda local con dos algoritmos que nos dan soluciones iniciales. Un algoritmo es el algoritmo goloso que detallamos en la sección \ref{subsub:algoritmos-heuristicos-goloso-desarrollo.tex}, y el otro es el algoritmo de Dijkstra tomando como función pesos de las aristas la función $\omega_1$.
+En los gráficos que presentamos a continuación, mostramos el tiempo de ejecución de correr búsqueda local con dos algoritmos que nos dan soluciones iniciales. Un algoritmo es el algoritmo goloso que detallamos en la sección \ref{subsub:algoritmos-heuristicos-goloso-desarrollo.tex}, y el otro es el algoritmo de Dijkstra tomando como función pesos de las aristas la función $w_1$.
 
 \begin{figure}[H]
   \begin{minipage}{0.5\linewidth}
@@ -51,9 +51,9 @@ Para continuar experimentando, incluimos un gráfico que muestre como se comport
   \end{center}
 \end{figure}
 
-En el gráfico podemos observar el comportamiento del algoritmo de búsqueda local en proporción al algoritmo exacto comparado al comportamiento del algoritmo goloso, también en proporción. Como podemos observar en esta familia el algoritmo de búsqueda local sí puede mejorar la solución que el algoritmo goloso le da como inicial. Más aún, el gráfico nos permite observar que no sólo las mejora, sino que logra encontrar la solución óptima, ya que como vemos el peso $\omega_2$ de la solución dada por dicho algoritmo es igual al del de la solución del algoritmo exacto. Esto verifica lo que dijimos en la sección \ref{subsub:algoritmos-heuristicos-busqueda-calidad.tex}.
+En el gráfico podemos observar el comportamiento del algoritmo de búsqueda local en proporción al algoritmo exacto comparado al comportamiento del algoritmo goloso, también en proporción. Como podemos observar en esta familia el algoritmo de búsqueda local sí puede mejorar la solución que el algoritmo goloso le da como inicial. Más aún, el gráfico nos permite observar que no sólo las mejora, sino que logra encontrar la solución óptima, ya que como vemos el peso $w_2$ de la solución dada por dicho algoritmo es igual al del de la solución del algoritmo exacto. Esto verifica lo que dijimos en la sección \ref{subsub:algoritmos-heuristicos-busqueda-calidad.tex}.
 
-A continuación incluiremos un gráfico que compara la calidad de las soluciones del algoritmo de búsqueda local cuando éste toma como solución inicial la dada por el algoritmo de Dijkstra tomando como función de peso el para las aristas la función $\omega_1$
+A continuación incluiremos un gráfico que compara la calidad de las soluciones del algoritmo de búsqueda local cuando éste toma como solución inicial la dada por el algoritmo de Dijkstra tomando como función de peso el para las aristas la función $w_1$
 
 
 \begin{figure}[H]
@@ -69,4 +69,4 @@ Como podemos observar en la Figura \ref{fig:busq-local-calidad}, para los grafos
 
 Creemos que esto es así porque, como ya vimos en la sección \ref{subsub:algoritmos-heuristicos-goloso-experimentacion.tex} las soluciones dadas por nuestro algoritmo goloso son mejores que las dadas por el algoritmo de Dijkstra. Una vez que nuestro algoritmo de búsqueda local toma estas soluciones iniciales mejora ambas. Sin embargo, no la logra mejorar lo suficiente las soluciones dadas por el algoritmo de Dijkstra como para que dichas soluciones superen a las dadas por nuestro algoritmo goloso, una vez que son mejoradas por búsqueda local.
 
-Debido a los resultados obtenidos anteriormente, llegamos a la conclusión de que, en general, resulta mejor utilizar nuestro algoritmo goloso para generar las soluciones iniciales que utilizar el algoritmo de Dijkstra tomando $\omega_1$ como función de peso. Por lo tanto, a partir de ahora utilizaremos únicamente nuestro algoritmo goloso para generar las soluciones iniciales para luego aplicarles búsqueda local.
+Debido a los resultados obtenidos anteriormente, llegamos a la conclusión de que, en general, resulta mejor utilizar nuestro algoritmo goloso para generar las soluciones iniciales que utilizar el algoritmo de Dijkstra tomando $w_1$ como función de peso. Por lo tanto, a partir de ahora utilizaremos únicamente nuestro algoritmo goloso para generar las soluciones iniciales para luego aplicarles búsqueda local.

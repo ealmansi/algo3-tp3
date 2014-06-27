@@ -1,6 +1,6 @@
 Diseñamos e implementamos un algoritmo exacto que utiliza la técnica de \emph{backtracking} para resolver el problema de CACM. A continuación daremos una descripción detallada del mismo.
 
-Lo que hace este algoritmo es recorrer todos los posibles caminos del grafo partiendo del nodo inicial $u$ y se queda con el mejor camino posible que tenga a $v$ como nodo final. El invariante de este algoritmo es que el camino empieza en el nodo $u$ y es un camino válido. Nos referimos a un camino como válido cuando éste, evaluado en su función de peso $\omega_1$, se encuentra acotada superiormente por la constante $K$ dada.
+Lo que hace este algoritmo es recorrer todos los posibles caminos del grafo partiendo del nodo inicial $u$ y se queda con el mejor camino posible que tenga a $v$ como nodo final. El invariante de este algoritmo es que el camino empieza en el nodo $u$ y es un camino válido. Nos referimos a un camino como válido cuando éste, evaluado en su función de peso $w_1$, se encuentra acotada superiormente por la constante $K$ dada.
 
 Lo que el algoritmo realiza en cada llamada se puede representar con el siguiente pseudocódigo:
 
@@ -15,7 +15,7 @@ Lo que el algoritmo realiza en cada llamada se puede representar con el siguient
 	\EndIf
       \Else 
 	\For{todo $j$ adyacente a $ultimo$}
-	 \If{(not $visitado[j]$) and $\omega_1$($sol$ + $j$) $\leq$ $K$}
+	 \If{(not $visitado[j]$) and $w_1$($sol$ + $j$) $\leq$ $K$}
 	  \State $sol$ $\leftarrow$ $sol$ + $j$
 	  \State backtracking($j$, $G$, $u$,$v$,$K$,$sol$, $sol\_opt$, $visitados$)
 	  \State $sol$ $\leftarrow$ $sol$ - $j$

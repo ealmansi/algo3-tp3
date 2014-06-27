@@ -14,9 +14,9 @@ Un algoritmo GRASP (\emph{Greedy Randomized Adaptative Search Procedure}) es una
  \end{figure}
 \end{center}
 
-Cabe aclarar que podemos generar nuestra solución $s$, la cual obtenemos mediante una heurística golosa aleatorizada, utilizando nuestro algoritmo goloso descripto en la sección \ref{subsub:algoritmos-heuristicos-goloso-desarrollo.tex}, o utilizando Dijkstra sobre la función $\omega_1$, modificándolo como describimos a continuación.
+Cabe aclarar que podemos generar nuestra solución $s$, la cual obtenemos mediante una heurística golosa aleatorizada, utilizando nuestro algoritmo goloso descripto en la sección \ref{subsub:algoritmos-heuristicos-goloso-desarrollo.tex}, o utilizando Dijkstra sobre la función $w_1$, modificándolo como describimos a continuación.
 
-Como nuestro algoritmo goloso original no tiene una componente ``aleatoria'', tuvimos que modificarlo. En GRASP, la componente aleatoria del algoritmo goloso se hace  fabricando en cada paso una Lista Restricta de Candidatos (RCL) y eligiendo de manera aleatoria un candidato de esta lista. Por esta razón, modificamos nuestra implementación del algoritmo de Dijkstra para que lo podamos utilizar. De la misma manera, logramos poder utilizar la nueva implementación de Dijkstra sobre la función de peso $\omega_1$ para tener dos tipos de algoritmos golosos iniciales para el algoritmo de GRASP.
+Como nuestro algoritmo goloso original no tiene una componente ``aleatoria'', tuvimos que modificarlo. En GRASP, la componente aleatoria del algoritmo goloso se hace  fabricando en cada paso una Lista Restricta de Candidatos (RCL) y eligiendo de manera aleatoria un candidato de esta lista. Por esta razón, modificamos nuestra implementación del algoritmo de Dijkstra para que lo podamos utilizar. De la misma manera, logramos poder utilizar la nueva implementación de Dijkstra sobre la función de peso $w_1$ para tener dos tipos de algoritmos golosos iniciales para el algoritmo de GRASP.
 
 La nueva implementación de Dijkstra que utilizamos es la siguiente:
 
