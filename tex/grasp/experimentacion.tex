@@ -1,4 +1,4 @@
-En esta sección, vamos a analizar el peso total del resultado devuelto por nuestro algoritmo de GRASP frente a distintas soluciones iniciales. Vamos a utilizar como soluciones iniciales a nuestro algoritmo goloso, y el resultado de recorrer el algoritmo de Dijkstra sobre la función de peso $\omega_1$.
+Primero vamos a analizar el peso total del resultado devuelto por nuestro algoritmo de GRASP frente a distintas soluciones iniciales. Vamos a utilizar como soluciones iniciales a nuestro algoritmo goloso, y el resultado de recorrer el algoritmo de Dijkstra sobre la función de peso $\omega_1$.
 
 En la figura \ref{fig:grasp-soluciones-iniciales} incluimos un gráfico tipo \emph{scatter} con los puntos que tienen como coordenadas $x$ e $y$ los valores de $W_2$ obtenidos utilizando los diferentes tipos de solución inicial, respectivamente, sobre instancias aleatorias de múltiples $n$.
 
@@ -25,4 +25,4 @@ Dado que el análisis previo ignora el efecto del tamaño del grafo en la relaci
 \end{figure}
 
 
-Como utilizar nuestro algoritmo goloso como solución inicial nos devuelve los mejores resultados, decidimos utilizarla al momento de comparar las distintas heurísticas.
+Como ya habíamos visto antes, usar como solución inicial nuestro algoritmo goloso siempre da mejores soluciones que usando Dijkstra, por eso todos los valores son inferiores a 1 (goloso < Dijkstra). Algo interesante que deducimos de este ultimo gráfico es que en función que el $n$ crece el beneficio de usar el algoritmo goloso como solución inicial es cada vez mejor en comparación con usar Dijkstra. Creemos que esto ocurre ya que Dijkstra aunque tiene una componente aleatoria, las soluciones que encuentra van a tener un $W_1$ bajo pero posiblemente un $W_2$ alto. En cambio, el goloso busca soluciones más intermedias, no solo usando $W_1$. Creemos que al aumentar el $n$ la distancia entre estas soluciones borde de Dijkstra y las soluciones intermedias del goloso crece, generando el comportamiento observado en el gráfico. 
