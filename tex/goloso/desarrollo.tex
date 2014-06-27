@@ -17,13 +17,13 @@ $\mathbf{1}$ El algoritmo siempre encuentra una solución factible si existe.
 $\mathbf{2}$ El peso $w_1$ del camino encontrado en función de $p$ es creciente, y el peso $w_2$ decreciente.
 
 Primero con $\mathbf{1}$ nos garantizamos de siempre devolver una solución factible.
-Gracias a $\mathbf{2}$ podemos ver que sea $p'$, el $p$ más grande tal que el peso $w_1$ siga estando acotado por la constante $K$, su camino asociado tendrá el menor (o igual) peso en $w_2$ entre todos los caminos factibles que encuentra el algoritmo para algún $p$.
+Gracias a $\mathbf{2}$ podemos ver que sea $p'$, el valor de $p$ más grande tal que el peso $w_1$ de su camino asociado siga estando acotado por la constante $K$, entonces dicho camino tendrá el menor (o igual) peso en $w_2$ entre todos los caminos factibles que encuentra el algoritmo para algún $p$.
 
-Para demostrar esto vemos dos cosas:
+Para demostrar esto último vemos dos cosas:
 
-1 - Los $p'' > p'$ no son factible ya que $p'$ era el m\'aximo $p$  tal que el peso $w_1$ siga estando acotado por la constante $K$. Si $p''$ es factible, o sea el peso $w_1$ esta acotado por la constante $K$, $p'$ no ser\'ia el m\'aximo, absurdo.
+a) Los $p'' > p'$ no son factibles ya que $p'$ era el m\'aximo $p$  tal que el peso $w_1$ siga estando acotado por la constante $K$. Si $p''$ es factible, o sea el peso $w_1$ esta acotado por la constante $K$, $p'$ no ser\'ia el m\'aximo, absurdo.
 
-2- Los $p'' < p'$ tendrán peso $w_1$ mayor o igual al de $p'$ ya que por $\mathbf{2}$ $w_2$ es decreciente en $p$.
+b) Los $p'' < p'$ tendrán peso $w_1$ mayor o igual al de $p'$ ya que por $\mathbf{2}$ $w_2$ es decreciente en $p$.
 
 
 Demostraci\'on $\mathbf{1}:$
@@ -37,13 +37,23 @@ O sea ser\'ia buscar el camino m\'inimo en $w_1$. Si este camino no es factible 
 
 Demostraci\'on $\mathbf{2}:$
 
-Primero veamos que el peso $w_2$ del camino encontrado en función de $p$ es decreciente.
+Primero veamos que el peso $w_1$ del camino encontrado en función de $p$ es creciente.
 
 Tomemos $p_1 < p_2$ cuyos caminos asociados son $C_1$ y $C_2$ correspondientemente.
 
-Queremos ver que $w_2(C_1) > w_2(C_2)$.
+Queremos ver que $w_1(C_1) < w_1(C_2)$.
 
 Primero veamos que $\frac{p_1}{1-p_1} < \frac{p_2}{1-p_2}$
+
+$$ p_1 < p_2 $$
+
+$$ p_1* (1-p_2) < p_2 * (1-p_2))$$
+
+Como $p_1 > p_2$ entonces sabemos que:
+
+$$p_2 * (1-p_2) < p_2 * (1-p_1)$$
+
+Entonces:
 
 $$ p_1* (1-p_2) < p_2 * (1-p_2) < p_2 * (1-p_1)$$
 
@@ -84,14 +94,14 @@ $$ 0 \leq (\frac{(1-p_2)}{p_2} - \frac{(1-p_1)}{p_1})*(w_1(C_1) - w_1(C_2))$$
 
 Como vimos al principio $\frac{p_1}{1-p_1} < \frac{p_2}{1-p_2}$, por lo que 
 
-$$0 < \frac{(1-p_2)}{p_2} - \frac{(1-p_1)}{p_1} $$
+$$0 < \frac{(1-p_1)}{p_1} - \frac{(1-p_2)}{p_2} $$
 
 Entonces:
-$$ 0 \leq (w_1(C_1) - w_1(C_2))$$
+$$ 0 > (w_1(C_1) - w_1(C_2))$$
 
-$$w_2(C_1) > w_2(C_2)$$
+$$w_1(C_2) > w_1(C_1)$$
 
-Demostrar que $w_1$ es creciente es análogo a lo demostrado anteriormente. Una forma de verlo es tomar $t$ = $1-p$ por lo que se ``invierten'' $w_1$ y $w_2$. Usando exactamente el mismo razonamiento que la última demostración llegamos a que $w_1$ es decreciente en $t$, y como $t$ = $1-p$ significa que es creciente en $p$.
+Demostrar que $w_2$ es decreciente es análogo a lo demostrado anteriormente. Una forma de verlo es tomar $t$ = $1-p$ por lo que se ``invierten'' $w_1$ y $w_2$. Usando exactamente el mismo razonamiento que la última demostración llegamos a que $w_2$ es creciente en $t$, y como $t$ = $1-p$ significa que es decreciente en $p$.
 
 Vale aclarar que la componente golosa de este algoritmo se hace presente cuando corremos el algoritmo de \emph{Dijkstra}, ya que dicho algoritmo es un algoritmo goloso.
 
