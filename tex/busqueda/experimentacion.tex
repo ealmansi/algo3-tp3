@@ -42,11 +42,13 @@ Como podemos observar para $n =5$ el algoritmo de búsqueda local logra mejorar 
 
 A continuación incluiremos un gráfico que compara la calidad de las soluciones del algoritmo de busqueda local cuando éste toma como solución inicial la dada por el algoritmo de Dijkstra tomando como función de peso el para las aristas la función $\omega_1$
 
-\begin{figure}[H]
+\begin{figure}
+  \begin{center}
   \begin{minipage}{0.5\linewidth}
     \includegraphics[width=\linewidth]{graficos/busq_local_calidad.eps}
     \caption{Comparacion Soluciones iniciales}\label{fig:busq-local-calidad}
   \end{minipage}
+  \end{center}
 \end{figure}
   
 Como podemos observar en la Figura \ref{fig:busq-local-calidad}, para los grafos con los que hicimos las mediciones, el algoritmo que toma como solución inicial la dada por nuestro algoritmo goloso en general es mejor que la dada por el algoritmo de Dijkstra.

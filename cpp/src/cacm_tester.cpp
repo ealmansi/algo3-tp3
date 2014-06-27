@@ -249,16 +249,45 @@ void Test_grasp(int n, int intervalo){
 		entrada e = grafo_rompe_goloso(i,i*i);
 
     
-    cout << "grasp" << endl;
+    //cout << "grasp" << endl;
     s = cacm_grasp::resolver(e);
-    escribir_salida(s);
-    cout << endl;	
+    //escribir_salida(s);
+    //cout << endl;	
 		proporcion = s.W2;
 		
-		cout << "exacto" << endl;
+		//cout << "exacto" << endl;
     s = cacm_exacto::resolver(e);
-    escribir_salida(s);
-    cout << endl;
+    //escribir_salida(s);
+    //cout << endl;
+		proporcion /= s.W2;
+		
+		cout << "Proporcion: " << proporcion << endl;
+		
+	}
+
+
+}
+
+void Test_grasp_puentes(int n, int intervalo){
+	salida s;
+	entrada e;
+	double proporcion;
+	for(int i = 8; i < n; i += intervalo ){
+		cout << "n: " << i << endl;
+		//cout << "i: " << (i-2)/3+1 << endl;
+		entrada e = grafo_rompe_goloso2(i,i*i);
+
+    
+    //cout << "grasp" << endl;
+    s = cacm_grasp::resolver(e,30,40,0.1);
+    //escribir_salida(s);
+    //cout << endl;	
+		proporcion = s.W2;
+		
+		//cout << "exacto" << endl;
+    s = cacm_exacto::resolver(e);
+    //escribir_salida(s);
+    //cout << endl;
 		proporcion /= s.W2;
 		
 		cout << "Proporcion: " << proporcion << endl;
@@ -271,8 +300,9 @@ void Test_grasp(int n, int intervalo){
 int main(int argc, char const *argv[])
 {
   
-  Test_rompe_goloso2(40,3);
+  //Test_rompe_goloso2(40,3);
   //Test_grasp(1000,3);
+  Test_grasp_puentes(1000,3);
   /*entrada e = grafo_rompe_goloso(9,100);
   salida s;
    cout << "exacto" << endl;

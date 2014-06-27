@@ -572,6 +572,91 @@ void medir_grasp_intmax(int n_min, int n_max)
   */
 }
 
+void medir_proporcion_todos_caminos(int n_inicio, int n_max){
+  salida s;
+  entrada e;
+  double proporcion,proporcion2,proporcion3;
+  for(int i = n_inicio; i < n_max; i += 3 ){
+    cout  << i << " ";
+    //cout << "i: " << (i-2)/3+1 << endl;
+    entrada e = grafo_rompe_goloso(i,i);
+    
+    s = cacm_goloso::resolver(e);
+    //cout << "goloso" << endl;
+    //escribir_salida(s);
+    //cout << endl; 
+    proporcion = s.W2;
+
+    s = cacm_busq_local::resolver(e);
+    // cout << "busqueda local" << endl;
+    // escribir_salida(s);
+    // cout << endl; 
+    proporcion2 = s.W2;
+    
+    s = cacm_grasp::resolver(e,1);
+    // cout << "busqueda local" << endl;
+    // escribir_salida(s);
+    // cout << endl; 
+    proporcion3 = s.W2;
+    
+    s = cacm_exacto::resolver(e);
+    //cout << "exacto" << endl;
+    //escribir_salida(s);
+    //cout << endl;
+    proporcion /= s.W2;
+    proporcion2 /= s.W2;
+    proporcion3 /= s.W2;
+
+    cout << proporcion  << " ";
+    cout << proporcion2  << " ";
+    cout  << proporcion3  << endl;
+  }
+
+
+}
+
+void medir_proporcion_todos_caminos_puentes(int n_inicio, int n_max){
+  salida s;
+  entrada e;
+  double proporcion,proporcion2,proporcion3;
+  for(int i = n_inicio; i < n_max; i += 3 ){
+    cout  << i << " ";
+    //cout << "i: " << (i-2)/3+1 << endl;
+    entrada e = grafo_rompe_goloso2(i,i);
+    
+    s = cacm_goloso::resolver(e);
+    //cout << "goloso" << endl;
+    //escribir_salida(s);
+    //cout << endl; 
+    proporcion = s.W2;
+
+    s = cacm_busq_local::resolver(e);
+    // cout << "busqueda local" << endl;
+    // escribir_salida(s);
+    // cout << endl; 
+    proporcion2 = s.W2;
+    
+    s = cacm_grasp::resolver(e);
+    // cout << "busqueda local" << endl;
+    // escribir_salida(s);
+    // cout << endl; 
+    proporcion3 = s.W2;
+    
+    s = cacm_exacto::resolver(e);
+    //cout << "exacto" << endl;
+    //escribir_salida(s);
+    //cout << endl;
+    proporcion /= s.W2;
+    proporcion2 /= s.W2;
+    proporcion3 /= s.W2;
+
+    cout << proporcion  << " ";
+    cout << proporcion2  << " ";
+    cout  << proporcion3  << endl;
+  }
+
+
+}
 
 int main(int argc, char const *argv[])
 {
@@ -583,6 +668,8 @@ int main(int argc, char const *argv[])
   //medir_busq_local_proporcion(5, 100);
   //medir_busq_local_proporcion2(8, 50);
   //medir_grasp_intmax(5,100);
-  comparar_grasp_coef(5,50);
+  //comparar_grasp_coef(5,50);
+  //medir_proporcion_todos_caminos(5,100);
+  medir_proporcion_todos_caminos_puentes(8,100);
   return 0;
 }
