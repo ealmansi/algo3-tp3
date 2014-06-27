@@ -2,11 +2,11 @@ Para probar que nuestro algoritmo no siempre da la solución óptima, vamos a pr
 
 %TODO crear y agregar figura que represente la familia
 
-$G_n$ de la familia \emph{3-caminos} para $n \geq 5$ esta compuesto por n nodos que se dividen en tres camino simples entre los nodos $1$ y $n$. A estos caminos los llamaremos $a$, $b$ y $c$ respectivamente. Los nodos se dividirán indiferentemente entre estos 3 caminos, pero cumpliendo que el costo total de cada camino sera:
+Definimos la familia \emph{3-caminos} como, los $G_n$ para $n \geq 5$ tal que esta compuesto por n nodos que se dividen en tres camino simples entre los nodos $1$ y $n$. A estos caminos los llamaremos $a$, $b$ y $c$ respectivamente. Los nodos se dividirán indiferentemente entre estos 3 caminos, pero cumpliendo que el costo total de cada camino sera:
 
-$\bullet$ $w_1(a) = k+1$ \ $w_2(a)=1$
+$\bullet$ $w_1(a) = K+1$ \ $w_2(a)=1$
 
-$\bullet$ $w_1(b) = k$  \ \ \ \ \ \ $w_2(b)=Q$
+$\bullet$ $w_1(b) = K$  \ \ \ \ \ \ $w_2(b)=Q$
 
 $\bullet$ $w_1(c) = 1$ \ \ \ \ \ \   $w_2(c)=i*Q$
 
@@ -20,9 +20,9 @@ $\bullet$ $w_1(c) = 1$ \ \ \ \ \ \   $w_2(c)=i*Q$
   \end{center}
 \end{figure}
 
-Con $k$ la cota sobre $w_1$, $i$ sera la proporción entre el resultado de nuestro algoritmo y el óptimo y $Q$ sera seleccionado para cumplir la condición anterior.
+Con $K$ la cota sobre $w_1$, $i$ sera la proporción entre el resultado de nuestro algoritmo y el óptimo y $Q$ sera seleccionado para cumplir la condición anterior.
 
-La idea de esta familia es que $a$ sea un camino donde se supera la cota por muy poco, pero tenga un $w_2$ muy bajo, $b$ sea el camino óptimo y su valor de $w_1$ sea exactamente $k$ y $c$ sea el camino que encuentra nuestro algoritmo, que tiene un $w_1$ muy bajo pero $w_2 = i * w_2(b)$.
+La idea de esta familia es que $a$ sea un camino donde se supera la cota por muy poco, pero tenga un $w_2$ muy bajo, $b$ sea el camino óptimo y su valor de $w_1$ sea exactamente $K$ y $c$ sea el camino que encuentra nuestro algoritmo, que tiene un $w_1$ muy bajo pero $w_2 = i * w_2(b)$.
 
 Esto va a suceder ya que no va a existir ningún $p$ para el cual el camino $b$ sea mejor que los otros dos al mismo tiempo. Para $p$ muy chiquitos $b$ sera mejor que $a$ y para $p$ muy grandes sera mejor que $c$. Claramente si se cumple lo anterior no abra ningún $p$ que sea mejor que ambas.
 
@@ -34,9 +34,9 @@ Sea $p$ tal que
 
 $$(1-p)*w_1(b)+p*w_2(b) < (1-p)*w_1(a)+p*w_2(a)$$
 
-$$(1-p)*k+p*Q < (1-p)*(k+1)+p$$
+$$(1-p)*K+p*Q < (1-p)*(K+1)+p$$
 
-$$k-p*k+p*Q < k-p*k-p+1+p$$
+$$K-p*K+p*Q < K-p*K-p+1+p$$
 
 $$p*Q < 1$$
 
@@ -50,35 +50,35 @@ Sea $p$ tal que
 
 $$(1-p)*w_1(b)+p*w_2(b) < (1-p)*w_1(c)+p*w_2(c)$$
 
-$$(1-p)*k+p*Q < (1-p)+p*i*Q$$
+$$(1-p)*K+p*Q < (1-p)+p*i*Q$$
 
-$$k-p*k+p*Q < 1-p+p*i*Q$$
+$$K-p*K+p*Q < 1-p+p*i*Q$$
 
-$$k-1 < -p+p*i*Q+p*k-p*Q$$
+$$K-1 < -p+p*i*Q+p*K-p*Q$$
 
-$$k-1 < p*(-1+i*Q+k-Q)$$
+$$K-1 < p*(-1+i*Q+K-Q)$$
 
-$$\frac{k-1}{-1+i*Q+k-Q} < p$$
+$$\frac{K-1}{-1+i*Q+K-Q} < p$$
 
-Tomando $k,i > 1$, ya que $k > 1$ y $Q*i > Q \rightarrow i*Q-Q+k-1 > 0$ por $Q > 0$.
+Tomando $K,i > 1$, ya que $K > 1$ y $Q*i > Q \rightarrow i*Q-Q+K-1 > 0$ por $Q > 0$.
 
 Para que $b$ sea mejor que $a$ y $c$ se debería cumplir:
 
-$$\frac{k-1}{-1+i*Q+k-Q} < p < \frac{1}{Q}$$
+$$\frac{K-1}{-1+i*Q+K-Q} < p < \frac{1}{Q}$$
 
-Para forzar que esto no ocurra buscamos $k$ y $Q$ tal que:
+Para forzar que esto no ocurra buscamos $K$ y $Q$ tal que:
 
-$$\frac{k-1}{i*Q-Q+k-1} > \frac{1}{Q}$$
+$$\frac{K-1}{i*Q-Q+K-1} > \frac{1}{Q}$$
 
-Luego, como vimos en el punto anterior que vale $i*Q-Q+k-1 > 0$; entonces:
+Luego, como vimos en el punto anterior que vale $i*Q-Q+K-1 > 0$; entonces:
 
-$$k-1 > \frac{i*Q-Q+k-1}{Q}$$
+$$K-1 > \frac{i*Q-Q+K-1}{Q}$$
 
-$$k-1 > \frac{k-1}{Q}+i-1$$
+$$K-1 > \frac{K-1}{Q}+i-1$$
 
-$$(k-1) \frac{Q-1}{Q} > i-1$$
+$$(K-1) \frac{Q-1}{Q} > i-1$$
 
-Tomando $Q=3$ y $k=2*i-1$, se verifica:
+Tomando $Q=3$ y $K=2*i-1$, se verifica:
 
 $$(2*i-2) \frac{2}{3} > i-1$$
 
@@ -88,12 +88,14 @@ $$(i-1) \frac{1}{3} > 0$$
 
 $$i-1 > 0$$
 
+Como ya habíamos dicho antes:
+
 $$i > 1$$
 
-como ya habíamos dicho antes.
 
 
-O sea, la familia para un $n$ y un $i$ dado estaría conformada por los casos donde: $k = 2*i-1$
+
+O sea, la familia para un $n$ y un $i$ dado estaría conformada por los casos donde: $K = 2*i-1$
 
 $\bullet$ $w_1(a) = 2*i$, $w_2(a)=1$
 
