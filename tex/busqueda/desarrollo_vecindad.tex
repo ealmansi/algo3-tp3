@@ -1,6 +1,6 @@
-La escencia de este algoritmo se encuentra principalmente en la vecindad que elegimos para las posibles soluciones, a continuación la detallaremos.
+La esencia de este algoritmo se encuentra principalmente en la vecindad que elegimos para las posibles soluciones, a continuación la detallaremos.
 
-Supongamos que tenemos un camino $C$ = ($c_0$, $c_1$, ..., $c_k$) de $k+1$ nodos que es una solución factible del problema de CACM par un grafo $G$ = ($V$,$E$). Los vecinos de la solución $C$ son caminos que también sean soluciones factibles y que surgan de aplicarle una de las siguientes operaciones:
+Supongamos que tenemos un camino $C$ = ($c_0$, $c_1$, ..., $c_k$) de $k+1$ nodos que es una solución factible del problema de CACM par un grafo $G$ = ($V$,$E$). Los vecinos de la solución $C$ son caminos que también sean soluciones factibles y que surjan de aplicarle una de las siguientes operaciones:
 
 \begin{itemize}
  \item Quitar Nodo:
@@ -20,13 +20,13 @@ Supongamos que tenemos un camino $C$ = ($c_0$, $c_1$, ..., $c_k$) de $k+1$ nodos
 
 \end{itemize}
  
-Dadas estas tres operaciones, un vecino de una solución factible $C$ es un camino que se pueda construir aplicándole a $C$ una de estas tres operaciones. Nótese que si existiese un $C'$ que se pudiera construir a partir de aplicarle a $C$ más de una operación, $C'$ no sería vecino de $C$. Tomamos esta decisión debido a que pensamos que si consideráramos vecino a un camino que se pudiera construir a partir de aplicarle numerosas operaciones a $C$ se estaría perdiendo, por así decirlo, la localidad de la búsqueda y estaríamos incurriendo en una búsqueda más global. Es importante recalcar que sólo tomamos como un vecino de $C$ un camino $C'$ factible.
+Dadas estas tres operaciones, un vecino de una solución factible $C$ es un camino que se pueda construir aplicándole a $C$ una de estas tres operaciones. Recordar que si existiese un $C'$ que se pudiera construir a partir de aplicarle a $C$ más de una operación, $C'$ no sería vecino de $C$. Tomamos esta decisión debido a que pensamos que si consideráramos vecino a un camino que se pudiera construir a partir de aplicarle numerosas operaciones a $C$ se estaría perdiendo, por así decirlo, la localidad de la búsqueda y estaríamos incurriendo en una búsqueda más global. Es importante recalcar que sólo tomamos como un vecino de $C$ un camino $C'$ factible.
 
 Algo que pensamos mientras elegíamos nuestra vecindad es que una buena propiedad que ésta pudiese cumplir sería que, dada una solución factible $C$, aplicándole una cantidad de operaciones, pudiésemos llegar a cualquier otra solución factible.
 
 Para explicar esto pensemos en los números reales. Supongamos tenemos una función $F: \mathbb{R} \Rightarrow \mathbb{R}$ y queremos hallar su máximo mediante una búsqueda local. Para esto podemos elegir, dado un $c \in \mathbb{R}$, una función de vecindad que devuelva por ejemplo el conjunto $[c-\varepsilon, c+\varepsilon]$  para algún $\varepsilon$. Dada esta función de vecindad podemos observar que aplicándola muchas veces nos podemos mover a lo largo de todo el dominio de la función $F$.
 
-Que una función de vecindad cumpla con esta propiedad nos parece bueno porque al poder moverse de cualquier solución factible a cualquier otra, hay menos probabilidad de perder soluciones factibles buenas. Más aún, si esta propiedad vale y tuviesemos un oraculo que nos dice que vecino tomar, podemos afirmar que si aplicamos muchas veces la función de vecindad (empezando de una solución $C$ luego en un vecino de $C$ y así) eventualmente llegaremos a la solución óptima del problema.
+Que una función de vecindad cumpla con esta propiedad nos parece bueno porque al poder moverse de cualquier solución factible a cualquier otra, hay menos probabilidad de perder soluciones factibles buenas. Más aún, si esta propiedad vale y tuviésemos un oráculo que nos dijera que vecino tomar, podemos afirmar que si aplicamos muchas veces la función de vecindad (empezando de una solución $C$ luego en un vecino de $C$ y así) eventualmente llegaremos a la solución óptima del problema.
 
 Luego de pensarlo llegamos a la conclusión de que nuestra vecindad no cumple con esa propiedad, ya que existen casos en los que a partir de una solución nos es imposible llegar a otra.
 
@@ -34,4 +34,4 @@ Supongamos que nuestro grafo es $C_n$ y que nuestro nodo inicial es $c_1$ y nues
 
 Supongamos ahora que tenemos como solución inicial $S'$. En este caso tampoco podemos aplicar ninguna operación a $S'$ y no podremos llegar a la otra solución. Podemos decir que en este caso, en nuestra vecindad tanto $S$ como $S'$ son soluciones sin vecinos.
 
-Luego de pensar como solucionar este problema, llegamos a la conclusión de que para resolverlo podríamos realizar las mismas operaciones pero en vez de a un nodo, de a $k$ con un $k$ fijo. Esto genera una vecindad muy grande y se podría perder la localidad de la búsqueda. No solo eso, sino tambien para casos de caminos muy disjuntos seguirís pasando lo mismo. Por ejemplo, en el caso anterior, cuando $n >> k$ seguiría pasando lo mismo.
+Luego de pensar como solucionar este problema, llegamos a la conclusión de que para resolverlo podríamos realizar las mismas operaciones pero en vez de a un nodo, de a $k$ con un $k$ fijo. Esto genera una vecindad muy grande y se podría perder la localidad de la búsqueda. No solo eso, sino también para casos de caminos muy disjuntos seguiría pasando lo mismo. Por ejemplo, en el caso anterior, cuando $n >> k$ seguiría pasando lo mismo.
