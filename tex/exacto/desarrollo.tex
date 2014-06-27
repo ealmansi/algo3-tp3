@@ -7,24 +7,23 @@ Lo que el algoritmo realiza en cada llamada se puede representar con el siguient
 \begin{center}
  \begin{figure}[H]
   \begin{pseudo}
-   \Procedure{backtracking}{nodo ultimo, grafo G, camino sol, camino sol\_opt, vector$\langle bool \rangle$ visitados}
+   \Procedure{backtracking}{nodo $ultimo$, grafo $G$, nodo $v$, entero $K$, camino\& $sol$, camino\& s$ol\_opt$, vector$\langle bool \rangle$\& $visitados$}
     \State $visitado[ultimo] \leftarrow true$
-    \If{$ultimo = G.nodoFinal$}
+    \If{$ultimo = v$}
 	\If{$sol$ es mejor que $sol\_opt$}
 	  \State $sol\_opt \leftarrow sol$
 	\EndIf
       \Else 
-	\For{todo $v$ adyacente a $ultimo$}
-	 \If{(not $visitado[v]$) and $\omega_1$($sol$ + $v$) $\leq$ $K$}
-	  \State $sol$ $\leftarrow$ $sol$ + $v$
-	  \State backtracking($v$, $G$, $sol$, $sol\_opt$, $visitados$)
-	  \State $sol$ $\leftarrow$ $sol$ - $v$
+	\For{todo $j$ adyacente a $ultimo$}
+	 \If{(not $visitado[j]$) and $\omega_1$($sol$ + $j$) $\leq$ $K$}
+	  \State $sol$ $\leftarrow$ $sol$ + $j$
+	  \State backtracking($j$, $G$, $u$,$v$,$K$,$sol$, $sol\_opt$, $visitados$)
+	  \State $sol$ $\leftarrow$ $sol$ - $j$
 	\EndIf 
 	
 	\EndFor
       \EndIf
       \State $visitado[ultimo] \leftarrow false$
-      \State // El algoritmo termina aca, y no hay return porque sol\_opt es pasada por referencia
    \EndProcedure
   \end{pseudo}
  \end{figure}
