@@ -408,11 +408,62 @@ void medir_busq_local_proporcion(int n_min, int n_max)
 	}
 }
 
+void comparar_grasp_coef_rand(int n_min, int n_max)
+{
+  entrada e;
+  salida s0, s1, s2, s3;
+  lld ratios10, ratios20;
+  ld prom_ratios10, prom_ratios20;
+
+  // int seed = time(0);
+  int seed = 1403828919;
+  srand(seed);
+  cout << "seed: " << seed << endl;
+
+  for(int n = n_min; n < n_max + 1; ++n)
+  {
+    ratios10.clear();
+    ratios20.clear();
+    for (int i = 0; i < 10; ++i)
+    {
+      // int m = 1 * cant_aristas_K_n(n);
+      // int max_w1 = 10000;
+      // int max_w2 = 10000;
+      // int K = 0.1 * ((1.0l * n * max_w1) / 4.0);
+      // entrada e = generar_instancia_aleatoria(n, m, max_w1, max_w2, K);
+      entrada e = grafo_rompe_goloso(n, n);
+
+      s0 = cacm_goloso::resolver(e);
+      s1 = cacm_busq_local::resolver(e);
+      s2 = cacm_grasp::resolver(e, n, 20, 0.01);
+      if (not s1.hay_solucion)
+        { cout << "."; escribir_salida(s0);}
+      if (s1.hay_solucion)
+      {
+        ratios10.push_back(1.0l * s0.W2 / s1.W2);
+        ratios20.push_back(1.0l * s0.W2 / s2.W2);
+      }
+      // s2 = cacm_grasp::resolver(e, 1, 10, 0.01);
+      // s3 = cacm_grasp::resolver(e, 5, 10, 0.01);
+      // if (s0.hay_solucion)
+      //   cout << n << " " << (1.0l * s1.W2 / s0.W2) << " " << (1.0l * s2.W2 / s0.W2) << " " << (1.0l * s3.W2 / s0.W2) << endl;
+    }
+
+    prom_ratios10 = accumulate(range(ratios10), 0.0l) / ratios10.size();
+    prom_ratios20 = accumulate(range(ratios20), 0.0l) / ratios20.size();
+    cout << n << " " << prom_ratios10 << " " << prom_ratios20;
+    if (abs(prom_ratios10 - prom_ratios20) < 1e-5)
+      cout << " !!";
+    cout << endl;
+  }
+}
+
 int main(int argc, char const *argv[])
 {
   
   //medir_exacto(3, 13);
-  medir_goloso_proporcion(5, 100);
+  // medir_goloso_proporcion(5, 100);
+  comparar_grasp_coef_rand(5, 100);
   //medir_busq_local_tiempo(5, 100);
   //medir_busq_local_calidad(5, 100);
   //medir_busq_local_proporcion(5, 100);
