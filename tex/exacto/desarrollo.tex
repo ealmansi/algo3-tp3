@@ -7,7 +7,7 @@ Lo que el algoritmo realiza en cada llamada se puede representar con el siguient
 \begin{center}
  \begin{figure}[H]
   \begin{pseudo}
-   \Procedure{backtracking}{nodo ultimo, grafo G, camino sol, camino sol\_opt, vector$\rangle bool \langle$ visitados}
+   \Procedure{backtracking}{nodo ultimo, grafo G, camino sol, camino sol\_opt, vector$\langle bool \rangle$ visitados}
     \State $visitado[ultimo] \leftarrow true$
     \If{$ultimo = G.nodoFinal$}
 	\If{$sol$ es mejor que $sol\_opt$}
