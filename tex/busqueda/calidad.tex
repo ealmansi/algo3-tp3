@@ -2,7 +2,11 @@ Lo que nuestro algoritmo hace es intentar mejorar las soluciones iniciales que s
 
 Logramos ver que si $n = 5$ nuestro algoritmo de búsqueda local logra mejorar la calidad de las soluciones dadas por nuestro algoritmo goloso. Esto es porque para un dicho valor de $n$ el grafo se compone de tres caminos de $3$ nodos cada uno, los cuales comparten los nodos de los extremos pero no el nodo del medio. Debido a esto, estos tres caminos son vecinos entre sí para nuestra vecindad, ya que se puede por ejemplo cambiar el nodo del medio de uno de los caminos para pasar a otro utilizando la operación de Cambiar Nodo definida en la sección \ref{subsub:algoritmos-heuristicos-busqueda-desarrollo_vecindad.tex}. Por lo tanto al correr el algoritmo de búsqueda local, éste puede devolver como solución el mejor de estos $3$ caminos.
 
-Cuando $n > 5$ los tres caminos del grafo tienen más de un nodo intermedio pero siguen teniendo en común sólo a sus extremos, por lo tanto no son vecinos entre sí para nuestra vecindad. Por este motivo el algoritmo de búsqueda local no puede mejorar la solución inicial dada por nuestro algoritmo goloso ya que ésta no tiene vecinos.
+Además, al crear esta familia tomamos la decisión de que los grafos de $6$ y $7$ nodos de la misma sean iguales al grafo con $5$ nodos pero con $1$ y $2$ nodos aislados, respectivamente. Por eso, podemos decir que nuestro algoritmo de búsqueda local también funciona para los grafos de $6$ y $7$ nodos.
+
+Generalmente, cuando $(n - 2)$ $mod$ $3 \neq 0$ el grafo de la familia \emph{3-caminos} de $n$ nodos es igual que el grafo con $n - ((n-2)$ $mod$ $3)$ nodos con el resto de los nodos aislados.
+
+Cuando $n > 5$ los tres caminos del grafo tienen más de un nodo intermedio pero siguen teniendo en común sólo a sus extremos, por lo tanto no son vecinos entre sí para nuestra vecindad. Por este motivo, el algoritmo de búsqueda local no puede mejorar la solución inicial dada por nuestro algoritmo goloso ya que ésta no tiene vecinos.
 
 Debido a esto, decidimos buscar una familia de grafos donde nuestro algoritmo goloso no se comporte como es deseado y que sea tal que, dada la solución del mismo, ésta pueda ser mejorada por el algoritmo de búsqueda local.
 

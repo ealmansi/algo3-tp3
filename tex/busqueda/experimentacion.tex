@@ -30,23 +30,38 @@ A continuación incluimos unos gráficos que comparan la calidad de las solucion
   \hfill
   \begin{minipage}{0.5\linewidth}
     \includegraphics[width=\linewidth]{graficos/busq_local_proporcion_comparacion.eps}
-    \caption{Calidad Soluciones Goloso/Dijkstra}\label{fig:busq-local-proporcion-comparacion}
+    \caption{Calidad Soluciones Goloso/Dijkstra en familia \emph{3-caminos}}\label{fig:busq-local-proporcion-comparacion}
   \end{minipage}
 \end{figure}
 
-El gráfico de la Figura \ref{fig:busq-local-proporcion} muestra la diferencia proporcional entre las soluciones que nos da el algoritmo de búsqueda local con una solución inicial dada por nuestro algoritmo goloso y el algoritmo exacto para la familia de grafos que rompe nuestro algoritmo goloso. El gráfico de la Figura \ref{fig:busq-local-proporcion-comparacion} compara la proporción con respecto al algoritmo exacto de las soluciones dadas por el algoritmo goloso y las soluciones resultantes de aplicar búsqueda local tomando como soluciones iniciales a las soluciones dadas por el algoritmo goloso para la misma familia de grafos del gráfico de la Figura \ref{fig:busq-local-proporcion}. Mostramos esto en dos gráficos distintos para que se logre apreciar que para la mayoría de los casos, el algoritmo de búsqueda local no logra mejorar las soluciones del nuestro algoritmo goloso para esta familia.
+El gráfico de la Figura \ref{fig:busq-local-proporcion} muestra la diferencia proporcional entre las soluciones que nos da el algoritmo de búsqueda local con una solución inicial dada por nuestro algoritmo goloso y el algoritmo exacto para la familia de grafos que rompe nuestro algoritmo goloso \emph{3-caminos}. El gráfico de la Figura \ref{fig:busq-local-proporcion-comparacion} compara la proporción con respecto al algoritmo exacto de las soluciones dadas por el algoritmo goloso y las soluciones resultantes de aplicar búsqueda local tomando como soluciones iniciales a las soluciones dadas por el algoritmo goloso para la misma familia de grafos del gráfico de la Figura \ref{fig:busq-local-proporcion}. Mostramos esto en dos gráficos distintos para que se logre apreciar que para la mayoría de los casos, el algoritmo de búsqueda local no logra mejorar las soluciones del nuestro algoritmo goloso para esta familia.
 
 Vale aclarar que en este experimento pudimos correr el algoritmo exacto para grafos con una cantidad de nodos un poco mayor que en las anteriores mediciones. Esto se debe a que para esta familia de grafos el algoritmo exacto tarda menos tiempo en correr ya que hay menos caminos que revisar (recordemos que los grafos de nuestra familia se componen de tres caminos disjuntos en aristas).
 
-Como podemos observar para $n =5$ el algoritmo de búsqueda local logra mejorar la calidad de la solución dada por el nuestro algoritmo goloso. Sin embargo, cuando $n > 5$ no logra mejorarla. Esto verifica lo que dijimos en la seccion \ref{subsub:algoritmos-heuristicos-busqueda-calidad.tex}.
+Como podemos observar para $n \leq 7$ el algoritmo de búsqueda local logra mejorar la calidad de la solución dada por el nuestro algoritmo goloso. Sin embargo, cuando $n > 7$ no logra mejorarla. Esto verifica lo que dijimos en la sección \ref{subsub:algoritmos-heuristicos-busqueda-calidad.tex}.
+
+Para continuar experimentando, incluimos un gráfico que muestre como se comporta nuestro algoritmo de búsqueda local ante grafos que sean de la familia \emph{3-caminos con puentes} definida en la sección \ref{subsub:algoritmos-heuristicos-busqueda-calidad.tex}. 
+
+\begin{figure}[H]
+  \begin{center}
+    \begin{minipage}{0.5\linewidth}
+      \includegraphics[width=\linewidth]{graficos/busq_local_proporcion2.eps}
+      \caption{Calidad Soluciones Goloso/Dijkstra en familia \emph{3-caminos con puentes}}\label{fig:busq-local-proporcion-2}
+    \end{minipage}
+  \end{center}
+\end{figure}
+
+En el gráfico podemos observar el comportamiento del algoritmo de búsqueda local en proporción al algoritmo exacto comparado al comportamiento del algoritmo goloso, también en proporción. Como podemos observar en esta familia el algoritmo de búsqueda local sí puede mejorar la solución que el algoritmo goloso le da como inicial. Más aún, el grafico nos permite observar que no sólo las mejora, sino que logra encontrar la solución óptima, ya que como vemos el peso $W2$ de la solución dada por dicho algoritmo es igual al del de la solución del algoritmo exacto. Esto verifica lo que dijimos en la sección \ref{subsub:algoritmos-heuristicos-busqueda-calidad.tex}.
 
 A continuación incluiremos un gráfico que compara la calidad de las soluciones del algoritmo de busqueda local cuando éste toma como solución inicial la dada por el algoritmo de Dijkstra tomando como función de peso el para las aristas la función $\omega_1$
 
 \begin{figure}[H]
-  \begin{minipage}{0.5\linewidth}
-    \includegraphics[width=\linewidth]{graficos/busq_local_calidad.eps}
-    \caption{Comparacion Soluciones iniciales}\label{fig:busq-local-calidad}
-  \end{minipage}
+  \begin{center}
+    \begin{minipage}{0.5\linewidth}
+      \includegraphics[width=\linewidth]{graficos/busq_local_calidad.eps}
+      \caption{Comparacion Soluciones iniciales}\label{fig:busq-local-calidad}
+    \end{minipage}
+  \end{center}
 \end{figure}
   
 Como podemos observar en la Figura \ref{fig:busq-local-calidad}, para los grafos con los que hicimos las mediciones, el algoritmo que toma como solución inicial la dada por nuestro algoritmo goloso en general es mejor que la dada por el algoritmo de Dijkstra.

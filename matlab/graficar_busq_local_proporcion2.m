@@ -57,7 +57,7 @@ function graficar_busq_local_proporcion2()
   title('Proporcion entre la solucion de busqueda local y goloso.');
   hleg = legend({'Busqueda local', 'Goloso'});
   xlabel('Cantidad de vertices (n)');
-  ylabel('Proporcion');
+  ylabel('Proporcion (W2/W2 exacto)');
   saveas(gca, ['../graficos/busq_local_proporcion2.eps'],'epsc');
   
   
