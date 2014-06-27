@@ -1,18 +1,18 @@
 \begin{center}
  \begin{figure}[H]
   \begin{pseudo}
-   \Procedure{cacm\_goloso}{grafo $G$, nodo $u$, nodo $v$}
+   \Procedure{cacm\_goloso}{grafo $G$, nodo $u$, nodo $v$, entero $K$}
     \State $pInicial \leftarrow 0$, $pFinal \leftarrow 1$, $pMedio$ \Ode{1}
     \For{$i < Cant\_Iteraciones$}
       \State $pMedio \leftarrow (pInicial + pFinal)/2$ \Ode{1}
       \State $solucion$ $\leftarrow$ $Dijkstra(G$, $pMedio$, $u$, $v)$ \Ode{n^2}
-      \If{$W_1(solucion) \leq k$} \Ode{1}
+      \If{$w_1(solucion) \leq K$} \Ode{1}
 	 \State $pInicial \leftarrow pMedio$ \Ode{1}
       \Else
 	 \State $pFinal \leftarrow pMedio$ \Ode{1}
       \EndIf
     \EndFor
-    \If{$W_1(solucion) \leq k$} \Ode{1}
+    \If{$w_1(solucion) \leq K$} \Ode{1}
       \State $solucion \leftarrow Dijkstra(G, 1)$ \Ode{n^2}
     \EndIf
     \State Devolver solución \Ode{1}

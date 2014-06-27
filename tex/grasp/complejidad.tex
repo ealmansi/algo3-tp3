@@ -9,23 +9,23 @@ A continución vamos a proponer un pseudocódigo para explicar la complejidad te
 \begin{center}
  \begin{figure}[H]
   \begin{pseudo}
-  \Procedure{Resolver}{Entrada e}
-    \State Salida mejor\_s $\leftarrow$ golosoResolver(e, COEF\_RAND) \Ode{Goloso}
-    \State cant\_it\_sin\_mejora $\leftarrow$ 0 \Ode{1}
-    \While{MAX\_CANT\_IT\_SIN\_MEJORA $<$ cant\_it\_sin\_mejora} \Ode{1}
-      \State Salida s $\leftarrow$ golosoResolver(e, COEF\_RAND) \Ode{Goloso}
-      \State maximoLocalBusqLocal(e,s) \Ode{BusqLocal}
-      \If{\textbf{not} s.hay\_solucion} \Ode{1}
-	\State++cant\_it\_sin\_mejora \Ode{1}
+  \Procedure{Resolver}{Entrada $e$}
+    \State Salida $mejor\_s$ $\leftarrow$ golosoResolver($e$, COEF\_RAND) \Ode{Goloso}
+    \State $cant\_it\_sin\_mejora$ $\leftarrow$ 0 \Ode{1}
+    \While{MAX\_CANT\_IT\_SIN\_MEJORA $<$ $cant\_it\_sin\_mejora$} \Ode{1}
+      \State Salida $s$ $\leftarrow$ golosoResolver($e$, COEF\_RAND) \Ode{Goloso}
+      \State maximoLocalBusqLocal($e$,$s$) \Ode{BusqLocal}
+      \If{\textbf{not} $s.hay\_solucion$} \Ode{1}
+	\State++$cant\_it\_sin\_mejora$ \Ode{1}
 	\State \textbf{continue}
       \EndIf
-      \If{diferencia\_relativa(mejor\_s, s) $<$ EPSILON} \Ode{1}
-	\State ++cant\_it\_sin\_mejora \Ode{1}
+      \If{diferencia\_relativa($mejor\_s$, $s$) $<$ EPSILON} \Ode{1}
+	\State ++$cant\_it\_sin\_mejora$ \Ode{1}
       \Else
-	\State cant\_it\_sin\_mejora $\leftarrow$ 0 \Ode{1}
+	\State $cant\_it\_sin\_mejora$ $\leftarrow$ 0 \Ode{1}
       \EndIf
-      \If{s.W2 $<$ mejor\_s.W2} \Ode{1}
-	\State mejor\_s $\leftarrow$ s \Ode{1}
+      \If{$s.w2$ $<$ $mejor\_s.w2$} \Ode{1}
+	\State $mejor\_s$ $\leftarrow$ s \Ode{1}
       \EndIf
     \EndWhile
     \EndProcedure

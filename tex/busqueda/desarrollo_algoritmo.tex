@@ -2,19 +2,20 @@ Habiendo explicado las características de nuestra vecindad, a continuación des
 
 Nuestro algoritmo recibe como entrada el grafo $G$ y una solución inicial $C$. Luego de esto el algoritmo entra en un ciclo en el que se buscan los vecinos de la mejor solución $S$ que se tenga. Si existe un vecino $S'$ mejor que $S$, entonces la mejor solución pasa a ser $S'$ y pasamos a la siguiente iteración. En la iteración en la que no exista un vecino mejor que $S$ entonces se termina la búsqueda.
 
-Cabe aclarar que nuestra solución inicial $C$ la podemos generar utilizando nuestro algoritmo goloso descripto en la sección \ref{subsub:algoritmos-heuristicos-goloso-desarrollo.tex}, o utilizando Dijkstra sobre la función $W_1$.
+Cabe aclarar que nuestra solución inicial $C$ la podemos generar utilizando nuestro algoritmo goloso descripto en la sección \ref{subsub:algoritmos-heuristicos-goloso-desarrollo.tex}, o utilizando Dijkstra sobre la función $w_1$.
 
 A continuación incluiremos un pseudocódigo del algoritmo.
 \begin{center}
  \begin{figure}[H]
   \begin{pseudo}
-   \Procedure{busqueda local}{grafo G, camino sol, c}
+   \Procedure{busqueda local}{grafo $G$, camino $sol$}
    \State $mejorSol \leftarrow sol$\Ode{1}
+   \State $mejorSol \leftarrow \emptyset $\Ode{1}
    \While{$seguirBuscando$}\hfill$c*O(1)$
       \State $buscarVecinoAgregar(mejorSol, mejorVecino, G)$\Ode{n^3}
       \State $buscarVecinoQuitar(mejorSol, mejorVecino, G)$\Ode{n^2}
       \State $buscarVecinoCambiar(mejorSol, mejorVecino, G)$\Ode{n^3}
-      \If{$mejorVecino.W_1 > k \vee mejorVecino.W_2 \geq mejorSol.W_2$}\Ode{1}
+      \If{$mejorVecino.w_1 > k \vee mejorVecino.w_2 \geq mejorSol.w_2$}\Ode{1}
 	\State $seguirBuscando \leftarrow false$\Ode{1}
       \Else
 	\State $mejorSol \leftarrow mejorVecino$\Ode{1}
@@ -29,15 +30,15 @@ A continuación incluiremos un pseudocódigo del algoritmo.
 \begin{flushleft}
  \begin{figure}[H]
   \begin{pseudo}
-   \Procedure{buscarVecinoAgregar}{mejorSol, mejorVecino, G}
+   \Procedure{buscarVecinoAgregar}{ \& $mejorSol$, \& $mejorVecino$, $G$}
    \State $i \leftarrow 0$\Ode{1}
    \While{$0 \leq i < cantEjes(mejorSol)-1$}\hfill$n*O(1)$
       \For{$j \in adyacentes(mejorSol_i,G) \cap adyacentes(mejorSol_{i+1},G)$}\hfill$n*O(1)$
-	  \State $W_1' \leftarrow mejorSol.W_1 - mejorSol(i,i+1).W_1 + (mejorSol_i,j).W_1 + $
-	  \State $(j,mejorSol_{i+1}).W_1$\Ode{1}
-	  \State $W_2' \leftarrow mejorSol.W_2 - mejorSol(i,i+1).W_2 + (mejorSol_i,j).W_2 + $
-	  \State $(j,mejorSol_{i+1}).W_2$\Ode{1}
-	  \If{$W_1' < k \wedge (mejorVecino.W_1 \geq k \vee W_2' < mejorVecino.W_2)$}\Ode{1}
+	  \State $w_1' \leftarrow mejorSol.w_1 - mejorSol(i,i+1).w_1 + (mejorSol_i,j).w_1 + $
+	  \State $(j,mejorSol_{i+1}).w_1$\Ode{1}
+	  \State $w_2' \leftarrow mejorSol.w_2 - mejorSol(i,i+1).w_2 + (mejorSol_i,j).w_2 + $
+	  \State $(j,mejorSol_{i+1}).w_2$\Ode{1}
+	  \If{$w_1' < k \wedge (mejorVecino.w_1 \geq k \vee w_2' < mejorVecino.w_2)$}\Ode{1}
 	    \State $mejorVecino = (mejorSol_1, ... ,mejorSol_i, j, mejorSol_{i+1}, ..., mejorSol_{cantEjes})$\Ode{1}
 	  \EndIf
       \EndFor
@@ -51,15 +52,15 @@ A continuación incluiremos un pseudocódigo del algoritmo.
 \begin{flushleft}
  \begin{figure}[H]
   \begin{pseudo}
-   \Procedure{buscarVecinoQuitar}{mejorSol, mejorVecino, G}
+   \Procedure{buscarVecinoQuitar}{\& $mejorSol$,\& $mejorVecino$, $G$}
    \State $i \leftarrow 0$\Ode{1}
    \While{$0 \leq j < cantEjes(mejorSol)-2$}\hfill$n*O(1)$
       \If{$mejorSol_{i+2} \in adyacentes(mejorSol_i,G)$}\Ode{n}
-	  \State $W_1' \leftarrow mejorSol.W_1 - mejorSol(i,i+1).W_1 - mejorSol(i+1,i+2).W_1 + $
-	  \State$mejorSol(i,i+2).W_1$\Ode{1}
-	  \State $W_2' \leftarrow mejorSol.W_2 - mejorSol(i,i+1).W_2 - mrjorSol(i+1,i+2).W_2 + $
-	  \State $mejorSol(i,i+2).W_2$\Ode{1}
-	  \If{$W_1' < k \wedge (mejorVecino.W_1 \geq k \vee W_2' < mejorVecino.W_2)$}\Ode{1}
+	  \State $w_1' \leftarrow mejorSol.w_1 - mejorSol(i,i+1).w_1 - mejorSol(i+1,i+2).w_1 + $
+	  \State$mejorSol(i,i+2).w_1$\Ode{1}
+	  \State $w_2' \leftarrow mejorSol.w_2 - mejorSol(i,i+1).w_2 - mrjorSol(i+1,i+2).w_2 + $
+	  \State $mejorSol(i,i+2).w_2$\Ode{1}
+	  \If{$w_1' < k \wedge (mejorVecino.w_1 \geq k \vee w_2' < mejorVecino.w_2)$}\Ode{1}
 	    \State $mejorVecino = (mejorSol_1, ... ,mejorSol_i, mejorSol_{i+1}, ..., mejorSol_{cantEjes})$\Ode{1}
 	  \EndIf
       \EndIf
@@ -73,15 +74,15 @@ A continuación incluiremos un pseudocódigo del algoritmo.
 \begin{flushleft}
  \begin{figure}[H]
   \begin{pseudo}
-   \Procedure{buscarVecinoCambiar}{mejorSol, mejorVecino, G}
+   \Procedure{buscarVecinoCambiar}{\& $mejorSol$,\& $mejorVecino$, $G$}
    \State $i \leftarrow 0$\Ode{1}
    \While{$0 \leq j < cantEjes(mejorSol)-2$}\hfill$n*O(1)$
       \For{$j \in adyacentes(mejorSol_i,G) \cap adyacentes(mejorSol_{i+2},G)$}\hfill$n*O(1)$
-	  \State $W_1' \leftarrow mejorSol.W_1 - mejorSol(i,i+1).W_1 - mejorSol(i+1,i+2).W_1 + $
-	  \State $(mejorSol_i, j).W_1 + (j, mejorSol_{i+2}).W_1$\Ode{1}
-	  \State $W_2' \leftarrow mejorSol.W_2 - mejorSol(i,i+1).W_2 - mejorSol(i+1,i+2).W_2 + $
-	  \State $(mejorSol_i, j).W_2 + (j, mejorSol_{i+2}).W_2$\Ode{1}
-	  \If{$W_1' < k \wedge (mejorVecino.W_1 \geq k \vee W_2' < mejorVecino.W_2)$}\Ode{1}
+	  \State $w_1' \leftarrow mejorSol.w_1 - mejorSol(i,i+1).w_1 - mejorSol(i+1,i+2).w_1 + $
+	  \State $(mejorSol_i, j).w_1 + (j, mejorSol_{i+2}).w_1$\Ode{1}
+	  \State $w_2' \leftarrow mejorSol.w_2 - mejorSol(i,i+1).w_2 - mejorSol(i+1,i+2).w_2 + $
+	  \State $(mejorSol_i, j).w_2 + (j, mejorSol_{i+2}).w_2$\Ode{1}
+	  \If{$w_1' < k \wedge (mejorVecino.w_1 \geq k \vee w_2' < mejorVecino.w_2)$}\Ode{1}
 	    \State $mejorVecino = (mejorSol_1, ... ,mejorSol_i, j ,mejorSol_{i+2}, ..., mejorSol_{cantEjes})$\Ode{1}
 	  \EndIf
       \EndFor
