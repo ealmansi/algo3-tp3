@@ -9,7 +9,7 @@ Dicho esto pasamos a analizar la complejidad de los algoritmos que buscan vecino
 \begin{itemize}
  \item buscarVecinoAgregar
 
-  Para analizar la complejidad de este algoritmo, es necesario aclarar que en la linea $3$ del mismo se verifica la guarda $j \in adyacentes(mejorSol_i,G) \cap adyacentes(mejorSol_{i+1},G)$. Esto se realiza una vez por cada iteración del $For$. Por lo tanto si cada vez que entramos en el $For$ revisamos todos los adyacentes de $mejorSol_i$ y $mejorSol_{i+2}$, lo cual tiene una complejidad lineal, a lo largo de todo el $For$ tendríamos una complejidad cuadrática. Sin embargo esto no es así ya que en nuestra implementación del algoritmo tenemos un grafo con listas de adyacencia en la que los nodos están ordenados, por lo tanto a lo largo de todo el $For$ tenemos una complejidad lineal y no cuadrática.
+  Para analizar la complejidad de este algoritmo, es necesario aclarar que en la linea $3$ del mismo se verifica la guarda $j \in (adyacentes(mejorSol_i,G) \cap adyacentes(mejorSol_{i+1},G))$. Esto se realiza una vez por cada iteración del $For$. Por lo tanto si cada vez que entramos en el $For$ revisamos todos los adyacentes de $mejorSol_i$ y $mejorSol_{i+2}$, lo cual tiene una complejidad lineal, a lo largo de todo el $For$ tendríamos una complejidad cuadrática. Sin embargo esto no es así ya que en nuestra implementación del algoritmo tenemos un grafo con listas de adyacencia en la que los nodos están ordenados, por lo tanto a lo largo de todo el $For$ tenemos una complejidad lineal y no cuadrática.
 
   Aclarado esto, observando el pseudocódigo que está situado en la sección anterior y teniendo en cuenta la última aclaración, podemos ver que la complejidad del algoritmo buscarVecinosAgregar es la siguiente:
 
@@ -17,13 +17,13 @@ Dicho esto pasamos a analizar la complejidad de los algoritmos que buscan vecino
 
   Por álgebra de órdenes:
 
-  $n^2(O(1))$
+  $n^2 * (O(1))$
 
   $O(n^2)$
 
   \item buscarVecinoQuitar
 
-  Esta vez, en la guarda del $If$ de la linea $3$ usamos la operación $j \in adyacentes(mejorSol_i, G)$ que también tiene complejidad lineal.
+  Esta vez, en la guarda del \emph{If} de la linea $3$ usamos la operación $j \in adyacentes(mejorSol_i, G)$ que también tiene complejidad lineal.
 
   La complejidad del algoritmo es la siguiente:
 
@@ -47,7 +47,7 @@ Dicho esto pasamos a analizar la complejidad de los algoritmos que buscan vecino
 
   Por álgebra de órdenes:
 
-  $n^2(O(1))$
+  $n^2 * (O(1))$
 
   $O(n^2)$
 

@@ -21,7 +21,7 @@ A continuación incluiremos un pseudocódigo del algoritmo.
 	\State $mejorSol \leftarrow mejorVecino$\Ode{1}
       \EndIf
    \EndWhile
-   \State Devolver $mejorSol$\Ode{1}
+   \State \textbf{return} $mejorSol$\Ode{1}
    \EndProcedure
   \end{pseudo}
  \end{figure}
@@ -30,7 +30,7 @@ A continuación incluiremos un pseudocódigo del algoritmo.
 \begin{flushleft}
  \begin{figure}[H]
   \begin{pseudo}
-   \Procedure{buscarVecinoAgregar}{ \& $mejorSol$, \& $mejorVecino$, $G$}
+   \Procedure{buscarVecinoAgregar}{camino\& $mejorSol$, camino\& $mejorVecino$, grafo $G$}
    \State $i \leftarrow 0$\Ode{1}
    \While{$0 \leq i < cantEjes(mejorSol)-1$}\hfill$n*O(1)$
       \For{$j \in adyacentes(mejorSol_i,G) \cap adyacentes(mejorSol_{i+1},G)$}\hfill$n*O(1)$
@@ -52,7 +52,7 @@ A continuación incluiremos un pseudocódigo del algoritmo.
 \begin{flushleft}
  \begin{figure}[H]
   \begin{pseudo}
-   \Procedure{buscarVecinoQuitar}{\& $mejorSol$,\& $mejorVecino$, $G$}
+   \Procedure{buscarVecinoQuitar}{camino\& $mejorSol$,camino\& $mejorVecino$, grafo $G$}
    \State $i \leftarrow 0$\Ode{1}
    \While{$0 \leq j < cantEjes(mejorSol)-2$}\hfill$n*O(1)$
       \If{$mejorSol_{i+2} \in adyacentes(mejorSol_i,G)$}\Ode{n}
@@ -61,10 +61,10 @@ A continuación incluiremos un pseudocódigo del algoritmo.
 	  \State $w_2' \leftarrow mejorSol.w_2 - mejorSol(i,i+1).w_2 - mrjorSol(i+1,i+2).w_2 + $
 	  \State $mejorSol(i,i+2).w_2$\Ode{1}
 	  \If{$w_1' < k \wedge (mejorVecino.w_1 \geq k \vee w_2' < mejorVecino.w_2)$}\Ode{1}
-	    \State $mejorVecino = (mejorSol_1, ... ,mejorSol_i, mejorSol_{i+1}, ..., mejorSol_{cantEjes})$\Ode{1}
+	    \State $mejorVecino \leftarrow (mejorSol_1, ... ,mejorSol_i, mejorSol_{i+1}, ..., mejorSol_{cantEjes})$\Ode{1}
 	  \EndIf
       \EndIf
-      \State $i = i+1$\Ode{1}
+      \State $i \leftarrow i+1$\Ode{1}
    \EndWhile
    \EndProcedure
   \end{pseudo}
@@ -74,7 +74,7 @@ A continuación incluiremos un pseudocódigo del algoritmo.
 \begin{flushleft}
  \begin{figure}[H]
   \begin{pseudo}
-   \Procedure{buscarVecinoCambiar}{\& $mejorSol$,\& $mejorVecino$, $G$}
+   \Procedure{buscarVecinoCambiar}{camino\& $mejorSol$,camino\& $mejorVecino$, grafo $G$}
    \State $i \leftarrow 0$\Ode{1}
    \While{$0 \leq j < cantEjes(mejorSol)-2$}\hfill$n*O(1)$
       \For{$j \in adyacentes(mejorSol_i,G) \cap adyacentes(mejorSol_{i+2},G)$}\hfill$n*O(1)$
@@ -83,10 +83,10 @@ A continuación incluiremos un pseudocódigo del algoritmo.
 	  \State $w_2' \leftarrow mejorSol.w_2 - mejorSol(i,i+1).w_2 - mejorSol(i+1,i+2).w_2 + $
 	  \State $(mejorSol_i, j).w_2 + (j, mejorSol_{i+2}).w_2$\Ode{1}
 	  \If{$w_1' < k \wedge (mejorVecino.w_1 \geq k \vee w_2' < mejorVecino.w_2)$}\Ode{1}
-	    \State $mejorVecino = (mejorSol_1, ... ,mejorSol_i, j ,mejorSol_{i+2}, ..., mejorSol_{cantEjes})$\Ode{1}
+	    \State $mejorVecino \leftarrow (mejorSol_1, ... ,mejorSol_i, j ,mejorSol_{i+2}, ..., mejorSol_{cantEjes})$\Ode{1}
 	  \EndIf
       \EndFor
-      \State $i = i+1$\Ode{1}
+      \State $i \leftarrow i+1$\Ode{1}
    \EndWhile
    \EndProcedure
   \end{pseudo}
