@@ -769,30 +769,80 @@ void medir_calidad_todos()
   }
 }
 
-void medir_grasp_calidad_aleatorios()
+void medir_tiempo_todos()
 {
+  entrada e;
+  salida s0, s1, s2, s3;
+  lld ratios_1, ratios_2, ratios_3;
+  ld prom_ratios_1, prom_ratios_2, prom_ratios_3;
+  
   int seed = time(0);
   //int seed = 1403878979;
-  srand(seed);
   cout << "seed: " << seed << endl;
+  cout << "m = 0.8" << endl;
+  cout << "K = 0.2" << endl;
 
-  int n_min = 100, n_max = 130;
-  for (int n = n_min; n < (n_max + 1); ++n)
+  int n_min = 60, n_max = 110;
+
+  timespec inicio, fin;
+  typedef vector<long long int> vi;
+  typedef vector<vi> vvi;
+  typedef vector<vvi> vvvi;
+  vvvi mediciones_0(n_max - n_min + 1, vvi(10, vi(5)));
+  vvvi mediciones_1(n_max - n_min + 1, vvi(10, vi(5)));
+  vvvi mediciones_2(n_max - n_min + 1, vvi(10, vi(5)));
+
+  for (int med = 0; med < 5; ++med)
   {
-    int m = 0.2 * cant_aristas_K_n(n);
-    int max_w1 = 10000;
-    int max_w2 = 10000;
-    int K = 1 * ((1.0l * n * max_w1) / 4.0);
-    entrada e = generar_instancia_aleatoria(n, m, max_w1, max_w2, K);
+    cout << "med" << " " << med << endl;
+    srand(seed);
+    for(int n = n_min; n < n_max + 1; ++n)
+    {
+      for (int i = 0; i < 10; ++i)
+      {
+        int m = 0.8 * cant_aristas_K_n(n);
+        int max_w1 = 10000;
+        int max_w2 = 10000;
+        int K = 0.2 * ((1.0l * n * max_w1) / 4.0);
+        entrada e = generar_instancia_aleatoria(n, m, max_w1, max_w2, K);
+        
+        clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &inicio);
+        s0 = cacm_goloso::resolver(e);
+        clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &fin);
+        mediciones_0[n - n_min][i][med] = (fin.tv_sec - inicio.tv_sec) * 1e9 + (fin.tv_nsec - inicio.tv_nsec);
 
-    salida s0 = cacm_goloso::resolver(e);
-    salida s1 = cacm_busq_local::resolver(e);
-    salida s2 = cacm_grasp::resolver(e, 10, 20, 0.01);
+        clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &inicio);
+        s1 = cacm_busq_local::resolver(e);
+        clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &fin);
+        mediciones_1[n - n_min][i][med] = (fin.tv_sec - inicio.tv_sec) * 1e9 + (fin.tv_nsec - inicio.tv_nsec);
 
-    cout << n << " " << s0.W2 << " " << s1.W2 << " " << s2.W2 << endl;
+        clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &inicio);
+        s2 = cacm_grasp::resolver(e, 1, 20, 0.01);
+        clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &fin);
+        mediciones_2[n - n_min][i][med] = (fin.tv_sec - inicio.tv_sec) * 1e9 + (fin.tv_nsec - inicio.tv_nsec);
+     }
+    }
+  }
+
+  for(int n = n_min; n < n_max + 1; ++n)
+  {
+    for (int i = 0; i < 10; ++i)
+    {
+      sort(range(mediciones_0[n-n_min][i]));
+      sort(range(mediciones_1[n-n_min][i]));
+      sort(range(mediciones_2[n-n_min][i]));
+    }
+    
+    long long int mediana_prom_0 = 0, mediana_prom_1 = 0, mediana_prom_2 = 0;
+    for (int i = 0; i < 10; ++i)
+    {
+      mediana_prom_0 += mediciones_0[n-n_min][i][5/2];
+      mediana_prom_1 += mediciones_1[n-n_min][i][5/2];
+      mediana_prom_2 += mediciones_2[n-n_min][i][5/2];
+    }
+    cout << n << " " << (mediana_prom_0/10) << " " << (mediana_prom_1/10) << " " << (mediana_prom_2/10) << endl;
   }
 }
-
 
 int main(int argc, char const *argv[])
 {
@@ -805,9 +855,10 @@ int main(int argc, char const *argv[])
   //medir_busq_local_proporcion2(8, 50);
   //medir_grasp_intmax(5,100);
   //comparar_grasp_coef(5,50);
-  medir_proporcion_todos_caminos(89,98);
+  //medir_proporcion_todos_caminos(89,98);
   //medir_proporcion_todos_caminos_puentes(8,100);
-  // medir_calidad_todos(5,100);
+  // medir_tiempo_todos(5,100);
   //medir_grasp_proporcion_solucion_inicial(5, 100);
+  medir_tiempo_todos();
   return 0;
 }
