@@ -9,14 +9,14 @@ datos_tiempo2 = [ 67853 88938 136634 167144 212092 266798 323867 424843 502935 5
  71879 99621 153383 190467 243155 306010 373801 484882 572681 667838 770802 880441 1005257 1123458 1254178 1400584 1539450 1699848 1859951 2034031 2222056 2204085 2386545 2561540 2744921 2955540
  2446993 3719207 5428894 7345200 9360927 11879778 14436164 17439216 20679448 23889075 28085899 32087028 35887924 40474498 44827793 50068341 55068757 60427028 65854280 72339680 77695694 84778235 92047742 99208018 105592238 114699791
  6951 12919 22651 45586 79524 158120 273445 539227 945838 1835565 3216171 6237654 10990278 21174917 37549701 71771649 128037155 244692160 436517222 821237489 1484636200 2786206514 5044780690 9443810733 17092007175 31954339880];
-datos_tiempo2 = datos_tiempo2 ./ 1E6;
+datos_tiempo2 = datos_tiempo2 ./ 1E9;
 %%
  figure;
   plot(8:3:100, datos_tiempo1(1,:), 'r');
   hold on;
   plot(8:3:100, datos_tiempo1(2,:), 'b');
   plot(8:3:100, datos_tiempo1(3,:), 'g');
-  plot(8:3:100, datos_tiempo1(4,:), 'y');
+  plot(8:3:100, datos_tiempo1(4,:), 'c');
   title('Tiempo de ejecucion algoritmos con familia 3-caminos.');
   xlabel('Cantidad de vertices (n)');
   ylabel('Tiempo (ms)');
@@ -30,7 +30,7 @@ datos_tiempo2 = datos_tiempo2 ./ 1E6;
   plot(8:3:100, datos_tiempo1(1,:), 'r');
   hold on;
   plot(8:3:100, datos_tiempo1(2,:), 'b');
-  plot(8:3:100, datos_tiempo1(4,:), 'y');
+  plot(8:3:100, datos_tiempo1(4,:), 'c');
   title('Tiempo de ejecucion algoritmos con familia 3-caminos.');
   xlabel('Cantidad de vertices (n)');
   ylabel('Tiempo (ms)');
@@ -45,7 +45,7 @@ datos_tiempo2 = datos_tiempo2 ./ 1E6;
   hold on;
   plot(11:3:86, datos_tiempo2(2,:), 'b');
   plot(11:3:86, datos_tiempo2(3,:), 'g');
-  plot(11:3:86, datos_tiempo2(4,:), 'y');
+  plot(11:3:86, datos_tiempo2(4,:), 'c');
   title('Tiempo de ejecucion algoritmos con familia 3-caminos con puentes.');
   xlabel('Cantidad de vertices (n)');
   ylabel('Tiempo (ms)');
@@ -54,7 +54,7 @@ datos_tiempo2 = datos_tiempo2 ./ 1E6;
   set(get(hleg,'Title'),'String','Algoritmos');
   saveas(gca, ['../graficos/todos_tiempo_puentes.eps'],'epsc');
   
-  
+  datos_tiempo2 = datos_tiempo2 ./ 1E-3;
   figure;
   plot(11:3:86, datos_tiempo2(1,:), 'r');
   hold on;
