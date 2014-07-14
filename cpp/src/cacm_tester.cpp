@@ -272,7 +272,7 @@ void Test_grasp_puentes(int n, int intervalo){
 	salida s;
 	entrada e;
 	double proporcion;
-	for(int i = 8; i < n; i += intervalo ){
+	for(int i = 101; i < n; i += intervalo ){
 		cout << "n: " << i << endl;
 		//cout << "i: " << (i-2)/3+1 << endl;
 		entrada e = grafo_rompe_goloso2(i,i*i);
@@ -302,7 +302,7 @@ int main(int argc, char const *argv[])
   
   //Test_rompe_goloso2(40,3);
   //Test_grasp(1000,3);
-  Test_grasp_puentes(1000,3);
+  Test_grasp_puentes(102,3);
   /*entrada e = grafo_rompe_goloso(9,100);
   salida s;
    cout << "exacto" << endl;
