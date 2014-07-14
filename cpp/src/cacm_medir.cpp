@@ -780,7 +780,7 @@ int main(int argc, char const *argv[])
   //medir_busq_local_proporcion2(8, 50);
   //medir_grasp_intmax(5,100);
   //comparar_grasp_coef(5,50);
-  medir_proporcion_todos_caminos(8,86);
+  medir_proporcion_todos_caminos(89,98);
   //medir_proporcion_todos_caminos_puentes(8,100);
   // medir_calidad_todos(5,100);
   //medir_grasp_proporcion_solucion_inicial(5, 100);
