@@ -769,7 +769,7 @@ void medir_calidad_todos()
   }
 }
 
-void medir_tiempo_todos()
+void medir_tiempo_todos(double _m, double _K)
 {
   entrada e;
   salida s0, s1, s2, s3;
@@ -779,8 +779,8 @@ void medir_tiempo_todos()
   int seed = time(0);
   //int seed = 1403878979;
   cout << "seed: " << seed << endl;
-  cout << "m = 0.8" << endl;
-  cout << "K = 0.2" << endl;
+  cout << "m = " << _m << endl;
+  cout << "K = " << _K << endl;
 
   int n_min = 60, n_max = 110;
 
@@ -800,10 +800,10 @@ void medir_tiempo_todos()
     {
       for (int i = 0; i < 10; ++i)
       {
-        int m = 0.8 * cant_aristas_K_n(n);
+        int m = _m * cant_aristas_K_n(n);
         int max_w1 = 10000;
         int max_w2 = 10000;
-        int K = 0.2 * ((1.0l * n * max_w1) / 4.0);
+        int K = _K * ((1.0l * n * max_w1) / 4.0);
         entrada e = generar_instancia_aleatoria(n, m, max_w1, max_w2, K);
         
         clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &inicio);
@@ -859,6 +859,10 @@ int main(int argc, char const *argv[])
   //medir_proporcion_todos_caminos_puentes(8,100);
   // medir_tiempo_todos(5,100);
   //medir_grasp_proporcion_solucion_inicial(5, 100);
-  medir_tiempo_todos();
+  //medir_tiempo_todos();
+  medir_tiempo_todos(0.8, 0.2);
+  medir_tiempo_todos(0.8, 1.2);
+  medir_tiempo_todos(0.4, 0.2);
+  medir_tiempo_todos(0.4, 1.2);
   return 0;
 }

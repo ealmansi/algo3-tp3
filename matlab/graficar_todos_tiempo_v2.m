@@ -63,4 +63,4 @@ datos = [60 1656153 1668334 63921122
 figure; hold on;
 plot(datos(:,1), datos(:,2), 'r');
 plot(datos(:,1), datos(:,3), 'g');
-%plot(datos(:,1), datos(:,4));
+plot(datos(:,1), 0.05*datos(:,4), 'b');
