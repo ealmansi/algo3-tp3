@@ -607,46 +607,70 @@ void medir_grasp_proporcion_solucion_inicial(int n_min, int n_max)
     cout << n << " " << prom_ratios << endl;
   }
 }
+#define CANT_MEDICIONES_POR_N_TODOS 11
 
 void medir_proporcion_todos_caminos(int n_inicio, int n_max){
   salida s;
   entrada e;
+  timespec inicio, fin;
+  vector<vvlli> mediciones_por_n(4, vvlli((n_max - n_inicio)/3, vlli(CANT_MEDICIONES_POR_N_TODOS)));
   double proporcion,proporcion2,proporcion3;
-  for(int i = n_inicio; i < n_max; i += 3 ){
-    cout  << i << " ";
-    //cout << "i: " << (i-2)/3+1 << endl;
-    entrada e = grafo_rompe_goloso(i,i);
-    
-    s = cacm_goloso::resolver(e);
-    //cout << "goloso" << endl;
-    //escribir_salida(s);
-    //cout << endl; 
-    proporcion = s.W2;
+	for(int k = 0; k < CANT_MEDICIONES_POR_N_TODOS ; k++){
+		for(int i = n_inicio; i < n_max; i += 3 ){
+		  //cout  << i << " ";
+		  //cout << "i: " << (i-2)/3+1 << endl;
+		  entrada e = grafo_rompe_goloso2(i,i);
+		  
+		  clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &inicio);
+			s = cacm_goloso::resolver(e);
+			clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &fin);
 
-    s = cacm_busq_local::resolver(e);
-    // cout << "busqueda local" << endl;
-    // escribir_salida(s);
-    // cout << endl; 
-    proporcion2 = s.W2;
-    
-    s = cacm_grasp::resolver(e,1);
-    // cout << "busqueda local" << endl;
-    // escribir_salida(s);
-    // cout << endl; 
-    proporcion3 = s.W2;
-    
-    s = cacm_exacto::resolver(e);
-    //cout << "exacto" << endl;
+			mediciones_por_n[0][(i-n_inicio)/3][k] = (fin.tv_sec - inicio.tv_sec) * 1e9 + (fin.tv_nsec - inicio.tv_nsec);
+		  
+		  //cout << "goloso" << endl;
+		  //escribir_salida(s);
+		  //cout << endl; 
+		  proporcion = s.W2;
+		
+			clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &inicio);
+		  s = cacm_busq_local::resolver(e);
+		  clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &fin);
+
+			mediciones_por_n[1][(i-n_inicio)/3][k] = (fin.tv_sec - inicio.tv_sec) * 1e9 + (fin.tv_nsec - inicio.tv_nsec);
+		  // cout << "busqueda local" << endl;
+		  // escribir_salida(s);
+		  // cout << endl; 
+		  proporcion2 = s.W2;
+		  
+		  clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &inicio);
+		  s = cacm_grasp::resolver(e,1);
+		  clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &fin);
+
+			mediciones_por_n[2][(i-n_inicio)/3][k] = (fin.tv_sec - inicio.tv_sec) * 1e9 + (fin.tv_nsec - inicio.tv_nsec);
+		  // cout << "busqueda local" << endl;
+		  // escribir_salida(s);
+		  // cout << endl; 
+		  proporcion3 = s.W2;
+		  
+		  clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &inicio);
+		  s = cacm_exacto::resolver(e);
+		  clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &fin);
+
+			mediciones_por_n[3][(i-n_inicio)/3][k] = (fin.tv_sec - inicio.tv_sec) * 1e9 + (fin.tv_nsec - inicio.tv_nsec);
+		  //cout << "exacto" << endl;
     //escribir_salida(s);
     //cout << endl;
-    proporcion /= s.W2;
-    proporcion2 /= s.W2;
-    proporcion3 /= s.W2;
-
-    cout << proporcion  << " ";
-    cout << proporcion2  << " ";
-    cout  << proporcion3  << endl;
-  }
+    }
+   }
+    for(int k=0; k<4; k++){
+		  for (int n = 0; n < (n_max - n_inicio)/3; ++n)
+			{
+			 	sort(range(mediciones_por_n[k][n]));
+			 	cout << " " << mediciones_por_n[k][n][CANT_MEDICIONES_POR_N_BUSQ/2];
+			}
+			cout << endl;
+		}
+  
 
 
 }
@@ -756,9 +780,9 @@ int main(int argc, char const *argv[])
   //medir_busq_local_proporcion2(8, 50);
   //medir_grasp_intmax(5,100);
   //comparar_grasp_coef(5,50);
-  //medir_proporcion_todos_caminos(5,800);
+  medir_proporcion_todos_caminos(8,86);
   //medir_proporcion_todos_caminos_puentes(8,100);
   // medir_calidad_todos(5,100);
-  medir_grasp_proporcion_solucion_inicial(5, 100);
+  //medir_grasp_proporcion_solucion_inicial(5, 100);
   return 0;
 }
