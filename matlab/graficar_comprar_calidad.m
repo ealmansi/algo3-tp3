@@ -59,7 +59,7 @@ datos = [60 1.0000 1.0000 1.0000
 110 1.0000 1.0000 1.0000];
 
 figure; bar(datos(:,1), datos(:,2:4)  -1);
-title('Comparacion de calidad sobre grafos aleatorios (m* = 0.8, K* = 1)');
+title('Comparacion de calidad sobre instancias aleatorios (m* = 0.8, K* = 1)');
 ylabel('Desviacion respecto al promedio (W2 / W2 promedio  - 1)');
 xlabel('Cantidad de nodos (n)');
 legend({'Goloso', 'Busq local', 'GRASP'});
@@ -123,7 +123,7 @@ datos = [60 1.0000 1.0000 1.0000
 110 1.0002 1.0002 0.9996];
 
 figure; bar(datos(:,1), datos(:,2:4)  -1);
-title('Comparacion de calidad sobre grafos aleatorios (m* = 0.4, K* = 0.2)');
+title('Comparacion de calidad sobre instancias aleatorios (m* = 0.4, K* = 0.2)');
 ylabel('Desviacion respecto al promedio (W2 / W2 promedio  - 1)');
 xlabel('Cantidad de nodos (n)');
 legend({'Goloso', 'Busq local', 'GRASP'});
@@ -188,7 +188,7 @@ datos = [60 1.0000 1.0000 1.0000
 110 1.0000 1.0000 1.0000];
 
 figure; bar(datos(:,1), datos(:,2:4)  -1);
-title('Comparacion de calidad sobre grafos aleatorios (m* = 0.4, K* = 1)');
+title('Comparacion de calidad sobre instancias aleatorios (m* = 0.4, K* = 1)');
 ylabel('Desviacion respecto al promedio (W2 / W2 promedio  - 1)');
 xlabel('Cantidad de nodos (n)');
 legend({'Goloso', 'Busq local', 'GRASP'});
@@ -252,7 +252,7 @@ datos = [60 1.0000 1.0000 1.0000
 110 1.0001 0.9999 0.9999];
 
 figure; bar(datos(:,1), datos(:,2:4)  -1);
-title('Comparacion de calidad sobre grafos aleatorios (m* = 0.8, K* = 0.2)');
+title('Comparacion de calidad sobre instancias aleatorios (m* = 0.8, K* = 0.2)');
 ylabel('Desviacion respecto al promedio (W2 / W2 promedio  - 1)');
 xlabel('Cantidad de nodos (n)');
 legend({'Goloso', 'Busq local', 'GRASP'});
