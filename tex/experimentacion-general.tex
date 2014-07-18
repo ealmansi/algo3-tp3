@@ -7,8 +7,7 @@ Por esta razón, realizamos experimentos sobre grafos con cantidad de aristas $m
 
 Posteriormente, pasamos a observar cómo se comportan las heurísticas desarrolladas ante la familias de grafos \emph{3-caminos}, y \emph{3-caminos con puentes}, definidas en las secciones \ref{sub:algoritmos-heuristicos-goloso} y \ref{sub:algoritmos-heuristicos-busqueda}.
 
-\subsubsection{Instancias aleatorias}
-
+\subsection{Instancias aleatorias}
 
 Para cada $n$, calculamos 10 instancias diferentes usando las tres heurísticas. Para cada instancia y por cada heurística, nos quedamos con el siguiente valor:
 
@@ -21,6 +20,8 @@ donde $w_2 promedio$ es el valor promedio de los $w_2$ resultantes de correr cad
 Ahora, como para cada $n$ tenemos 10 instancias, calculamos (para cada $n$) el promedio de los valores que obtuvimos en el paso anterior.
 
 Esto generaba que los gráficos tengan valores cercanos a uno, por lo que restamos uno al final.
+
+\subsubsection{Análisis de calidad}
 
 \begin{figure}[H]
     \begin{minipage}{0.5\linewidth}
@@ -65,6 +66,9 @@ Además, podemos ver que las soluciones que da el algoritmo GRASP son a veces me
 
 Otro punto que vale la pena destacar es que no hay una gran variación entre las soluciones ($ \pm 10\%$)
 
+\subsubsection{Análisis de tiempo de ejecución}
+
+Ahora vamos a analizar el tiempo de ejecución de nuestros algoritmos frente a instancias de grafos randoms
 
 %TODO Este ultimo grafico lo dejamos?
 
@@ -79,6 +83,7 @@ Otro punto que vale la pena destacar es que no hay una gran variación entre las
 %   \end{center}
 % \end{figure}
 
+\subsection{Instancias de familias particulares}
 
 Ahora vamos a observar como se comportan nuestros algoritmos ante la familia de grafos \emph{3-caminos} y otro ante la familia \emph{3-caminos con puentes}. Usamos $i$ = $n$ en ambas familias. Ver secciones \ref{subsub:algoritmos-heuristicos-goloso-calidad.tex} y \ref{subsub:algoritmos-heuristicos-busqueda-calidad.tex} para entender las familias.
 
