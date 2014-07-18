@@ -1,9 +1,10 @@
 En esta sección el objetivo será comparar todos los algoritmos heurísticos diseñados e implementados en este trabajo, contrastando tanto el tiempo de ejecución como la calidad de las soluciones obtenidas.
 
+Vale aclarar que los parámetros utilizados en cada algoritmo son los mejores valores de configuración encontrados.
 
 En una primera etapa, estudiamos el comportamiento de las heurísticas al resolver instancias sobre grafos y pesos generados al azar. En general, la performance relativa de los distintos algoritmos puede variar cuando se ejecutan sobre grafos de mayor o menor densidad de aristas (densos o ralos), o en función de la distribución de pesos $w_1$ y $w_2$ en las aristas y la cota $K$.
 
-Por esta razón, realizamos experimentos sobre grafos con cantidad de aristas $m = m^* \times \#(E(K_n))$, donde $m^*$ es un coeficiente entre 0 y 1 que especifica la densidad en relación a un grafo completo. Por otro lado, definimos la cota para el peso $w_1$ como $K = K^* \times \frac{n}{2} \times \frac{max_{w_1}}{2}$, siendo $K^*$ un coeficiente. La expresión para $K$ se escogió de forma tal que, al medir sobre grafos de diferentes tamaños, la cota sea proporcional a la cantidad de nodos del grafo. En particular, $\frac{max_{w_1}}{2}$ es el peso $w_1$ promedio (ya que los pesos se asginan de forma aleatoriamente uniforme entre $1$ y $w_1$).
+Por esta razón, realizamos experimentos sobre grafos con cantidad de aristas $m = m^* \times \#(E(K_n))$, donde $m^*$ es un coeficiente entre 0 y 1 que especifica la densidad en relación a un grafo completo. Por otro lado, definimos la cota para el peso $w_1$ como $K = K^* \times \frac{n}{2} \times \frac{max_{w_1}}{2}$, siendo $K^*$ un coeficiente. La expresión para $K$ se escogió de forma tal que, al medir sobre grafos de diferentes tamaños, la cota sea proporcional a la cantidad de nodos del grafo. En particular, $\frac{max_{w_1}}{2}$ es el peso $w_1$ promedio (ya que los pesos se asignan de forma aleatoriamente uniforme entre $1$ y $w_1$).
 
 Posteriormente, pasamos a observar cómo se comportan las heurísticas desarrolladas ante las familias de grafos \emph{3-caminos}, y \emph{3-caminos con puentes}, definidas en las secciones \ref{sub:algoritmos-heuristicos-goloso} y \ref{sub:algoritmos-heuristicos-busqueda}.
 
@@ -12,7 +13,7 @@ Posteriormente, pasamos a observar cómo se comportan las heurísticas desarroll
 \subsubsection{Análisis de calidad}
 
 Para comparar la calidad de las soluciones obtenidas sobre instancias aleatorias, realizamos el siguiente procedimiento.
-Por cada $n$ en un rango viable (50 - 120), resolvimos 10 instancias diferentes con cada una de las tres heurísticas, obteniendo tres soluciones con diferentes valores de $w_2$ (mejor cuanto menor sea). Luego, registramos el valor de $w_2$ de cada heurística en relación al promedio de los tres valores de $w_2$ obtenidos; es decir, $puntaje = \frac{w_2}{w_2 \, promedio}$. Esto nos permite comparar el rendimiento de cada heurística sobre múltiples instancias para un mismo $n$, lo cual a priori no resulta tan sencillo ya que el valor de $w_2$ óptimo puede variar significativamente incluso para instancias de igual tamaño.
+Por cada $n$ en un rango viable (60 - 110), creamos 10 instancias diferentes, las cuales resolvimos con cada una de las tres heurísticas, obteniendo tres soluciones con diferentes valores de $w_2$ . Luego, registramos el valor de $w_2$ de cada heurística en relación al promedio de los tres valores de $w_2$ obtenidos; es decir, $puntaje = \frac{w_2}{w_2 \, promedio}$. Esto nos permite comparar el rendimiento de cada heurística sobre múltiples instancias para un mismo $n$, lo cual a priori no resulta tan sencillo ya que el valor de $w_2$ óptimo puede variar significativamente incluso para instancias de igual tamaño.
 
 Finalmente, se promedia el puntaje de cada heurística en todas las instancias con igual $n$, generando los datos que se presentan en los siguientes gráficos. Se puede observar una barra por cada heurística y para cada $n$, con el puntaje de la misma menos $1$; en general, un valor mayor a 0 significa que la heurística produjo soluciones peores que el promedio, y un valor inferior a 0 indica calidad superior en promedio.
 
@@ -29,11 +30,11 @@ Finalmente, se promedia el puntaje de cada heurística en todas las instancias c
     \end{minipage}    
 \end{figure}
 
-Podemos observar en las Figuras \ref{fig:ralos-ajustada} y \ref{fig:ralos-libre} que en la mayoría de los casos, las tres heurísticas producen resultados similares.
+Podemos observar en las Figuras \ref{fig:ralos-ajustada} y \ref{fig:ralos-libre} que en la mayoría de los casos, las tres heurísticas producen resultados similares ($ \pm 10\%$).
 
-En la Figura \ref{fig:ralos-ajustada} podemos observar que el algoritmo GRASP logra mejorar respecto del algoritmo goloso y del algoritmo de búsqueda local. Por otro lado, en la Figura \ref{fig:ralos-libre} GRASP es peor que las otras dos heurísticas en la mayoría de casos donde no son iguales. De estos gráficos podemos concluir que el algoritmo de GRASP se comporta mejor con cota ajustada contra utilizar una cota libre.
+En la Figura \ref{fig:ralos-ajustada} podemos observar que el algoritmo GRASP logra, en los pocos casos donde son diferentes, mejorar respecto del algoritmo goloso y del algoritmo de búsqueda local. Por otro lado, en la Figura \ref{fig:ralos-libre} GRASP es peor que las otras dos heurísticas en la mayoría de casos donde no son iguales. De estos gráficos podemos concluir que el algoritmo de GRASP se comporta mejor con cota ajustada contra utilizar una cota holgada.
 
-El algoritmo de búsqueda local siempre da soluciones que son mejores o iguales a las que da el algoritmo goloso (para un mismo $n$), ya que la proporción es siempre menor o igual a uno. Esto es lógico ya que nuestro algoritmo de búsqueda local toma como solución inicial la que da el goloso e intenta mejorarlas, lo cual no siempre logra, pero nunca empeora la solución inicial que se le da.
+El algoritmo de búsqueda local siempre da soluciones que son mejores o iguales a las que da el algoritmo goloso (para un mismo $n$). Esto es lógico ya que nuestro algoritmo de búsqueda local toma como solución inicial la que da el goloso e intenta mejorarlas, lo cual no siempre logra, pero nunca empeora la solución inicial que se le da.
 
 
 \begin{figure}[H]
@@ -50,19 +51,19 @@ El algoritmo de búsqueda local siempre da soluciones que son mejores o iguales 
 
 En estos dos gráficos, podemos observar resultados similares a las Figuras \ref{fig:ralos-ajustada} y \ref{fig:ralos-libre}. Una vez más, las tres heurísticas producen resultados similares, en en la mayoría de los casos.
 
-GRASP logra mejorar en algunos casos respecto del algoritmo goloso y del algoritmo de búsqueda local cuando la cota es ajustada, pero es peor en general donde la cota es libre.
+GRASP logra mejorar en algunos casos respecto del algoritmo goloso y del algoritmo de búsqueda local cuando la cota es ajustada, pero es peor en general donde la cota es holgada.
 
 También, los algoritmos goloso y búsqueda local tienen resultados similares para los distintos $n$.
 
-Por todo esto, creemos que dado un grafo cualuiera, nuestro algoritmo de GRASP se comporta mejor cuando la cota es ajustada, y la cantidad de aristas no es un factor crucial en el resultado de dicho algoritmo.
+Por todo esto, creemos que dado un grafo cualquiera, nuestro algoritmo de GRASP se comporta mejor cuando la cota es ajustada, y la cantidad de aristas no es un factor crucial en el resultado de dicho algoritmo.
 
 Además, podemos ver que las soluciones que da el algoritmo GRASP son a veces mejores que las del algoritmo de búsqueda local pero a veces son peores. Esto es debido a que el algoritmo de GRASP hace búsqueda local sobre la solución inicial que le da nuestro algoritmo goloso aleatorio en cada iteración. Por lo tanto, GRASP hace búsqueda local a partir de soluciones iniciales distintas a la del algoritmo de búsqueda local que toma como solución inicial la dada por nuestro algoritmo goloso que no es aleatorio. Entonces, tiene sentido que GRASP llegue a soluciones distintas al algoritmo de búsqueda local, las cuales a veces son mejores y a veces son peores.
 
-Otro punto que vale la pena destacar es que no hay una gran variación entre las soluciones ($ \pm 10\%$)
+También en todos los casos vemos que tanto Búsqueda Local como el Goloso, generan exactamente el mismo valor( $ \approx 99,85 \% $). Esto reafirma nuevamente que nuestra búsqueda local no logra mejorar la solución inicial.  
 
 \subsubsection{Análisis de tiempo de ejecución}
 
-Ahora vamos a analizar el tiempo de ejecución de nuestros algoritmos frente a instancias aleatorios. Para esto, utilizamos exactamente los mismos gráficos utilizados en la sección de análisis de calidad.
+Ahora vamos a analizar el tiempo de ejecución de nuestros algoritmos frente a instancias aleatorias. Para esto, utilizamos exactamente los mismos grafos utilizados en la sección de análisis de calidad.
 
 \begin{figure}[H]
     \begin{minipage}{0.5\linewidth}
@@ -78,9 +79,9 @@ Ahora vamos a analizar el tiempo de ejecución de nuestros algoritmos frente a i
 
 Realizamos estos experimentos utilizando grafos poco poblados ($m^* = 0.4$) y con cota ajustada ($K^* = 0.2$).
 
-Como podemos observar en la Figura \ref{fig:tiempo-all}, nuestro algoritmo basado en la metaheurística GRASP tiene un tiempo de ejecución mucho mayor a la de las otras heurísticas. Esto tiene sentido ya que realiza pasos similares a busqueda local y al algoritmo goloso, solo que varias veces.
+Como podemos observar en la Figura \ref{fig:tiempo-all}, nuestro algoritmo basado en la metaheurística GRASP tiene un tiempo de ejecución mucho mayor a la de las otras heurísticas. Esto tiene sentido ya que realiza pasos similares a búsqueda local y al algoritmo goloso, solo que varias veces.
 
-Por otro lado, creamos otro gráfico (Figura \ref{fig:tiempo-sin-grasp}) sin las mediciones de tiempo de GRASP y observamos que los tiempos de ejecución de la búsqueda local y goloso son similares. Suponemos que esto se debe a que nuestra búsqueda local no encuentra vecinos en el grafo para la solución inicial que el algoritmo goloso le brinda.
+Por otro lado, creamos otro gráfico (Figura \ref{fig:tiempo-sin-grasp}) sin las mediciones de tiempo de GRASP y observamos que los tiempos de ejecución de la búsqueda local y goloso son virtualmente idénticos. Esto es consistente con nuestra afirmación que nuestra búsqueda local no mejora para la solución inicial que el algoritmo goloso le brinda (encuentra mejores vecinos en el grafo).
 
 Luego, realizamos los mismos experimentos con los siguientes parámetros:
 
@@ -90,11 +91,11 @@ Luego, realizamos los mismos experimentos con los siguientes parámetros:
  \item $m^* = 0.4 \wedge K^* = 1.2$
 \end{itemize}
 
-Estos experimentos no nos proporcionaron información lo suficientemente variada. Para no sobrecargar esta sección, los incluimos en el Apéndice F.
+Estos experimentos no nos proporcionaron información nueva. Para no sobrecargar esta sección, los incluimos en el Apéndice \ref{graficos-extra}.
 
 \subsection{Instancias de familias particulares}
 
-En esta sección vamos a observar como se comportan nuestros algoritmos ante la familia de grafos \emph{3-caminos} y otro ante la familia \emph{3-caminos con puentes}. Usamos $i$ = $n$ en ambas familias. Ver secciones \ref{subsub:algoritmos-heuristicos-goloso-calidad.tex} y \ref{subsub:algoritmos-heuristicos-busqueda-calidad.tex} para entender las familias.
+En esta sección vamos a observar como se comportan nuestros algoritmos ante la familia de grafos \emph{3-caminos} y ante la familia \emph{3-caminos con puentes}. Usamos $i$ = $n$ en ambas familias. Ver secciones \ref{subsub:algoritmos-heuristicos-goloso-calidad.tex} y \ref{subsub:algoritmos-heuristicos-busqueda-calidad.tex} para entender las familias.
 
 Cabe aclarar que, para ambas familias, dado un $n$ existe una sola representación de las mismas. Por esto, para cada familia, graficamos una única instancia y no múltiples.
 
@@ -112,15 +113,8 @@ Cabe aclarar que, para ambas familias, dado un $n$ existe una sola representaci�
     \end{minipage}    
 \end{figure}
 
-En los dos gráficos anteriores mostramos el comportamiento de los siguientes algoritmos para dos familias de grafos. Los algoritmos medidos son los siguientes:
 
-\begin{itemize}
- \item Algoritmo Goloso implementado en el trabajo.
- \item Algoritmo de búsqueda local, que utiliza nuestro algoritmo goloso.
- \item Algoritmo GRASP que utiliza nuestro algoritmo goloso aleatorio y nuestro algoritmo de búsqueda local.
-\end{itemize}
-
-Vale aclarar que los parámetros utilizados en cada algoritmo son los mejores valores de configuración encontrados. Por otro lado, todas las soluciones se muestran en proporción a las del algoritmo exacto.
+Todas las soluciones se muestran en proporción a las del algoritmo exacto.
 
 En el gráfico de la Figura \ref{fig:comportamiento-familia-rompe} podemos ver que para los grafos de la familia \emph{3-caminos} nuestro algoritmo goloso devuelve soluciones de mala calidad, al igual que nuestro algoritmo de búsqueda local. Sin embargo, nuestro algoritmo GRASP logra mejorar las soluciones de dichos algoritmos. Más aún, no solo las mejora sino que devuelve la solución óptima. También podemos volver a ver que nuestro algoritmo de búsqueda local no logra mejorar la solución inicial que le da el algoritmo goloso para esta familia de grafos cuando éstos superan una determinada cantidad de nodos (en secciones previas observamos que dicha cantidad es $7$).
 
@@ -136,7 +130,7 @@ En esta sección, realizamos mediciones de tiempo de ejecución para los algorit
       \caption{Tiempo de ejecución familia \emph{3-caminos}}\label{fig:3caminos-all}
     \end{minipage}
     \hfill
-    \begin{minipage}{0.5\linewidth}
+    \begin{minipage}{0.5\linewidth} 
       \includegraphics[width=\linewidth]{graficos/todos_tiempo_3caminos_sinG.eps}
       \caption{Ídem, sin GRASP}\label{fig:3caminos-sinG}
     \end{minipage}    
