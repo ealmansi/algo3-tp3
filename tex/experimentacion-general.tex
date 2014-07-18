@@ -68,20 +68,35 @@ Otro punto que vale la pena destacar es que no hay una gran variación entre las
 
 \subsubsection{Análisis de tiempo de ejecución}
 
-Ahora vamos a analizar el tiempo de ejecución de nuestros algoritmos frente a instancias de grafos randoms
+Ahora vamos a analizar el tiempo de ejecución de nuestros algoritmos frente a instancias aleatorios. Para esto, utilizamos exactamente los mismos gráficos utilizados en la sección de análisis de calidad.
 
-%TODO Este ultimo grafico lo dejamos?
+\begin{figure}[H]
+    \begin{minipage}{0.5\linewidth}
+      \includegraphics[width=\linewidth]{graficos/todos_tiempo_randm4K2.eps}
+      \caption{Tiempo de ejecución todas heurísticas}\label{fig:tiempo-all}
+    \end{minipage}
+    \hfill
+    \begin{minipage}{0.5\linewidth}
+      \includegraphics[width=\linewidth]{graficos/todos_tiempo_randm4K2SinG.eps}
+      \caption{Ídem sin GRASP}\label{fig:tiempo-sin-grasp}
+    \end{minipage}    
+\end{figure}
 
-% Para continuar incluimos un gráfico que compara las soluciones de nuestro algoritmo GRASP y nuestro algoritmo de búsqueda local en proporción con nuestro algoritmo goloso.
-% 
-% \begin{figure}[H]
-%   \begin{center}
-%     \begin{minipage}{0.5\linewidth}
-%     \includegraphics[width=\linewidth]{graficos/todos_calidad.eps}
-%     \caption{Soluciones en proporción con goloso}\label{fig:proporcion-goloso}
-%     \end{minipage}
-%   \end{center}
-% \end{figure}
+Realizamos estos experimentos utilizando grafos poco poblados ($m^* = 0.4$) y con cota ajustada ($K^* = 0.2$).
+
+Como podemos observar en la Figura \ref{fig:tiempo-all}, nuestro algoritmo basado en la metaheurística GRASP tiene un tiempo de ejecución mucho mayor a la de las otras heurísticas. Esto tiene sentido ya que realiza pasos similares a busqueda local y al algoritmo goloso, solo que varias veces.
+
+Por otro lado, creamos otro gráfico (Figura \ref{fig:tiempo-sin-grasp}) sin las mediciones de tiempo de GRASP y observamos que los tiempos de ejecución de la búsqueda local y goloso son similares. Suponemos que esto se debe a que nuestra búsqueda local no encuentra vecinos en el grafo para la solución inicial que el algoritmo goloso le brinda.
+
+Luego, realizamos los mismos experimentos con los siguientes parámetros:
+
+\begin{itemize}
+ \item $m^* = 0.4 \wedge K^* = 1.2$
+ \item $m^* = 0.8 \wedge K^* = 0.2$
+ \item $m^* = 0.4 \wedge K^* = 1.2$
+\end{itemize}
+
+Estos experimentos no nos proporcionaron información lo suficientemente variada. Para no sobrecargar esta sección, los incluimos en el Apéndice F.
 
 \subsection{Instancias de familias particulares}
 
