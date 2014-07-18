@@ -1,11 +1,14 @@
 En esta sección el objetivo será comparar todos los algoritmos heurísticos diseñados e implementados en este trabajo, contrastando tanto el tiempo de ejecución como la calidad de las soluciones obtenidas.
 
 
-En una primera instancia, estudiamos el comportamiento de las heurísticas al resolver instancias sobre grafos generados al azar. Luego, pasamos a observar cómo se comportan ante la familia de grafos \emph{3-caminos}, y ante la familia \emph{3-caminos con puentes}.
+En una primera etapa, estudiamos el comportamiento de las heurísticas al resolver instancias sobre grafos y pesos generados al azar. En general, la performance relativa de los distintos algoritmos puede variar cuando se ejecutan sobre grafos de mayor o menor densidad de aristas (densos o ralos), o en función de la distribución de pesos $w_1$ y $w_2$ en las aristas y la cota $K$.
 
-Para los siguientes gráficos, vamos a utilizar grafos ralos y luego densos. La cantidad de aristas en el grafo random va a ser $m$, donde $m$ = $m^*$ $*$ $\#(E(K_n))$. Por otro lado, definimos la cota como $K$, donde $K = K^* * \frac{n}{2} * \frac{max_{w_1}}{2}$. 
+Por esta razón, realizamos experimentos sobre grafos con cantidad de aristas $m = m^* \times \#(E(K_n))$, donde $m^*$ es un coeficiente entre 0 y 1 que especifica la densidad en relación a un grafo completo. Por otro lado, definimos la cota para el peso $w_1$ como $K = K^* \times \frac{n}{2} \times \frac{max_{w_1}}{2}$, siendo $K^*$ un coeficiente. La expresión para $K$ se escogió de forma tal que, al medir sobre grafos de diferentes tamaños, la cota sea proporcional a la cantidad de nodos del grafo. En particular, $\frac{max_{w_1}}{2}$ es el peso $w_1$ promedio (ya que los pesos se asginan de forma aleatoriamente uniforme entre $1$ y $w_1$).
 
-%TODO EXPLICAR ESTOS NUMEROS MAGICOS? ^
+Posteriormente, pasamos a observar cómo se comportan las heurísticas desarrolladas ante la familias de grafos \emph{3-caminos}, y \emph{3-caminos con puentes}, definidas en las secciones \ref{sub:algoritmos-heuristicos-goloso} y \ref{sub:algoritmos-heuristicos-busqueda}.
+
+\subsubsection{Instancias aleatorias}
+
 
 Para cada $n$, calculamos 10 instancias diferentes usando las tres heurísticas. Para cada instancia y por cada heurística, nos quedamos con el siguiente valor:
 
