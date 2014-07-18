@@ -219,7 +219,7 @@ close all
   hold on;
   plot(datos_tiempo1(:,1), datos_tiempo1(:,3), 'b');
   plot(datos_tiempo1(:,1), datos_tiempo1(:,4), 'g');
-  title('Tiempo de ejecucion algoritmos con instancias random m = 0.8, K = 0.2.');
+  title('Comparacion de tiempo sobre instancias aleatorios (m* = 0.8, K* = 0.2)');
   xlabel('Cantidad de vertices (n)');
   ylabel('Tiempo (ms)');
   hleg = legend({'Goloso', 'Busq Local','Grasp'});
@@ -232,7 +232,7 @@ close all
   hold on;
   plot(datos_tiempo2(:,1), datos_tiempo2(:,3), 'b');
   plot(datos_tiempo2(:,1), datos_tiempo2(:,4), 'g');
-  title('Tiempo de ejecucion algoritmos con instancias random m = 0.8, K = 1.2.');
+  title('Comparacion de tiempo sobre instancias aleatorios (m* = 0.8, K* = 1.2)');
   xlabel('Cantidad de vertices (n)');
   ylabel('Tiempo (ms)');
   hleg = legend({'Goloso', 'Busq Local','Grasp'});
@@ -245,7 +245,7 @@ close all
   hold on;
   plot(datos_tiempo3(:,1), datos_tiempo3(:,3), 'b');
   plot(datos_tiempo3(:,1), datos_tiempo3(:,4), 'g');
-  title('Tiempo de ejecucion algoritmos con instancias random m = 0.4, K = 0.2.');
+  title('Comparacion de tiempo sobre instancias aleatorios (m* = 0.4, K* = 0.2)');
   xlabel('Cantidad de vertices (n)');
   ylabel('Tiempo (ms)');
   hleg = legend({'Goloso', 'Busq Local','Grasp'});
@@ -258,7 +258,7 @@ close all
   hold on;
   plot(datos_tiempo2(:,1), datos_tiempo2(:,3), 'b');
   plot(datos_tiempo2(:,1), datos_tiempo2(:,4), 'g');
-  title('Tiempo de ejecucion algoritmos con instancias random m = 0.4, K = 1.2.');
+  title('Comparacion de tiempo sobre instancias aleatorios (m* = 0.4, K* = 1.2)');
   xlabel('Cantidad de vertices (n)');
   ylabel('Tiempo (ms)');
   hleg = legend({'Goloso', 'Busq Local','Grasp'});
@@ -272,7 +272,7 @@ close all
   plot(datos_tiempo1(:,1), datos_tiempo1(:,2), 'r');
   hold on;
   plot(datos_tiempo1(:,1), datos_tiempo1(:,3), 'b');
-  title('Tiempo de ejecucion algoritmos con instancias random m = 0.8, K = 0.2.');
+  title('Comparacion de tiempo sobre instancias aleatorios (m* = 0.8, K* = 0.2)');
   xlabel('Cantidad de vertices (n)');
   ylabel('Tiempo (ms)');
   hleg = legend({'Goloso', 'Busq Local'});
@@ -284,7 +284,7 @@ close all
   plot(datos_tiempo2(:,1), datos_tiempo2(:,2), 'r');
   hold on;
   plot(datos_tiempo2(:,1), datos_tiempo2(:,3), 'b');
-  title('Tiempo de ejecucion algoritmos con instancias random m = 0.8, K = 1.2.');
+  title('Comparacion de tiempo sobre instancias aleatorios (m* = 0.8, K* = 1.2)');
   xlabel('Cantidad de vertices (n)');
   ylabel('Tiempo (ms)');
   hleg = legend({'Goloso', 'Busq Local'});
@@ -296,7 +296,7 @@ close all
   plot(datos_tiempo3(:,1), datos_tiempo3(:,2), 'r');
   hold on;
   plot(datos_tiempo3(:,1), datos_tiempo3(:,3), 'b');
-  title('Tiempo de ejecucion algoritmos con instancias random m = 0.4, K = 0.2.');
+  title('Comparacion de tiempo sobre instancias aleatorios (m* = 0.4, K* = 0.2)');
   xlabel('Cantidad de vertices (n)');
   ylabel('Tiempo (ms)');
   hleg = legend({'Goloso', 'Busq Local'});
@@ -308,7 +308,7 @@ close all
   plot(datos_tiempo2(:,1), datos_tiempo2(:,2), 'r');
   hold on;
   plot(datos_tiempo2(:,1), datos_tiempo2(:,3), 'b');
-  title('Tiempo de ejecucion algoritmos con instancias random m = 0.4, K = 1.2.');
+  title('Comparacion de tiempo sobre instancias aleatorios (m* = 0.4, K* = 1.2)');
   xlabel('Cantidad de vertices (n)');
   ylabel('Tiempo (ms)');
   hleg = legend({'Goloso', 'Busq Local'});
