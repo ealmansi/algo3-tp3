@@ -5,22 +5,14 @@ En una primera etapa, estudiamos el comportamiento de las heurísticas al resolv
 
 Por esta razón, realizamos experimentos sobre grafos con cantidad de aristas $m = m^* \times \#(E(K_n))$, donde $m^*$ es un coeficiente entre 0 y 1 que especifica la densidad en relación a un grafo completo. Por otro lado, definimos la cota para el peso $w_1$ como $K = K^* \times \frac{n}{2} \times \frac{max_{w_1}}{2}$, siendo $K^*$ un coeficiente. La expresión para $K$ se escogió de forma tal que, al medir sobre grafos de diferentes tamaños, la cota sea proporcional a la cantidad de nodos del grafo. En particular, $\frac{max_{w_1}}{2}$ es el peso $w_1$ promedio (ya que los pesos se asginan de forma aleatoriamente uniforme entre $1$ y $w_1$).
 
-Posteriormente, pasamos a observar cómo se comportan las heurísticas desarrolladas ante la familias de grafos \emph{3-caminos}, y \emph{3-caminos con puentes}, definidas en las secciones \ref{sub:algoritmos-heuristicos-goloso} y \ref{sub:algoritmos-heuristicos-busqueda}.
+Posteriormente, pasamos a observar cómo se comportan las heurísticas desarrolladas ante las familias de grafos \emph{3-caminos}, y \emph{3-caminos con puentes}, definidas en las secciones \ref{sub:algoritmos-heuristicos-goloso} y \ref{sub:algoritmos-heuristicos-busqueda}.
 
-\subsubsection{Instancias aleatorias}
+\subsection{Instancias aleatorias}
 
+Para comparar la calidad de las soluciones obtenidas sobre instancias aleatorias, realizamos el siguiente procedimiento.
+Por cada $n$ en un rango viable, resolvimos 10 instancias diferentes con cada una de las tres heurísticas, obteniendo tres soluciones con diferentes valores de $w_2$ (mejor cuanto menor sea). Luego, registramos el valor de $w_2$ de cada heurística en relación al promedio de los tres valores de $w_2$ obtenidos; es decir, $puntaje = \frac{w_2}{w_2 \, promedio}$. Esto nos permite comparar el rendimiento de cada heurística sobre múltiples instancias para un mismo $n$, lo cual a priori no resulta tan sencillo ya que el valor de $w_2$ óptimo puede variar significativamente incluso para instancias de igual tamaño.
 
-Para cada $n$, calculamos 10 instancias diferentes usando las tres heurísticas. Para cada instancia y por cada heurística, nos quedamos con el siguiente valor:
-
-\begin{center}
-$\frac{w_2}{w_2 promedio}$
-\end{center}
-
-donde $w_2 promedio$ es el valor promedio de los $w_2$ resultantes de correr cada heurística para dicha instancia.
-
-Ahora, como para cada $n$ tenemos 10 instancias, calculamos (para cada $n$) el promedio de los valores que obtuvimos en el paso anterior.
-
-Esto generaba que los gráficos tengan valores cercanos a uno, por lo que restamos uno al final.
+Finalmente, se promedia el puntaje de cada heurística en todas las instancias con igual $n$, generando los datos que se presentan en los siguientes gráficos. Se puede observar una barra por cada heurística y para cada $n$, con el puntaje de la misma menos $1$; en general, un valor mayor a 0 significa que la heurística produjo soluciones peores que el promedio, y un valor inferior a 0 indica calidad superior en promedio.
 
 \begin{figure}[H]
     \begin{minipage}{0.5\linewidth}
