@@ -94,9 +94,11 @@ Estos experimentos no nos proporcionaron información lo suficientemente variada
 
 \subsection{Instancias de familias particulares}
 
-Ahora vamos a observar como se comportan nuestros algoritmos ante la familia de grafos \emph{3-caminos} y otro ante la familia \emph{3-caminos con puentes}. Usamos $i$ = $n$ en ambas familias. Ver secciones \ref{subsub:algoritmos-heuristicos-goloso-calidad.tex} y \ref{subsub:algoritmos-heuristicos-busqueda-calidad.tex} para entender las familias.
+En esta sección vamos a observar como se comportan nuestros algoritmos ante la familia de grafos \emph{3-caminos} y otro ante la familia \emph{3-caminos con puentes}. Usamos $i$ = $n$ en ambas familias. Ver secciones \ref{subsub:algoritmos-heuristicos-goloso-calidad.tex} y \ref{subsub:algoritmos-heuristicos-busqueda-calidad.tex} para entender las familias.
 
 Cabe aclarar que, para ambas familias, dado un $n$ existe una sola representación de las mismas. Por esto, para cada familia, graficamos una única instancia y no múltiples.
+
+\subsubsection{Análisis de calidad}
 
 \begin{figure}[H]
     \begin{minipage}{0.5\linewidth}
@@ -124,7 +126,9 @@ En el gráfico de la Figura \ref{fig:comportamiento-familia-rompe} podemos ver q
 
 A su vez, en el gráfico de la Figura \ref{fig:comportamiento-familia-puente} podemos observar que nuestro algoritmo goloso devuelve malas soluciones para la familia de grafos \emph{3-caminos con puentes}, pero que el algoritmo de búsqueda local las logra mejorar, devolviendo una solución óptima. También podemos ver que el algoritmo GRASP también se comporta de manera óptima para los algoritmos de dicha familia.
 
-Finalmente, realizamos mediciones de tiempo para los algoritmos en estas dos familias.
+\subsubsection{Análisis de tiempo de ejecución}
+
+En esta sección, realizamos mediciones de tiempo de ejecución para los algoritmos en estas dos familias.
 
 \begin{figure}[H]
     \begin{minipage}{0.5\linewidth}
