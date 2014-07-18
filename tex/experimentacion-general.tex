@@ -9,12 +9,13 @@ Posteriormente, pasamos a observar cómo se comportan las heurísticas desarroll
 
 \subsection{Instancias aleatorias}
 
+\subsubsection{Análisis de calidad}
+
 Para comparar la calidad de las soluciones obtenidas sobre instancias aleatorias, realizamos el siguiente procedimiento.
-Por cada $n$ en un rango viable, resolvimos 10 instancias diferentes con cada una de las tres heurísticas, obteniendo tres soluciones con diferentes valores de $w_2$ (mejor cuanto menor sea). Luego, registramos el valor de $w_2$ de cada heurística en relación al promedio de los tres valores de $w_2$ obtenidos; es decir, $puntaje = \frac{w_2}{w_2 \, promedio}$. Esto nos permite comparar el rendimiento de cada heurística sobre múltiples instancias para un mismo $n$, lo cual a priori no resulta tan sencillo ya que el valor de $w_2$ óptimo puede variar significativamente incluso para instancias de igual tamaño.
+Por cada $n$ en un rango viable (50 - 120), resolvimos 10 instancias diferentes con cada una de las tres heurísticas, obteniendo tres soluciones con diferentes valores de $w_2$ (mejor cuanto menor sea). Luego, registramos el valor de $w_2$ de cada heurística en relación al promedio de los tres valores de $w_2$ obtenidos; es decir, $puntaje = \frac{w_2}{w_2 \, promedio}$. Esto nos permite comparar el rendimiento de cada heurística sobre múltiples instancias para un mismo $n$, lo cual a priori no resulta tan sencillo ya que el valor de $w_2$ óptimo puede variar significativamente incluso para instancias de igual tamaño.
 
 Finalmente, se promedia el puntaje de cada heurística en todas las instancias con igual $n$, generando los datos que se presentan en los siguientes gráficos. Se puede observar una barra por cada heurística y para cada $n$, con el puntaje de la misma menos $1$; en general, un valor mayor a 0 significa que la heurística produjo soluciones peores que el promedio, y un valor inferior a 0 indica calidad superior en promedio.
 
-\subsubsection{Análisis de calidad}
 
 \begin{figure}[H]
     \begin{minipage}{0.5\linewidth}
